@@ -31,9 +31,10 @@ interface Props {
   open: boolean;
   onToggle: () => void;
   logs: TraceEntry[];
+  source: "live" | "sample";
 }
 
-export default function TraceDrawer({ open, onToggle, logs }: Props) {
+export default function TraceDrawer({ open, onToggle, logs, source }: Props) {
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -96,7 +97,7 @@ export default function TraceDrawer({ open, onToggle, logs }: Props) {
               <div ref={endRef} />
             </div>
             <div className="border-t border-surface-border px-4 py-2 font-mono text-[10px] text-foreground/30">
-              Demo mode · telemetry is simulated from mock fixtures
+              {source === "live" ? "Signals: live from akta.pro" : "Signals: seed deck (akta.pro not connected)"} · handoff steps are not yet wired to external services
             </div>
           </motion.aside>
         )}

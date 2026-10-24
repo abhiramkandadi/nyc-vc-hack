@@ -3,6 +3,7 @@
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { BadgeCheck, Heart, Landmark, RotateCcw, Search, Star, X, Zap, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import FounderPhoto from "./FounderPhoto";
 import type { StealthStartup } from "@/lib/mockData";
 
 export type SwipeDirection = "left" | "right" | "up";
@@ -54,13 +55,7 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
       className="absolute inset-0 cursor-grab select-none overflow-hidden rounded-[28px] border border-white/10 bg-black shadow-2xl active:cursor-grabbing"
     >
       <div className="absolute inset-x-0 top-0 h-[75%]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={startup.founderImage}
-          alt={`Portrait for ${startup.founderName}`}
-          draggable={false}
-          className="h-full w-full object-cover object-top"
-        />
+        <FounderPhoto startup={startup} className="h-full w-full object-cover object-top" />
       </div>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
@@ -120,6 +115,12 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
               </span>
             );
           })}
+          {startup.liveNews && (
+            <span className="flex max-w-full items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] text-emerald-200 backdrop-blur-md">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+              <span className="truncate">{startup.liveNews.title}</span>
+            </span>
+          )}
         </div>
       </div>
     </motion.div>

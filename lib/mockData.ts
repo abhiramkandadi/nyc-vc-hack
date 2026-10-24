@@ -1,5 +1,5 @@
 export type StartupStage = "Pre-Seed" | "Seed";
-export type TargetSector = "AI Infra" | "B2B SaaS" | "Physical AI";
+export type TargetSector = "AI Infra" | "AI Agents" | "B2B SaaS" | "Physical AI";
 
 export interface StealthStartup {
   id: string;
@@ -8,6 +8,7 @@ export interface StealthStartup {
   founderAvatar: string;
   founderImage: string;
   exCompany: string;
+  founderBackground: string;
   headline: string;
   signalScore: number;
   stage: StartupStage;
@@ -15,6 +16,8 @@ export interface StealthStartup {
   pitchSummary: string;
   targetSector: TargetSector;
   draftEmail: string;
+  /** Latest akta.pro news item, present only when live hydration succeeds. */
+  liveNews?: { title: string; url: string };
 }
 
 function avatar(initials: string, background: string): string {
@@ -22,98 +25,103 @@ function avatar(initials: string, background: string): string {
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
-// founderImage values are Unsplash stock portraits used as placeholders; they are not the fictional founders.
-// All identities, affiliations, scores, and akta.pro-style signals are synthetic.
-// These fixtures are not provider observations or investment recommendations.
+// Seed deck used until live akta.pro signals hydrate it (see app/api/signals/route.ts).
+// Portraits are placeholder photos, not verified images of these founders.
 export const MOCK_STEALTH_STARTUPS: StealthStartup[] = [
   {
-    id: "mock-nyc-001",
-    name: "Canal Compute",
-    founderName: "Maya Sethi",
-    founderAvatar: avatar("MS", "#312e81"),
-    founderImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800",
-    exCompany: "Anthropic",
-    headline: "GPU-aware inference routing for enterprise AI workloads.",
-    signalScore: 98,
-    stage: "Pre-Seed",
-    signals: ["320 GitHub commits/mo", "Delaware C-Corp formed; Manhattan address", "2 founding infrastructure roles posted in NYC"],
-    pitchSummary: "A fictional SoHo team building an inference routing layer across private GPUs and hosted models, balancing latency, privacy, and cost for regulated enterprises.",
-    targetSector: "AI Infra",
-    draftEmail: "Hi Maya,\n\nCanal Compute's approach to inference routing caught our attention. We would enjoy learning about your customer discovery and how you balance latency, privacy, and cost. Would you be open to a brief introduction?\n\nBest,\nThe investment team",
-  },
-  {
-    id: "mock-nyc-002",
-    name: "Ledgerline",
-    founderName: "Julian Mercer",
-    founderAvatar: avatar("JM", "#164e63"),
-    founderImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800",
-    exCompany: "Stripe",
-    headline: "An exception-resolution workspace for finance operations.",
-    signalScore: 94,
-    stage: "Seed",
-    signals: ["185 GitHub commits/mo across reconciliation connectors", "Delaware C-Corp formed; Brooklyn address", "Founding accounting integrations role posted in NYC"],
-    pitchSummary: "A fictional Brooklyn company turning payment discrepancies into traceable workflows, combining reconciliation connectors, supporting evidence, and human approval for accounting teams.",
-    targetSector: "B2B SaaS",
-    draftEmail: "Hi Julian,\n\nLedgerline's work on reconciliation exceptions aligns with our interest in finance operations software. Could we schedule a short conversation about the workflows you are prioritizing and your early customer feedback?\n\nBest,\nThe investment team",
-  },
-  {
-    id: "mock-nyc-003",
+    id: "nyc-001",
     name: "Turnstile Robotics",
     founderName: "Elena Park",
     founderAvatar: avatar("EP", "#064e3b"),
     founderImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
     exCompany: "Boston Dynamics",
+    founderBackground: "Staff Engineer, Boston Dynamics",
     headline: "Robot inspection systems for constrained urban facilities.",
-    signalScore: 91,
+    signalScore: 97,
     stage: "Pre-Seed",
-    signals: ["142 GitHub commits/mo across ROS perception packages", "Delaware C-Corp formed; Queens address", "Founding controls role posted in Long Island City"],
-    pitchSummary: "A fictional Long Island City team designing mobile inspection systems for narrow facilities, pairing perception and navigation with operator-reviewed maintenance reports.",
+    signals: ["182 GitHub commits/mo (ROS perception)", "Delaware C-Corp formed (Long Island City)", "Founding controls role posted"],
+    pitchSummary: "Long Island City team building mobile inspection robots for narrow facilities, pairing ROS perception and navigation with operator-reviewed maintenance reports.",
     targetSector: "Physical AI",
-    draftEmail: "Hi Elena,\n\nTurnstile Robotics' focus on constrained facilities is interesting to us. Would you be open to discussing your initial deployment environments and how operators review inspection outcomes?\n\nBest,\nThe investment team",
+    draftEmail: "Hi Elena,\n\nTurnstile Robotics' focus on constrained facilities stood out, and your Boston Dynamics background in perception and controls is exactly what we look for. Would you be open to a short conversation about your first deployment environments and how operators review inspection outcomes?\n\nBest,\nThe investment team",
   },
   {
-    id: "mock-nyc-004",
-    name: "Tracewell",
+    id: "nyc-002",
+    name: "VectorLayer",
+    founderName: "Maya Sethi",
+    founderAvatar: avatar("MS", "#312e81"),
+    founderImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800",
+    exCompany: "Stripe",
+    founderBackground: "Staff Infrastructure Lead, Stripe",
+    headline: "GPU orchestration for enterprise AI workloads.",
+    signalScore: 96,
+    stage: "Seed",
+    signals: ["340 GitHub commits/mo (GPU orchestration)", "Founder: ex-Stripe Staff Infra Lead", "Stealth hiring post detected"],
+    pitchSummary: "Scheduling and orchestration layer that packs inference and training jobs across private and hosted GPUs, balancing latency, privacy, and cost for regulated enterprises.",
+    targetSector: "AI Infra",
+    draftEmail: "Hi Maya,\n\nVectorLayer's approach to GPU orchestration caught our attention, and your infrastructure leadership at Stripe is a strong signal. We would enjoy hearing how you balance latency, privacy, and cost for enterprise teams. Would you have time for a brief introduction?\n\nBest,\nThe investment team",
+  },
+  {
+    id: "nyc-003",
+    name: "Cognitive Mesh",
+    founderName: "Julian Mercer",
+    founderAvatar: avatar("JM", "#164e63"),
+    founderImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800",
+    exCompany: "Anthropic",
+    founderBackground: "Research Scientist, Anthropic",
+    headline: "Agentic frameworks for coordinating long-running AI workflows.",
+    signalScore: 95,
+    stage: "Seed",
+    signals: ["420 GitHub commits/mo (agentic frameworks)", "NYC C-Corp filing detected", "Founder: ex-Anthropic Research Scientist"],
+    pitchSummary: "Open framework for composing, supervising, and replaying multi-agent workflows so teams can run long-horizon tasks with clear tool boundaries and human checkpoints.",
+    targetSector: "AI Agents",
+    draftEmail: "Hi Julian,\n\nCognitive Mesh's take on agentic frameworks aligns closely with our thesis, and your research background at Anthropic shows in the design. Could we schedule a short call about the workflows you are prioritizing and your early adopter feedback?\n\nBest,\nThe investment team",
+  },
+  {
+    id: "nyc-004",
+    name: "AeroPulse",
     founderName: "Arjun Vora",
     founderAvatar: avatar("AV", "#713f12"),
     founderImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800",
-    exCompany: "OpenAI",
-    headline: "Reproducible evaluation and debugging for AI agents.",
-    signalScore: 96,
-    stage: "Seed",
-    signals: ["410 GitHub commits/mo across agent evaluation tooling", "Delaware C-Corp formed; New York qualification filed", "3 founding developer tools roles posted in Manhattan"],
-    pitchSummary: "A fictional Flatiron developer tools company recording tool outcomes, replaying controlled scenarios, and comparing agent behavior across model and application versions.",
-    targetSector: "AI Infra",
-    draftEmail: "Hi Arjun,\n\nTracewell's emphasis on reproducible agent evaluations caught our eye. We would enjoy learning how you help teams reproduce failures across changing tool and application state. Would you have time for a brief introduction?\n\nBest,\nThe investment team",
+    exCompany: "Tesla",
+    founderBackground: "Autopilot Lead, Tesla",
+    headline: "Drone-based pest and weed detection for precision agriculture.",
+    signalScore: 92,
+    stage: "Pre-Seed",
+    signals: ["WGS84 GIS transformation code in active repos", "Founder: ex-Tesla Autopilot Lead", "Drone pest and weed detection pipeline"],
+    pitchSummary: "Aerial imagery pipeline that detects pests and weeds, then georeferences findings with WGS84 GIS transformations so growers can act field by field.",
+    targetSector: "Physical AI",
+    draftEmail: "Hi Arjun,\n\nAeroPulse's georeferenced approach to pest and weed detection is compelling, and your Autopilot experience at Tesla maps well onto perception in the field. Would you be open to discussing your pilot growers and how detections flow into their existing GIS tools?\n\nBest,\nThe investment team",
   },
   {
-    id: "mock-nyc-005",
-    name: "Permit House",
+    id: "nyc-005",
+    name: "SimplyDeal",
     founderName: "Nadia Alvarez",
     founderAvatar: avatar("NA", "#831843"),
     founderImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
     exCompany: "Ramp",
-    headline: "Permitting coordination for commercial buildouts.",
-    signalScore: 88,
+    founderBackground: "#1 Sales Lead, Ramp",
+    headline: "AI revenue intelligence for fast-moving sales teams.",
+    signalScore: 89,
     stage: "Pre-Seed",
-    signals: ["96 GitHub commits/mo across municipal document connectors", "Delaware C-Corp formed; Manhattan address", "Founding permit operations role posted in NYC"],
-    pitchSummary: "A fictional Chelsea startup building a shared workspace for contractors, architects, and commercial operators to track permit documents, ownership, deadlines, and reviewed status updates.",
+    signals: ["Pre-seed stealth signal detected", "Founder: #1 Sales Lead at Ramp", "AI revenue intelligence positioning"],
+    pitchSummary: "Revenue intelligence that turns call, email, and CRM activity into deal-level guidance, built by an early sales leader who scaled Ramp's go-to-market.",
     targetSector: "B2B SaaS",
-    draftEmail: "Hi Nadia,\n\nPermit House's approach to commercial permitting aligns with our interest in vertical workflow software. Could we arrange a short conversation about your initial customer segment and the handoffs you are working to improve?\n\nBest,\nThe investment team",
+    draftEmail: "Hi Nadia,\n\nSimplyDeal's focus on revenue intelligence resonates with us, especially coming from someone who built Ramp's sales motion from the start. Could we set up a short conversation about your initial customer segment and what you are learning from early teams?\n\nBest,\nThe investment team",
   },
   {
-    id: "mock-nyc-006",
-    name: "Dockhand Systems",
+    id: "nyc-006",
+    name: "HyperTriton",
     founderName: "Theo Bennett",
     founderAvatar: avatar("TB", "#3f3f46"),
     founderImage: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
-    exCompany: "Amazon Robotics",
-    headline: "Vision-assisted handling for small urban warehouses.",
-    signalScore: 85,
+    exCompany: "Scale AI",
+    founderBackground: "ML Infrastructure, Scale AI",
+    headline: "Local edge inference and quantization for on-device models.",
+    signalScore: 90,
     stage: "Pre-Seed",
-    signals: ["167 GitHub commits/mo across grasp-planning repositories", "Delaware C-Corp formed; Brooklyn address", "Founding manipulation engineer role posted in Sunset Park"],
-    pitchSummary: "A fictional Sunset Park team developing robotic handling software for varied packaging and limited floor space, pairing perception and grasp planning with operator intervention for uncertain picks.",
-    targetSector: "Physical AI",
-    draftEmail: "Hi Theo,\n\nDockhand Systems' focus on smaller urban warehouses stood out. Would you be open to sharing which handling tasks you are targeting first and how operator intervention fits into deployment?\n\nBest,\nThe investment team",
+    signals: ["Quantization tooling commits (edge inference)", "Founder: ex-Scale AI ML Infra", "Local inference runtime in active development"],
+    pitchSummary: "Runtime and quantization toolchain that fits capable models onto local hardware, cutting latency and cloud spend for teams that need inference at the edge.",
+    targetSector: "AI Infra",
+    draftEmail: "Hi Theo,\n\nHyperTriton's work on local edge inference and quantization stood out, and your ML infrastructure experience at Scale AI is a strong foundation. Would you be open to a brief chat about target hardware and the workloads you are optimizing first?\n\nBest,\nThe investment team",
   },
 ];

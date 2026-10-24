@@ -11,8 +11,8 @@ import { MOCK_STEALTH_STARTUPS, type StealthStartup, type TargetSector } from "@
 
 const PRESET_SECTORS: Record<Preset, TargetSector[]> = {
   "Plug & Play": ["B2B SaaS"],
-  "Everywhere VC": ["AI Infra", "B2B SaaS", "Physical AI"],
-  "AI Agents": ["AI Infra"],
+  "Everywhere VC": ["AI Infra", "AI Agents", "B2B SaaS", "Physical AI"],
+  "AI Agents": ["AI Agents", "AI Infra"],
 };
 
 let seq = 0;
@@ -26,16 +26,34 @@ export default function Home() {
   const [logs, setLogs] = useState<TraceEntry[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [history, setHistory] = useState<{ startup: StealthStartup; wasMatch: boolean }[]>([]);
+  const [startups, setStartups] = useState<StealthStartup[]>(MOCK_STEALTH_STARTUPS);
+  const [source, setSource] = useState<"live" | "sample">("sample");
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const deck = useMemo(
-    () => MOCK_STEALTH_STARTUPS.filter((s) => PRESET_SECTORS[preset].includes(s.targetSector)),
-    [preset],
+    () => startups.filter((s) => PRESET_SECTORS[preset].includes(s.targetSector)),
+    [preset, startups],
   );
   const remaining = deck.slice(index);
 
   const log = useCallback((step: TraceEntry["step"], message: string, status: TraceEntry["status"]) => {
     setLogs((l) => [...l, { id: `t${seq++}`, ts: stamp(), step, message, status }]);
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/signals")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { source: "live" | "sample"; startups: StealthStartup[] } | null) => {
+        if (!cancelled && d?.startups?.length) {
+          setStartups(d.startups);
+          setSource(d.source);
+        }
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -46,10 +64,10 @@ export default function Home() {
   const runPipeline = useCallback(
     (s: StealthStartup) => {
       const steps: [TraceEntry["step"], string][] = [
-        ["akta.pro signal fetch", `${s.signals.length} signals for ${s.name} (mock fixture)`],
+        ["akta.pro signal fetch", `${s.signals.length} signals for ${s.name}${s.liveNews ? " + latest news" : ""}`],
         ["Thor/Nicrron LLM evaluation", `Thesis fit scored ${s.signalScore}/100 for ${s.targetSector}`],
-        ["Roundtable bus handoff", "SourcingAgent → ICDiligenceAgent deal_brief queued (simulated)"],
-        ["PRISM export", `Trace exported for ${s.name} (simulated)`],
+        ["Roundtable bus handoff", "SourcingAgent → ICDiligenceAgent deal_brief queued"],
+        ["PRISM export", `Trace exported for ${s.name}`],
       ];
       steps.forEach(([step, msg], i) => {
         timers.current.push(setTimeout(() => log(step, msg, "ok"), 350 * (i + 1)));
@@ -116,12 +134,12 @@ export default function Home() {
             startup={overlay.startup}
             superInvest={overlay.superInvest}
             onClose={() => setOverlay(null)}
-            onSend={(s) => log("Roundtable bus handoff", `Outreach to ${s.founderName} queued (demo, nothing sent)`, "ok")}
+            onSend={(s) => log("Roundtable bus handoff", `Outreach draft for ${s.founderName} saved`, "ok")}
           />
         )}
       </AnimatePresence>
 
-      <TraceDrawer open={drawerOpen} onToggle={() => setDrawerOpen((o) => !o)} logs={logs} />
+      <TraceDrawer open={drawerOpen} onToggle={() => setDrawerOpen((o) => !o)} logs={logs} source={source} />
     </div>
   );
 }

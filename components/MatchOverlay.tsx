@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Check, Send, X, Zap } from "lucide-react";
 import { useState } from "react";
+import FounderPhoto from "./FounderPhoto";
 import type { StealthStartup } from "@/lib/mockData";
 
 interface Props {
@@ -49,12 +50,11 @@ export default function MatchOverlay({ startup, superInvest, onClose, onSend }: 
         )}
 
         <div className="mt-5 flex items-center gap-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={startup.founderAvatar} alt="" className="h-14 w-14 rounded-full border border-surface-border" />
+          <FounderPhoto startup={startup} className="h-16 w-16 rounded-full border border-white/20 object-cover object-top" />
           <div>
             <p className="font-display text-lg font-semibold leading-tight">{startup.founderName}</p>
             <p className="text-xs text-foreground/60">
-              Founder, {startup.name} · ex-{startup.exCompany}
+              {startup.founderBackground} · {startup.name}
             </p>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function MatchOverlay({ startup, superInvest, onClose, onSend }: 
         >
           {sent ? (
             <>
-              <Check className="h-4 w-4" /> Outreach queued (demo, no email sent)
+              <Check className="h-4 w-4" /> Draft saved (not emailed)
             </>
           ) : (
             <>
