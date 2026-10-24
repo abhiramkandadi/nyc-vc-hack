@@ -17,7 +17,7 @@ export default function Header({ preset, onPreset, matchCount }: Props) {
       <div className="flex items-center gap-2 font-display text-xl font-extrabold text-[#FF385C]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logo.webp" alt="" className="h-9 w-9 rounded-xl shadow-sm" />
-        <span>Company Tinder</span>
+        <span>CompanyTinder</span>
       </div>
 
       <nav aria-label="VC presets" className="flex gap-1 rounded-full border border-gray-200 bg-gray-100 p-1 text-xs font-semibold">

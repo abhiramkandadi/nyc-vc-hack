@@ -165,7 +165,7 @@ export default function Home() {
         reorderDeck(preset);
         void refreshThesis();
       })
-      .catch(() => log("swipe", `Thesis service did not record ${ACTION_LABEL[action]} for ${s.name}`, "info"));
+      .catch(() => log("swipe", `Ranking service did not record ${ACTION_LABEL[action]} for ${s.name}`, "info"));
     if (d === "left") return;
     if (d === "up") {
       log("swipe", `Tracking ${s.name}: right company, wrong time`, "ok");

@@ -20,8 +20,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "NYC VC Hack",
-  description: "Swipe-style matching for founders and investors.",
+  title: "CompanyTinder",
+  description: "Swipe through pre-seed and seed startups. CompanyTinder learns your investment thesis from what you save and pass.",
   icons: { icon: "/logo.webp", apple: "/logo.webp" },
 };
 

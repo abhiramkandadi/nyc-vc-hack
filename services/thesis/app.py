@@ -37,7 +37,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Thesis", lifespan=lifespan)
+app = FastAPI(title="CompanyTinder ranking service", lifespan=lifespan)
 
 
 class ActionIn(BaseModel):
