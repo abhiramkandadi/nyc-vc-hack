@@ -51,7 +51,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
   const initials = name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
 
   return (
-    <aside className="hidden h-full w-[380px] shrink-0 flex-col overflow-y-auto border-l border-gray-200 bg-white p-6 xl:flex">
+    <aside className="hidden h-full w-[24vw] min-w-[340px] max-w-[400px] shrink-0 flex-col overflow-y-auto border-l border-gray-200/80 bg-white p-5 shadow-sm xl:flex">
       <section className="border-b border-gray-200 pb-5" aria-label="Your profile">
         <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-500">Your profile</h3>
         <div className="flex items-center gap-4">

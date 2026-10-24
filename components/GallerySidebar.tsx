@@ -14,7 +14,7 @@ interface Props {
 
 export default function GallerySidebar({ startups, currentId, matchedIds, live, onSelect }: Props) {
   return (
-    <aside className="hidden h-full w-[420px] shrink-0 flex-col gap-4 overflow-y-auto border-r border-gray-200 bg-white p-6 xl:flex">
+    <aside className="hidden h-full w-[26vw] min-w-[360px] max-w-[440px] shrink-0 flex-col gap-4 overflow-y-auto border-r border-gray-200/80 bg-white p-5 shadow-sm xl:flex">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-extrabold text-gray-900">Explore founders</h2>
         <span className="flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-2.5 py-1 text-xs font-bold text-[#FF385C]">
@@ -27,7 +27,7 @@ export default function GallerySidebar({ startups, currentId, matchedIds, live, 
         </span>
       </div>
 
-      <div className="grid min-h-0 flex-1 auto-rows-fr grid-cols-2 gap-4">
+      <div className="grid flex-1 auto-rows-[minmax(12rem,1fr)] grid-cols-2 gap-4">
         {startups.map((s) => (
           <button
             key={s.id}

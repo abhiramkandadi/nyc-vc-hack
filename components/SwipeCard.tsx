@@ -72,7 +72,7 @@ function TopCard({ startup, forced, onSwipe, onImpact }: TopCardProps) {
       className="absolute inset-0 flex cursor-grab select-none flex-col justify-between overflow-hidden rounded-[36px] border border-gray-200/80 bg-white shadow-2xl active:cursor-grabbing"
     >
       {/* Image area */}
-      <div className="relative h-[64%] w-full shrink-0 bg-gray-200">
+      <div className="relative h-[65%] w-full shrink-0 bg-gray-200">
         <FounderPhoto startup={startup} className="h-full w-full object-cover object-top" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
@@ -168,8 +168,8 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
   };
 
   return (
-    <div className="flex h-full max-h-[920px] w-full flex-col gap-5">
-      <motion.div animate={shake} className="relative min-h-0 w-full max-w-[520px] flex-1 self-center">
+    <div className="flex h-full max-h-[1200px] w-full flex-col gap-5">
+      <motion.div animate={shake} className="relative min-h-0 w-full max-w-[560px] flex-1 self-center">
         {next && (
           <div
             aria-hidden="true"

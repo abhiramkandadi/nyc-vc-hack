@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
 import { exportPrismTrace } from "@/lib/sponsorStack";
-import { AktaHydrationError, getStartupProfiles, getMockStartupProfiles } from "@/lib/akta";
+import { AktaHydrationError, getStartupProfiles, getMockStartupProfiles, reportAktaTelemetry } from "@/lib/akta";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -17,11 +17,15 @@ export async function GET() {
   try {
     const result = await getStartupProfiles();
     const demo = result.source === "mock";
+    reportAktaTelemetry("dataset_dispatch", {
+      source: result.source, count: result.data.length,
+      latencyMs: Math.round(performance.now() - startedAt),
+    });
     return NextResponse.json({
       success: true, data: result.data, source: demo ? "sample" : "live", startups: result.data,
-      meta: { dataSource: demo ? "mock" : "akta.pro", retrieval: result.source, demo, reason: result.reason,
+      meta: { dataSource: demo ? "mock" : "akta.pro", retrieval: result.source, count: result.data.length, demo, reason: result.reason,
         refreshing: result.refreshing ?? false, fetchedAt: result.fetchedAt, cached: result.cached },
-    }, { headers: { ...headers, "X-Data-Source": demo ? "mock" : "akta.pro", "X-Data-Retrieval": result.source } });
+    }, { headers: { ...headers, "X-Data-Source": demo ? "mock" : "akta.pro", "X-Data-Retrieval": result.source, "X-Startup-Count": String(result.data.length) } });
   } catch (error: unknown) {
     const reason = error instanceof AktaHydrationError ? error.code : "HYDRATION_FAILED";
     // Do not log raw errors, provider bodies, keys, or private company payloads.
@@ -43,7 +47,7 @@ export async function GET() {
     const data = getMockStartupProfiles();
     return NextResponse.json({
       success: true, data, source: "sample", startups: data,
-      meta: { dataSource: "mock", demo: true, reason, fetchedAt: new Date().toISOString(), cached: false },
-    }, { headers: { ...headers, "X-Data-Source": "mock" } });
+      meta: { dataSource: "mock", count: data.length, demo: true, reason, fetchedAt: new Date().toISOString(), cached: false },
+    }, { headers: { ...headers, "X-Data-Source": "mock", "X-Startup-Count": String(data.length) } });
   }
 }

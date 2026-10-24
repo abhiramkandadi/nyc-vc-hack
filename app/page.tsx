@@ -132,7 +132,7 @@ export default function Home() {
 
   return (
     <PortraitContext.Provider value={portraits}>
-    <div className="flex h-screen w-screen justify-between overflow-hidden bg-[#F8F9FA] font-sans text-gray-900">
+    <div className="m-0 flex h-screen w-screen max-w-none flex-row items-stretch justify-between overflow-hidden bg-[#F8F9FA] p-0 font-sans text-gray-900">
       <GallerySidebar
         startups={startups}
         currentId={remaining[0]?.id ?? null}
@@ -141,7 +141,7 @@ export default function Home() {
         onSelect={handleSelectFounder}
       />
 
-      <div className="relative flex h-full min-w-0 flex-1 flex-col overflow-hidden">
+      <div className="relative flex h-full min-w-0 flex-1 flex-col items-center justify-between overflow-hidden bg-[#F1F3F5]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 scale-125 opacity-40 blur-[120px] transition-all duration-700 ease-out"
@@ -149,8 +149,8 @@ export default function Home() {
         />
         <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 
-        <main className="relative z-10 flex min-h-0 w-full flex-1 flex-col items-center justify-center p-4">
-          <div className="relative flex h-full w-full max-w-[520px] flex-col">
+        <main className="relative z-10 flex min-h-0 w-full flex-1 flex-col items-center justify-center px-6 py-4">
+          <div className="relative flex h-full w-full max-w-[560px] flex-col">
             {remaining.length > 0 ? (
               <SwipeCard startups={remaining} onSwipe={handleSwipe} onRewind={handleRewind} canRewind={history.length > 0} />
             ) : (
