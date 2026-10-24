@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thesis</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a64; --line: #e2e0d8;
+    --accent: #1f5f4a; --warn: #9a4a1c; --bar: #1f5f4a; --bar-neg: #b5532a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #151513; --panel: #1f1f1c; --ink: #ecebe5; --muted: #9a998f; --line: #34332e;
+            --accent: #6cc2a3; --warn: #e0925e; --bar: #6cc2a3; --bar-neg: #e0925e; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 14px 24px; border-bottom: 1px solid var(--line); display: flex;
+           justify-content: space-between; align-items: baseline; }
+  header h1 { font-size: 17px; margin: 0; letter-spacing: .02em; }
+  header span { color: var(--muted); font-size: 13px; }
+  main { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px;
+         max-width: 1100px; margin: 20px auto; padding: 0 16px; }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+  h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; }
+  .name { font-size: 24px; font-weight: 650; margin: 0 0 2px; }
+  .meta { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+  .desc { margin: 0 0 16px; }
+  .row { margin: 0 0 14px; }
+  .row b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .founder { margin: 2px 0; }
+  .founder small { color: var(--muted); }
+  .match { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .score { font-weight: 650; color: var(--accent); }
+  .tag { border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; font-size: 12px; color: var(--muted); }
+  a { color: var(--accent); }
+  .actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 18px; }
+  button { font: inherit; padding: 10px 6px; border-radius: 8px; border: 1px solid var(--line);
+           background: var(--bg); color: var(--ink); cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  button small { display: block; color: var(--muted); font-size: 11px; }
+  .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+  .bar { display: grid; grid-template-columns: 1fr 70px; gap: 8px; align-items: center; font-size: 13px; margin: 5px 0; }
+  .track { height: 8px; background: var(--line); border-radius: 4px; position: relative; }
+  .fill { position: absolute; top: 0; height: 100%; border-radius: 4px; }
+  .readback { font-size: 15px; margin: 0 0 16px; }
+  .note { color: var(--muted); font-size: 13px; }
+  .err { color: var(--warn); font-size: 13px; }
+</style>
+</head>
+<body>
+<header><h1>Thesis</h1><span id="progress"></span></header>
+<main>
+  <section class="panel" id="card-panel"><div class="empty">Loading…</div></section>
+  <aside class="panel">
+    <h2>Your filter, in words</h2>
+    <p class="readback" id="readback"></p>
+    <div class="err" id="readback-err"></div>
+    <h2>What the model weighs</h2>
+    <div id="weights"></div>
+  </aside>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+let current = null, busy = false, pollTimer = null;
+
+function el(tag, props = {}, ...kids) {
+  const e = document.createElement(tag);
+  Object.assign(e, props);
+  for (const k of kids) e.append(k);
+  return e;
+}
+function row(label, ...content) { return el("div", { className: "row" }, el("b", { textContent: label }), ...content); }
+
+function renderCard(data) {
+  const p = $("card-panel");
+  p.replaceChildren();
+  $("progress").textContent = `${data.n_actions} actions · ${data.remaining} left`;
+  if (!data.company) { p.append(el("div", { className: "empty", textContent: "No companies left." })); current = null; return; }
+  const c = data.company; current = c;
+  p.append(el("h3", { className: "name", textContent: c.name }));
+  p.append(el("div", { className: "meta", textContent:
+    [c.sector, c.founded_year && `founded ${c.founded_year}`, c.headcount_range && `${c.headcount_range} people`].filter(Boolean).join(" · ") }));
+  p.append(el("p", { className: "desc", textContent: c.description || "" }));
+
+  if (c.founders.length) {
+    const box = el("div");
+    for (const f of c.founders.slice(0, 3)) {
+      const line = el("div", { className: "founder" }, el("span", { textContent: f.name }),
+        el("small", { textContent: ` · ${f.title || "founder"}` }));
+      if (f.previous_companies) line.append(el("small", { textContent: ` · previously ${f.previous_companies.join(", ")}` }));
+      box.append(line);
+    }
+    p.append(row("Founders", box));
+  } else p.append(row("Founders", el("span", { className: "note", textContent: "No founder data from the source." })));
+
+  const dated = c.recent_moves.filter(m => m.date).sort((a, b) => b.date.localeCompare(a.date))[0];
+  if (dated) {
+    const s = el("span", { textContent: `${dated.date} · ${dated.description}` });
+    const kids = [s];
+    if (dated.source) kids.push(" ", el("a", { href: dated.source, target: "_blank", rel: "noopener", textContent: "source" }));
+    p.append(row("Latest signal", el("div", {}, ...kids)));
+  }
+  const m = el("div", { className: "match" }, el("span", { className: "score", textContent: `${Math.round(data.score * 100)}% match` }));
+  for (const r of data.reasons || []) m.append(el("span", { className: "tag", textContent: r }));
+  p.append(row("Match", m));
+
+  const acts = el("div", { className: "actions" });
+  for (const [a, label, key] of [["pass", "Pass", "←"], ["save", "Save", "→"], ["track", "Track", "↑"], ["intro", "Intro", "↓"]]) {
+    const b = el("button", { textContent: label }, el("small", { textContent: key }));
+    b.onclick = () => act(a);
+    acts.append(b);
+  }
+  p.append(acts);
+}
+
+function renderThesis(t) {
+  $("readback").textContent = t.readback || (t.n_actions < 5 ? "Act on five companies and your filter appears here." : "Writing your readback…");
+  $("readback-err").textContent = t.readback_error ? `Readback failed: ${t.readback_error}` : "";
+  const w = $("weights"); w.replaceChildren();
+  const entries = Object.entries(t.weights);
+  if (!entries.length) { w.append(el("div", { className: "note", textContent: "Weights appear after you save and pass at least one company each." })); return; }
+  const max = Math.max(...entries.map(([, v]) => Math.abs(v)), 1e-6);
+  for (const [name, v] of entries.slice(0, 8)) {
+    const pct = (Math.abs(v) / max) * 50;
+    const fill = el("div", { className: "fill" });
+    fill.style.cssText = v >= 0 ? `left:50%;width:${pct}%;background:var(--bar)` : `left:${50 - pct}%;width:${pct}%;background:var(--bar-neg)`;
+    w.append(el("div", { className: "bar" }, el("span", { textContent: name }), el("div", { className: "track" }, fill)));
+  }
+}
+
+async function load() {
+  const [n, t] = await Promise.all([fetch("/next").then(r => r.json()), fetch("/thesis").then(r => r.json())]);
+  renderCard(n); renderThesis(t);
+  return t;
+}
+
+async function act(action) {
+  if (!current || busy) return;
+  busy = true;
+  try {
+    const r = await fetch("/action", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uuid: current.uuid, action }) });
+    if (!r.ok) throw new Error(await r.text());
+    const t = await load();
+    waitForReadback(t);
+  } catch (e) { $("readback-err").textContent = String(e); }
+  finally { busy = false; }
+}
+
+// The readback is written in the background every five actions. Poll until it catches up.
+function waitForReadback(t) {
+  clearTimeout(pollTimer);
+  const due = Math.floor(t.n_actions / 5) * 5;
+  if (due > 0 && t.readback_at < due && !t.readback_error) {
+    pollTimer = setTimeout(async () => {
+      const next = await fetch("/thesis").then(r => r.json());
+      renderThesis(next); waitForReadback(next);
+    }, 1200);
+  }
+}
+
+document.addEventListener("keydown", (e) => {
+  const map = { ArrowLeft: "pass", ArrowRight: "save", ArrowUp: "track", ArrowDown: "intro" };
+  if (map[e.key]) { e.preventDefault(); act(map[e.key]); }
+});
+load().then(waitForReadback);
+</script>
+</body>
+</html>
