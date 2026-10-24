@@ -1,0 +1,27 @@
+[
+  {
+    "id": "everywhere",
+    "name": "Everywhere Ventures",
+    "thesis": "Pre-seed investor backing purpose-driven founders from anywhere in the world, focused on the future of money, health and work: fintech, digital health and new ways of working."
+  },
+  {
+    "id": "plugandplay",
+    "name": "Plug and Play",
+    "thesis": "Pre-seed to Series A investor in enterprise and B2B SaaS, with a focus on AI applications and enterprise infrastructure."
+  },
+  {
+    "id": "wischoff",
+    "name": "Wischoff Ventures",
+    "thesis": "Pre-seed and seed investor digitizing offline industries: logistics and supply chain, construction and manufacturing, payments and vertical software that bring physical-industry operations online."
+  },
+  {
+    "id": "forum",
+    "name": "Forum Ventures",
+    "thesis": "Pre-seed fund and accelerator for B2B software founders, industry-agnostic but leaning toward vertical SaaS, vertical AI, AI infrastructure, fintech, healthcare and supply chain, with a strong go-to-market focus."
+  },
+  {
+    "id": "generic",
+    "name": "Seed B2B software",
+    "thesis": "Seed-stage B2B software: technical founders building products that businesses pay for, such as developer tools, security, AI infrastructure and workflow automation, with a small team and early traction."
+  }
+]
