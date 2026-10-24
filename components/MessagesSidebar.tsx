@@ -77,7 +77,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
             ) : (
               <>
                 <p className="truncate font-display text-lg font-extrabold text-gray-900">{name}</p>
-                <span className="mt-1 inline-block max-w-full truncate rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-[11px] font-semibold text-[#FF385C]">
+                <span className="mt-1 inline-block max-w-full rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-[11px] font-semibold text-[#FF385C]">
                   {title}
                 </span>
               </>
