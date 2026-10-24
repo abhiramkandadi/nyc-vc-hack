@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "provider": "akta.pro",
-  "fetchedAt": "2026-10-24T17:02:12.552Z",
   "sourceApiUrl": "https://mcp.akta.pro/mcp",
+  "fetchedAt": "2026-10-24T17:25:51.980034+00:00",
   "data": [
     {
       "id": "02mokfp",
@@ -11,18 +11,18 @@
       "founderImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "founderAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "exCompany": "Boston Dynamics",
-      "founderBackground": "Co-founder & CEO",
-      "headline": "Dynamic Creatures builds interactive character robots for hospitality and entertainment, combining robotics with adaptive AI behavior.  It launched Sn",
-      "signalScore": 97,
+      "founderBackground": "Previously at Boston Dynamics",
+      "headline": "Official Boston Dynamics entertainment partner",
+      "signalScore": 94,
       "stage": "Pre-Seed",
       "signals": [
         "Exited stealth in September 2026",
         "Official Boston Dynamics entertainment partner",
         "SnowJay AI character platform launched"
       ],
-      "pitchSummary": "Dynamic Creatures builds interactive character robots for hospitality and entertainment, combining robotics with adaptive AI behavior.  It launched SnowJay and reports an official entertainment partnership with Boston Dynamics.",
+      "pitchSummary": "Dynamic Creatures emerged from stealth on September 8, 2026, as a robotics company building interactive character robots for entertainment and hospitality. Co-founded by former Boston Dynamics and Google leaders, it is Boston Dynamics' official entertainment and hospitality partner, working with a theme park and retailer.",
       "targetSector": "Physical AI",
-      "draftEmail": "Hi Marc,\n\nWe came across Dynamic Creatures while researching early-stage companies. Dynamic Creatures builds interactive character robots for hospitality and entertainment, combining robotics with adaptive AI behavior.  It launched SnowJay and reports an official entertainment partnership with Boston Dynamics.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "draftEmail": "Hi Marc,\n\nI came across Dynamic Creatures's recent update: \"Exited stealth in September 2026\". We are researching physical ai and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
       "liveNews": {
         "title": "Dynamic Creatures Emerges from Stealth",
         "url": "https://www.dynamiccreatures.com/news"
@@ -48,27 +48,18 @@
           "text": "SnowJay AI character platform launched",
           "sourceUrl": "https://www.dynamiccreatures.com/news",
           "observedAt": "2026-09-08T00:00:00"
-        },
-        {
-          "text": "Founder previously at Boston Dynamics",
-          "sourceUrl": "https://www.dynamiccreatures.com/news",
-          "observedAt": null
-        },
-        {
-          "text": "News: Dynamic Creatures Emerges from Stealth",
-          "sourceUrl": "https://www.dynamiccreatures.com/news",
-          "observedAt": "2026-09-08T00:00:00"
         }
       ],
       "warnings": [
-        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
-        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
-        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
-        "Profile normalized from akta.pro news; full company enrichment was not available.",
-        "Stock portrait placeholder; not an image of the named founder.",
-        "Stage unavailable; Pre-Seed is a display default.",
-        "Sector inferred for frontend filtering; verify classification."
-      ]
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "Physical AI",
+      "themeColor": "#D73737",
+      "sourceNewsId": 35076551,
+      "sourcePublishedAt": "2026-09-08T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
     },
     {
       "id": "003oan6",
@@ -77,18 +68,18 @@
       "founderImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "founderAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "exCompany": "Magic",
-      "founderBackground": "Co-founder & CEO",
-      "headline": "Midcentury develops multimodal training datasets for frontier AI and embodied systems.  Its reported launch includes an egocentric human-behavior data",
-      "signalScore": 98,
+      "founderBackground": "Previously at Magic",
+      "headline": "Over two million hours of egocentric data",
+      "signalScore": 97,
       "stage": "Seed",
       "signals": [
-        "$15M seed round reported at stealth exit",
-        "2M+ hours of egocentric human-behavior data",
-        "Matrix physical-AI simulation platform launched"
+        "$15M seed round announced",
+        "Over two million hours of egocentric data",
+        "Matrix simulation platform launched"
       ],
-      "pitchSummary": "Midcentury develops multimodal training datasets for frontier AI and embodied systems.  Its reported launch includes an egocentric human-behavior dataset and Matrix, a simulation platform for physical AI.",
+      "pitchSummary": "Midcentury emerged from stealth on September 23, 2026, with a $15 million seed round. It launched an egocentric dataset of over 2 million hours of human behavior and a cloud simulation platform called Matrix.",
       "targetSector": "Physical AI",
-      "draftEmail": "Hi Chetan,\n\nWe came across Midcentury while researching early-stage companies. Midcentury develops multimodal training datasets for frontier AI and embodied systems.  Its reported launch includes an egocentric human-behavior dataset and Matrix, a simulation platform for physical AI.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "draftEmail": "Hi Chetan,\n\nI came across Midcentury's recent update: \"$15M seed round announced\". We are researching physical ai and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
       "liveNews": {
         "title": "Midcentury Emerges From Stealth With $15M Seed for Physical AI Training Data",
         "url": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/"
@@ -101,39 +92,30 @@
       "signalScoreMethod": "evidence-coverage-v1",
       "signalEvidence": [
         {
-          "text": "$15M seed round reported at stealth exit",
+          "text": "$15M seed round announced",
           "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
           "observedAt": "2026-09-26T10:13:48"
         },
         {
-          "text": "2M+ hours of egocentric human-behavior data",
+          "text": "Over two million hours of egocentric data",
           "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
           "observedAt": "2026-09-26T10:13:48"
         },
         {
-          "text": "Matrix physical-AI simulation platform launched",
-          "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
-          "observedAt": "2026-09-26T10:13:48"
-        },
-        {
-          "text": "Founder previously at Magic",
-          "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
-          "observedAt": null
-        },
-        {
-          "text": "News: Midcentury Emerges From Stealth With $15M Seed for Physical AI Training Data",
+          "text": "Matrix simulation platform launched",
           "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
           "observedAt": "2026-09-26T10:13:48"
         }
       ],
       "warnings": [
-        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
-        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
-        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
-        "News reports a $15M seed announcement; the company snapshot lists $30.1M total funding, a different scope.",
-        "Stock portrait placeholder; not an image of the named founder.",
-        "Sector inferred for frontend filtering; verify classification."
-      ]
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Physical AI",
+      "themeColor": "#3766D7",
+      "sourceNewsId": 38966347,
+      "sourcePublishedAt": "2026-09-26T10:13:48",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
     },
     {
       "id": "akta-news-39683006",
@@ -142,18 +124,18 @@
       "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "exCompany": "Not disclosed",
-      "founderBackground": "Founder & CEO",
-      "headline": "TeRAM develops custom 3D SRAM to address memory-bandwidth constraints in AI computing.  Its stated roadmap targets initial customer production in 2029",
-      "signalScore": 96,
+      "founderBackground": "Founder",
+      "headline": "Developing custom 3D SRAM for AI",
+      "signalScore": 94,
       "stage": "Seed",
       "signals": [
-        "$37M equity financing reported at stealth exit",
-        "Custom 3D SRAM for AI memory bandwidth",
+        "$37M equity financing announced",
+        "Developing custom 3D SRAM for AI",
         "Initial customer production targeted for 2029"
       ],
-      "pitchSummary": "TeRAM develops custom 3D SRAM to address memory-bandwidth constraints in AI computing.  Its stated roadmap targets initial customer production in 2029.",
+      "pitchSummary": "TeRAM emerged from stealth with $37 million in equity financing from early-stage investors to develop custom 3D SRAM for AI memory bandwidth. The company targets initial customer production in 2029, aiming to address memory constraints as AI models scale beyond two trillion parameters.",
       "targetSector": "AI Infra",
-      "draftEmail": "Hi Charlie,\n\nWe came across TeRAM while researching early-stage companies. TeRAM develops custom 3D SRAM to address memory-bandwidth constraints in AI computing.  Its stated roadmap targets initial customer production in 2029.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "draftEmail": "Hi Charlie,\n\nI came across TeRAM's recent update: \"$37M equity financing announced\". We are researching ai infra and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
       "liveNews": {
         "title": "TeRAM Emerges from Stealth to Tackle the AI Memory Wall",
         "url": "https://teram.com/teram-press-release/"
@@ -166,12 +148,12 @@
       "signalScoreMethod": "evidence-coverage-v1",
       "signalEvidence": [
         {
-          "text": "$37M equity financing reported at stealth exit",
+          "text": "$37M equity financing announced",
           "sourceUrl": "https://teram.com/teram-press-release/",
           "observedAt": "2026-09-14T00:00:00"
         },
         {
-          "text": "Custom 3D SRAM for AI memory bandwidth",
+          "text": "Developing custom 3D SRAM for AI",
           "sourceUrl": "https://teram.com/teram-press-release/",
           "observedAt": "2026-09-14T00:00:00"
         },
@@ -179,21 +161,18 @@
           "text": "Initial customer production targeted for 2029",
           "sourceUrl": "https://teram.com/teram-press-release/",
           "observedAt": "2026-09-14T00:00:00"
-        },
-        {
-          "text": "News: TeRAM Emerges from Stealth to Tackle the AI Memory Wall",
-          "sourceUrl": "https://teram.com/teram-press-release/",
-          "observedAt": "2026-09-14T00:00:00"
         }
       ],
       "warnings": [
-        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
-        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
-        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
-        "Profile normalized from akta.pro news; full company enrichment was not available.",
-        "Stock portrait placeholder; not an image of the named founder.",
-        "Sector inferred for frontend filtering; verify classification."
-      ]
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "AI Infra",
+      "themeColor": "#95D737",
+      "sourceNewsId": 39683006,
+      "sourcePublishedAt": "2026-09-14T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
     },
     {
       "id": "0000uxu",
@@ -202,18 +181,18 @@
       "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "exCompany": "Coinbase",
-      "founderBackground": "Co-founder & CEO",
-      "headline": "Beltic provides verification infrastructure for AI agents, checking identity, authority, and transaction legitimacy.  Modular APIs help businesses acc",
-      "signalScore": 98,
+      "founderBackground": "Previously at Coinbase",
+      "headline": "Earlier $1.5M pre-seed round",
+      "signalScore": 97,
       "stage": "Seed",
       "signals": [
-        "$7.3M seed round led by Norwest",
-        "Earlier $1.5M pre-seed round reported",
-        "Agent identity and transaction authorization APIs"
+        "$7.3M seed led by Norwest",
+        "Earlier $1.5M pre-seed round",
+        "Agent identity and transaction verification APIs"
       ],
-      "pitchSummary": "Beltic provides verification infrastructure for AI agents, checking identity, authority, and transaction legitimacy.  Modular APIs help businesses accept agent-driven activity with explicit safeguards.",
+      "pitchSummary": "Beltic emerged from stealth with $7.3 million in seed funding led by Norwest, following a $1.5 million pre-seed round. The company builds agent verification infrastructure to verify AI agents' identity and authorization for transactions.",
       "targetSector": "AI Infra",
-      "draftEmail": "Hi Isha,\n\nWe came across Beltic while researching early-stage companies. Beltic provides verification infrastructure for AI agents, checking identity, authority, and transaction legitimacy.  Modular APIs help businesses accept agent-driven activity with explicit safeguards.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "draftEmail": "Hi Isha,\n\nI came across Beltic's recent update: \"$7.3M seed led by Norwest\". We are researching ai infra and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
       "liveNews": {
         "title": "Beltic Emerges from Stealth to Secure Autonomous Agent Transactions at Scale",
         "url": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html"
@@ -226,39 +205,30 @@
       "signalScoreMethod": "evidence-coverage-v1",
       "signalEvidence": [
         {
-          "text": "$7.3M seed round led by Norwest",
+          "text": "$7.3M seed led by Norwest",
           "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
           "observedAt": "2026-09-30T00:00:00"
         },
         {
-          "text": "Earlier $1.5M pre-seed round reported",
+          "text": "Earlier $1.5M pre-seed round",
           "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
           "observedAt": "2026-09-30T00:00:00"
         },
         {
-          "text": "Agent identity and transaction authorization APIs",
-          "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
-          "observedAt": "2026-09-30T00:00:00"
-        },
-        {
-          "text": "Founder previously at Coinbase",
-          "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
-          "observedAt": null
-        },
-        {
-          "text": "News: Beltic Emerges from Stealth to Secure Autonomous Agent Transactions at Scale",
+          "text": "Agent identity and transaction verification APIs",
           "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
           "observedAt": "2026-09-30T00:00:00"
         }
       ],
       "warnings": [
-        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
-        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
-        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
-        "Recent launch news identifies Isha Bhatnagar as CEO/co-founder; the concise company snapshot lists a different role.",
-        "Stock portrait placeholder; not an image of the named founder.",
-        "Sector inferred for frontend filtering; verify classification."
-      ]
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "AI Infra",
+      "themeColor": "#D737C3",
+      "sourceNewsId": 39310343,
+      "sourcePublishedAt": "2026-09-30T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
     },
     {
       "id": "02mqjeu",
@@ -267,18 +237,18 @@
       "founderImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "founderAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "exCompany": "TestProject",
-      "founderBackground": "Co-founder",
-      "headline": "Keewano develops a data layer that preserves ordered entity-event histories for AI agents.  It is designed to let agents investigate large event strea",
-      "signalScore": 97,
+      "founderBackground": "Previously at TestProject",
+      "headline": "Entity-event histories for AI agent context",
+      "signalScore": 94,
       "stage": "Pre-Seed",
       "signals": [
-        "$12M financing reported on stealth exit",
+        "$12M financing on stealth exit",
         "Entity-event histories for AI agent context",
-        "Founding team previously built TestProject and Devalore"
+        "Founders previously built TestProject and Devalore"
       ],
-      "pitchSummary": "Keewano develops a data layer that preserves ordered entity-event histories for AI agents.  It is designed to let agents investigate large event streams without rebuilding context for each query.",
+      "pitchSummary": "Keewano, a data layer for AI agents, exited stealth with $12M in funding. The team, including Mark Kardashov, Dima Karger, Pavel Bibergal, and Vitaly Bukhovsky, previously built TestProject and Devalore.",
       "targetSector": "AI Agents",
-      "draftEmail": "Hi Mark,\n\nWe came across Keewano while researching early-stage companies. Keewano develops a data layer that preserves ordered entity-event histories for AI agents.  It is designed to let agents investigate large event streams without rebuilding context for each query.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "draftEmail": "Hi Mark,\n\nI came across Keewano's recent update: \"$12M financing on stealth exit\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
       "liveNews": {
         "title": "Keewano Exits Stealth with $12M in Funding",
         "url": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg"
@@ -291,7 +261,7 @@
       "signalScoreMethod": "evidence-coverage-v1",
       "signalEvidence": [
         {
-          "text": "$12M financing reported on stealth exit",
+          "text": "$12M financing on stealth exit",
           "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
           "observedAt": "2026-09-16T00:00:00"
         },
@@ -301,30 +271,21 @@
           "observedAt": "2026-09-16T00:00:00"
         },
         {
-          "text": "Founding team previously built TestProject and Devalore",
-          "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
-          "observedAt": "2026-09-16T00:00:00"
-        },
-        {
-          "text": "Founder previously at TestProject",
-          "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
-          "observedAt": null
-        },
-        {
-          "text": "News: Keewano Exits Stealth with $12M in Funding",
+          "text": "Founders previously built TestProject and Devalore",
           "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
           "observedAt": "2026-09-16T00:00:00"
         }
       ],
       "warnings": [
-        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
-        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
-        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
-        "Profile normalized from akta.pro news; full company enrichment was not available.",
-        "Stock portrait placeholder; not an image of the named founder.",
-        "Stage unavailable; Pre-Seed is a display default.",
-        "Sector inferred for frontend filtering; verify classification."
-      ]
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#37D7BD",
+      "sourceNewsId": 39670705,
+      "sourcePublishedAt": "2026-09-16T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
     },
     {
       "id": "akta-news-33865927",
@@ -333,18 +294,18 @@
       "founderImage": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "founderAvatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "exCompany": "VMware",
-      "founderBackground": "Co-founder",
-      "headline": "ai builds agents and a decision layer for infrastructure operations.  Its platform models the impact of proposed changes before execution to help team",
-      "signalScore": 97,
+      "founderBackground": "Previously at VMware",
+      "headline": "Infrastructure-change impact analysis agents",
+      "signalScore": 94,
       "stage": "Pre-Seed",
       "signals": [
-        "$21M financing reported at stealth exit",
+        "$21M funding announced",
         "Infrastructure-change impact analysis agents",
         "Production use reported at Guardant Health and Avahi"
       ],
-      "pitchSummary": "ai builds agents and a decision layer for infrastructure operations.  Its platform models the impact of proposed changes before execution to help teams understand risk.",
+      "pitchSummary": "Empirik.ai emerged from stealth with $21 million in funding from Sequoia Capital, S32, Canapi Ventures, and Alumni Ventures. The San Francisco-based company builds infrastructure change management agents to support AI coding agents, which accelerate software creation while infrastructure remains human-speed.",
       "targetSector": "AI Agents",
-      "draftEmail": "Hi Avon,\n\nWe came across Empirik.ai while researching early-stage companies. ai builds agents and a decision layer for infrastructure operations.  Its platform models the impact of proposed changes before execution to help teams understand risk.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "draftEmail": "Hi Avon,\n\nI came across Empirik.ai's recent update: \"$21M funding announced\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
       "liveNews": {
         "title": "Empirik.AI Emerges From Stealth With $21M to Build AI Agents for Infrastructure",
         "url": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/"
@@ -357,7 +318,7 @@
       "signalScoreMethod": "evidence-coverage-v1",
       "signalEvidence": [
         {
-          "text": "$21M financing reported at stealth exit",
+          "text": "$21M funding announced",
           "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
           "observedAt": "2026-09-04T10:11:07"
         },
@@ -370,27 +331,18 @@
           "text": "Production use reported at Guardant Health and Avahi",
           "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
           "observedAt": "2026-09-04T10:11:07"
-        },
-        {
-          "text": "Founder previously at VMware",
-          "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
-          "observedAt": null
-        },
-        {
-          "text": "News: Empirik.AI Emerges From Stealth With $21M to Build AI Agents for Infrastructure",
-          "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
-          "observedAt": "2026-09-04T10:11:07"
         }
       ],
       "warnings": [
-        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
-        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
-        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
-        "Profile normalized from akta.pro news; full company enrichment was not available.",
-        "Stock portrait placeholder; not an image of the named founder.",
-        "Stage unavailable; Pre-Seed is a display default.",
-        "Sector inferred for frontend filtering; verify classification."
-      ]
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#D78E37",
+      "sourceNewsId": 33865927,
+      "sourcePublishedAt": "2026-09-04T10:11:07",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
     },
     {
       "id": "akta-news-35071927",
@@ -399,18 +351,18 @@
       "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
       "exCompany": "Not disclosed",
-      "founderBackground": "Co-founder",
-      "headline": "Twin1 builds AI extensions of individual professionals to capture knowledge, judgment, and context.  Its governed network connects that expertise acro",
-      "signalScore": 96,
+      "founderBackground": "Founder",
+      "headline": "AI extensions capture professional knowledge",
+      "signalScore": 93,
       "stage": "Seed",
       "signals": [
-        "$20M seed round reported at stealth exit",
+        "$20M seed round reported",
         "AI extensions capture professional knowledge",
-        "Governed network for enterprise agent context"
+        "Governed enterprise knowledge network"
       ],
-      "pitchSummary": "Twin1 builds AI extensions of individual professionals to capture knowledge, judgment, and context.  Its governed network connects that expertise across an organization.",
+      "pitchSummary": "Twin1 AI, founded by Lewis Z. Liu, raised $20M in seed funding and exited stealth.",
       "targetSector": "AI Agents",
-      "draftEmail": "Hi Lewis,\n\nWe came across Twin1 AI while researching early-stage companies. Twin1 builds AI extensions of individual professionals to capture knowledge, judgment, and context.  Its governed network connects that expertise across an organization.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "draftEmail": "Hi Lewis,\n\nI came across Twin1 AI's recent update: \"$20M seed round reported\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
       "liveNews": {
         "title": "Twin1 Emerges from Stealth with $20M Seed Round",
         "url": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/"
@@ -423,7 +375,7 @@
       "signalScoreMethod": "evidence-coverage-v1",
       "signalEvidence": [
         {
-          "text": "$20M seed round reported at stealth exit",
+          "text": "$20M seed round reported",
           "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/",
           "observedAt": "2026-08-20T00:00:00"
         },
@@ -433,24 +385,2463 @@
           "observedAt": "2026-08-20T00:00:00"
         },
         {
-          "text": "Governed network for enterprise agent context",
-          "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/",
-          "observedAt": "2026-08-20T00:00:00"
-        },
-        {
-          "text": "News: Twin1 Emerges from Stealth with $20M Seed Round",
+          "text": "Governed enterprise knowledge network",
           "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/",
           "observedAt": "2026-08-20T00:00:00"
         }
       ],
       "warnings": [
-        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
-        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
-        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
-        "Profile normalized from akta.pro news; full company enrichment was not available.",
-        "Stock portrait placeholder; not an image of the named founder.",
-        "Sector inferred for frontend filtering; verify classification."
-      ]
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#5F37D7",
+      "sourceNewsId": 35071927,
+      "sourcePublishedAt": "2026-08-20T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-35707038",
+      "name": "Ellis",
+      "founderName": "Ryan Williams",
+      "founderImage": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Cadre",
+      "founderBackground": "Previously at Cadre",
+      "headline": "Source-verifiable data foundation for private credit",
+      "signalScore": 95,
+      "stage": "Seed",
+      "signals": [
+        "Over $10M seed led by First Round",
+        "Source-verifiable data foundation for private credit",
+        "Private-credit design partners engaged"
+      ],
+      "pitchSummary": "Ellis, an AI-native operations platform for private credit, launched with over $10 million in seed funding led by First Round Capital. The platform provides a reconciled data foundation and AI agents for reconciliation, LP reporting, and compliance.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Ryan,\n\nI came across Ellis's recent update: \"Over $10M seed led by First Round\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Ellis Emerges From Stealth With $10M+",
+        "url": "https://www.ellis.ai/press/ellis-emerges-from-stealth"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Over $10M seed led by First Round",
+          "sourceUrl": "https://www.ellis.ai/press/ellis-emerges-from-stealth",
+          "observedAt": "2026-07-30T00:00:00"
+        },
+        {
+          "text": "Source-verifiable data foundation for private credit",
+          "sourceUrl": "https://www.ellis.ai/press/ellis-emerges-from-stealth",
+          "observedAt": "2026-07-30T00:00:00"
+        },
+        {
+          "text": "Private-credit design partners engaged",
+          "sourceUrl": "https://www.ellis.ai/press/ellis-emerges-from-stealth",
+          "observedAt": "2026-07-30T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#3ED737",
+      "sourceNewsId": 35707038,
+      "sourcePublishedAt": "2026-07-30T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-35039388",
+      "name": "Enigmata",
+      "founderName": "Scott Searle",
+      "founderImage": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "AI training and search on encrypted data",
+      "signalScore": 94,
+      "stage": "Seed",
+      "signals": [
+        "$6.5M seed led by Blockchange Ventures",
+        "AI training and search on encrypted data",
+        "Enterprise design-partner access offered"
+      ],
+      "pitchSummary": "Enigmata, Inc. emerged from stealth with $6.5 million in seed funding led by Blockchange Ventures to commercialize Enigmata Cipher, a cryptographic technology that lets AI train and search data while encrypted.",
+      "targetSector": "AI Infra",
+      "draftEmail": "Hi Scott,\n\nI came across Enigmata's recent update: \"$6.5M seed led by Blockchange Ventures\". We are researching ai infra and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Enigmata Emerges from Stealth with $6.5M Seed",
+        "url": "https://www.enigmata.xyz/news/seed-round"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$6.5M seed led by Blockchange Ventures",
+          "sourceUrl": "https://www.enigmata.xyz/news/seed-round",
+          "observedAt": "2026-09-10T00:00:00"
+        },
+        {
+          "text": "AI training and search on encrypted data",
+          "sourceUrl": "https://www.enigmata.xyz/news/seed-round",
+          "observedAt": "2026-09-10T00:00:00"
+        },
+        {
+          "text": "Enterprise design-partner access offered",
+          "sourceUrl": "https://www.enigmata.xyz/news/seed-round",
+          "observedAt": "2026-09-10T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "AI Infra",
+      "themeColor": "#D7376D",
+      "sourceNewsId": 35039388,
+      "sourcePublishedAt": "2026-09-10T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-31428366",
+      "name": "Endeavor Optical Networks",
+      "founderName": "Charlie Horowitz",
+      "founderImage": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Optical satellite communications infrastructure",
+      "signalScore": 93,
+      "stage": "Seed",
+      "signals": [
+        "$10.8M seed co-led by General Catalyst and a16z",
+        "Optical satellite communications infrastructure",
+        "Demonstration mission planned for 2027 or 2028"
+      ],
+      "pitchSummary": "Endeavor Optical Networks emerged from stealth on Tuesday with $10.8 million in seed funding co-led by General Catalyst and Andreessen Horowitz, aiming to build a constellation of optical communications satellites in medium Earth orbit as an alternative to subsea data cables. The company plans to deploy approximately 20 satellites at around 13,000 km altitude with a target throughput of 2.4 Tbps per link, positioning itself as a redundant route above threats like anchor damage or sabotage that affect undersea cables.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Charlie,\n\nI came across Endeavor Optical Networks's recent update: \"$10.8M seed co-led by General Catalyst and a16z\". We are researching precision tech and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Endeavor Optical Networks Emerges from Stealth",
+        "url": "https://payloadspace.com/endeavor-optical-networks-emerges-from-stealth/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$10.8M seed co-led by General Catalyst and a16z",
+          "sourceUrl": "https://payloadspace.com/endeavor-optical-networks-emerges-from-stealth/",
+          "observedAt": "2026-08-06T12:31:19"
+        },
+        {
+          "text": "Optical satellite communications infrastructure",
+          "sourceUrl": "https://payloadspace.com/endeavor-optical-networks-emerges-from-stealth/",
+          "observedAt": "2026-08-06T12:31:19"
+        },
+        {
+          "text": "Demonstration mission planned for 2027 or 2028",
+          "sourceUrl": "https://payloadspace.com/endeavor-optical-networks-emerges-from-stealth/",
+          "observedAt": "2026-08-06T12:31:19"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "Precision Tech",
+      "themeColor": "#379BD7",
+      "sourceNewsId": 31428366,
+      "sourcePublishedAt": "2026-08-06T12:31:19",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-35074386",
+      "name": "Guickly",
+      "founderName": "Prashant Jalan",
+      "founderImage": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Enterprise AI usage and cost analytics",
+      "signalScore": 94,
+      "stage": "Seed",
+      "signals": [
+        "$4.2M seed funding announced",
+        "Enterprise AI usage and cost analytics",
+        "Analyzes billing without collecting sensitive prompts"
+      ],
+      "pitchSummary": "Guickly emerged from stealth with $4.2 million in seed funding to help enterprises track AI usage, costs, and ROI. The platform analyzes billing and usage data without sending sensitive prompts or source code to its servers.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Prashant,\n\nI came across Guickly's recent update: \"$4.2M seed funding announced\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Guickly Emerges from Stealth to Control AI Costs",
+        "url": "https://techstrong.ai/articles/guickly-emerges-from-stealth-to-control-ai-costs/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$4.2M seed funding announced",
+          "sourceUrl": "https://techstrong.ai/articles/guickly-emerges-from-stealth-to-control-ai-costs/",
+          "observedAt": "2026-09-01T00:00:00"
+        },
+        {
+          "text": "Enterprise AI usage and cost analytics",
+          "sourceUrl": "https://techstrong.ai/articles/guickly-emerges-from-stealth-to-control-ai-costs/",
+          "observedAt": "2026-09-01T00:00:00"
+        },
+        {
+          "text": "Analyzes billing without collecting sensitive prompts",
+          "sourceUrl": "https://techstrong.ai/articles/guickly-emerges-from-stealth-to-control-ai-costs/",
+          "observedAt": "2026-09-01T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#CAD737",
+      "sourceNewsId": 35074386,
+      "sourcePublishedAt": "2026-09-01T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-40214619",
+      "name": "Polygrade",
+      "founderName": "David Steckel",
+      "founderImage": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Setter",
+      "founderBackground": "Previously at Setter",
+      "headline": "AI-native warranty claims management",
+      "signalScore": 95,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$6.3M funding announced",
+        "AI-native warranty claims management",
+        "Expanding engineering and go-to-market teams"
+      ],
+      "pitchSummary": "Polygrade emerged from stealth with $6.3 million in funding from Construct Capital, American Family Ventures, and Nine Four Ventures. The AI-native claims management platform will use the funds to expand engineering and go-to-market teams, and plans to expand beyond home warranty into extended warranty, OEM warranty, and equipment breakdown insurance.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi David,\n\nI came across Polygrade's recent update: \"$6.3M funding announced\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Polygrade Emerges from stealth with $6.3M funding",
+        "url": "https://privatecapitaljournal.com/polygrade-emerges-from-stealth-with-6-3m-funding/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$6.3M funding announced",
+          "sourceUrl": "https://privatecapitaljournal.com/polygrade-emerges-from-stealth-with-6-3m-funding/",
+          "observedAt": "2026-10-07T14:46:13"
+        },
+        {
+          "text": "AI-native warranty claims management",
+          "sourceUrl": "https://privatecapitaljournal.com/polygrade-emerges-from-stealth-with-6-3m-funding/",
+          "observedAt": "2026-10-07T14:46:13"
+        },
+        {
+          "text": "Expanding engineering and go-to-market teams",
+          "sourceUrl": "https://privatecapitaljournal.com/polygrade-emerges-from-stealth-with-6-3m-funding/",
+          "observedAt": "2026-10-07T14:46:13"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#B637D7",
+      "sourceNewsId": 40214619,
+      "sourcePublishedAt": "2026-10-07T14:46:13",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-40557279",
+      "name": "AiID",
+      "founderName": "Brandon Currul",
+      "founderImage": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Credential-authentication demonstrations published",
+      "signalScore": 93,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Frictionless ID platform unveiled",
+        "Credential-authentication demonstrations published",
+        "Seed investor discussions underway"
+      ],
+      "pitchSummary": "AiID emerged from stealth to unveil Frictionless ID, a credential intelligence platform for document authentication. In three demos, it changed a genuine ID from FAIL to PASS and two counterfeit IDs from PASS to FAIL.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Brandon,\n\nI came across AiID's recent update: \"Frictionless ID platform unveiled\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "AiID Emerges from Stealth with Frictionless ID™",
+        "url": "https://www.prnewswire.com/news-releases/aiid-emerges-from-stealth-with-frictionless-id-302906521.html"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Frictionless ID platform unveiled",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/aiid-emerges-from-stealth-with-frictionless-id-302906521.html",
+          "observedAt": "2026-10-13T12:54:00"
+        },
+        {
+          "text": "Credential-authentication demonstrations published",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/aiid-emerges-from-stealth-with-frictionless-id-302906521.html",
+          "observedAt": "2026-10-13T12:54:00"
+        },
+        {
+          "text": "Seed investor discussions underway",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/aiid-emerges-from-stealth-with-frictionless-id-302906521.html",
+          "observedAt": "2026-10-13T12:54:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#37D787",
+      "sourceNewsId": 40557279,
+      "sourcePublishedAt": "2026-10-13T12:54:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-36205631",
+      "name": "CreditBase.ai",
+      "founderName": "John Karakelle",
+      "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Silicon Valley Bank",
+      "founderBackground": "Previously at Silicon Valley Bank",
+      "headline": "Private-credit deal execution platform",
+      "signalScore": 94,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Exited stealth after one year of development",
+        "Private-credit deal execution platform",
+        "Limited design-partner intake announced"
+      ],
+      "pitchSummary": "CreditBase.ai emerged from stealth after one year of development, extending its deal execution platform to private credit and leveraged finance. The platform automates manual deal work for mid-market and institutional lenders, with modules for deal record tracking, governance, and covenant compliance in development.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi John,\n\nI came across CreditBase.ai's recent update: \"Exited stealth after one year of development\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "CreditBase exits stealth with deal execution platform",
+        "url": "https://www.fintechfutures.com/fintech-start-ups/credibase-exits-stealth"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Exited stealth after one year of development",
+          "sourceUrl": "https://www.fintechfutures.com/fintech-start-ups/credibase-exits-stealth",
+          "observedAt": "2026-09-18T12:54:34"
+        },
+        {
+          "text": "Private-credit deal execution platform",
+          "sourceUrl": "https://www.fintechfutures.com/fintech-start-ups/credibase-exits-stealth",
+          "observedAt": "2026-09-18T12:54:34"
+        },
+        {
+          "text": "Limited design-partner intake announced",
+          "sourceUrl": "https://www.fintechfutures.com/fintech-start-ups/credibase-exits-stealth",
+          "observedAt": "2026-09-18T12:54:34"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#D75837",
+      "sourceNewsId": 36205631,
+      "sourcePublishedAt": "2026-09-18T12:54:34",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-36061363",
+      "name": "Fin.com",
+      "founderName": "Nabeel Alamgir",
+      "founderImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Payout infrastructure across 50-plus countries",
+      "signalScore": 94,
+      "stage": "Seed",
+      "signals": [
+        "$20M seed led by Expa",
+        "Payout infrastructure across 50-plus countries",
+        "Supports more than 40 currencies"
+      ],
+      "pitchSummary": "Fin.com emerged from stealth, raising $20 million in seed funding led by Expa and Uber co-founder Garrett Camp. The payments infrastructure firm supports payouts in over 50 countries and 40 currencies, and plans to pursue a bank acquisition within six months.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Nabeel,\n\nI came across Fin.com's recent update: \"$20M seed led by Expa\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Fin.com emerges from stealth with $20m in seed funding",
+        "url": "https://www.fintechfutures.com/venture-capital-funding/fin-com-emerges-from-stealth-with-20m-in-seed-funding"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$20M seed led by Expa",
+          "sourceUrl": "https://www.fintechfutures.com/venture-capital-funding/fin-com-emerges-from-stealth-with-20m-in-seed-funding",
+          "observedAt": "2026-09-17T10:23:17"
+        },
+        {
+          "text": "Payout infrastructure across 50-plus countries",
+          "sourceUrl": "https://www.fintechfutures.com/venture-capital-funding/fin-com-emerges-from-stealth-with-20m-in-seed-funding",
+          "observedAt": "2026-09-17T10:23:17"
+        },
+        {
+          "text": "Supports more than 40 currencies",
+          "sourceUrl": "https://www.fintechfutures.com/venture-capital-funding/fin-com-emerges-from-stealth-with-20m-in-seed-funding",
+          "observedAt": "2026-09-17T10:23:17"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#3745D7",
+      "sourceNewsId": 36061363,
+      "sourcePublishedAt": "2026-09-17T10:23:17",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-32696230",
+      "name": "Cantina",
+      "founderName": "Hari Mulackal",
+      "founderImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Total capital raised reported at $16.5M",
+      "signalScore": 91,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$8M financing led by Framework Ventures",
+        "Total capital raised reported at $16.5M",
+        "Autonomous vulnerability-management platform"
+      ],
+      "pitchSummary": "Cybersecurity startup Cantina has emerged from stealth mode with $8 million in fresh funding, bringing its total capital raised to $16.5 million. The investment round was led by Framework Ventures and will support the development of its autonomous vulnerability management platform.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Hari,\n\nI came across Cantina's recent update: \"$8M financing led by Framework Ventures\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Cantina Emerges From Stealth With $8 Million in Funding",
+        "url": "https://www.securityweek.com/cantina-emerges-from-stealth-with-8-million-in-funding/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$8M financing led by Framework Ventures",
+          "sourceUrl": "https://www.securityweek.com/cantina-emerges-from-stealth-with-8-million-in-funding/",
+          "observedAt": "2026-07-30T13:00:00"
+        },
+        {
+          "text": "Total capital raised reported at $16.5M",
+          "sourceUrl": "https://www.securityweek.com/cantina-emerges-from-stealth-with-8-million-in-funding/",
+          "observedAt": "2026-07-30T13:00:00"
+        },
+        {
+          "text": "Autonomous vulnerability-management platform",
+          "sourceUrl": "https://www.securityweek.com/cantina-emerges-from-stealth-with-8-million-in-funding/",
+          "observedAt": "2026-07-30T13:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#73D737",
+      "sourceNewsId": 32696230,
+      "sourcePublishedAt": "2026-07-30T13:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-33093956",
+      "name": "Maglut Heavy Industries",
+      "founderName": "Curtis Wu",
+      "founderImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Amgen",
+      "founderBackground": "Previously at Amgen",
+      "headline": "Pilot-scale rare-earth separation reported",
+      "signalScore": 96,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$3.1M pre-seed round announced",
+        "Pilot-scale rare-earth separation reported",
+        "ARC-1 chromatography platform developed"
+      ],
+      "pitchSummary": "California-based Maglut Heavy Industries emerged from stealth with $3.1 million in pre-seed funding, aiming to refine rare earth elements domestically using a chromatography-based platform. Co-founder and CEO Curtis Wu, formerly of Amgen, said the company validated its ARC-1 process at pilot scale, separating feedstock into rare earth oxides at 99.9% purity or higher.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Curtis,\n\nI came across Maglut Heavy Industries's recent update: \"$3.1M pre-seed round announced\". We are researching precision tech and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Exclusive: Maglut Heavy Industries Emerges from Stealth",
+        "url": "https://axios.link/4wPSqKM"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$3.1M pre-seed round announced",
+          "sourceUrl": "https://axios.link/4wPSqKM",
+          "observedAt": "2026-08-26T14:00:09"
+        },
+        {
+          "text": "Pilot-scale rare-earth separation reported",
+          "sourceUrl": "https://axios.link/4wPSqKM",
+          "observedAt": "2026-08-26T14:00:09"
+        },
+        {
+          "text": "ARC-1 chromatography platform developed",
+          "sourceUrl": "https://axios.link/4wPSqKM",
+          "observedAt": "2026-08-26T14:00:09"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Precision Tech",
+      "themeColor": "#D737A2",
+      "sourceNewsId": 33093956,
+      "sourcePublishedAt": "2026-08-26T14:00:09",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-35043171",
+      "name": "SciFin",
+      "founderName": "Mohit Aron",
+      "founderImage": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Cohesity",
+      "founderBackground": "Previously at Cohesity",
+      "headline": "Connects fragmented enterprise revenue data",
+      "signalScore": 96,
+      "stage": "Seed",
+      "signals": [
+        "$44M seed co-led by Altimeter and Madrona",
+        "Connects fragmented enterprise revenue data",
+        "Founder previously built Nutanix and Cohesity"
+      ],
+      "pitchSummary": "SciFin emerged from stealth with a $44 million seed round co-led by Altimeter and Madrona. The AI platform connects fragmented revenue data across systems to reduce manual work.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Mohit,\n\nI came across SciFin's recent update: \"$44M seed co-led by Altimeter and Madrona\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "SciFin Emerges From Stealth With $44 Million Seed Round",
+        "url": "https://www.citybiz.co/article/897563/scifin-emerges-from-stealth-with-44-million-seed-round/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$44M seed co-led by Altimeter and Madrona",
+          "sourceUrl": "https://www.citybiz.co/article/897563/scifin-emerges-from-stealth-with-44-million-seed-round/",
+          "observedAt": "2026-09-01T00:00:00"
+        },
+        {
+          "text": "Connects fragmented enterprise revenue data",
+          "sourceUrl": "https://www.citybiz.co/article/897563/scifin-emerges-from-stealth-with-44-million-seed-round/",
+          "observedAt": "2026-09-01T00:00:00"
+        },
+        {
+          "text": "Founder previously built Nutanix and Cohesity",
+          "sourceUrl": "https://www.citybiz.co/article/897563/scifin-emerges-from-stealth-with-44-million-seed-round/",
+          "observedAt": "2026-09-01T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#37D1D7",
+      "sourceNewsId": 35043171,
+      "sourcePublishedAt": "2026-09-01T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-39690609",
+      "name": "F13",
+      "founderName": "Gregory Janik",
+      "founderImage": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Foundation models for controllable vector graphics",
+      "signalScore": 94,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$5M pre-seed led by Credo and Point Nine",
+        "Foundation models for controllable vector graphics",
+        "Early access through API and web platform"
+      ],
+      "pitchSummary": "F13, an AI company developing vector graphics foundation models, emerged from stealth with $5 million in pre-seed funding led by Credo Ventures and Point Nine Capital. The company targets professional applications like data visualizations and scientific diagrams, with early access available via API and web platform.",
+      "targetSector": "AI Infra",
+      "draftEmail": "Hi Gregory,\n\nI came across F13's recent update: \"$5M pre-seed led by Credo and Point Nine\". We are researching ai infra and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "F13 emerges from stealth with $5M for vector graphics AI",
+        "url": "https://tech.eu/2026/09/23/f13-emerges-from-stealth-with-5m-for-vector-graphics-ai/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$5M pre-seed led by Credo and Point Nine",
+          "sourceUrl": "https://tech.eu/2026/09/23/f13-emerges-from-stealth-with-5m-for-vector-graphics-ai/",
+          "observedAt": "2026-09-23T00:00:00"
+        },
+        {
+          "text": "Foundation models for controllable vector graphics",
+          "sourceUrl": "https://tech.eu/2026/09/23/f13-emerges-from-stealth-with-5m-for-vector-graphics-ai/",
+          "observedAt": "2026-09-23T00:00:00"
+        },
+        {
+          "text": "Early access through API and web platform",
+          "sourceUrl": "https://tech.eu/2026/09/23/f13-emerges-from-stealth-with-5m-for-vector-graphics-ai/",
+          "observedAt": "2026-09-23T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "AI Infra",
+      "themeColor": "#D7AF37",
+      "sourceNewsId": 39690609,
+      "sourcePublishedAt": "2026-09-23T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-39310354",
+      "name": "Kanu AI",
+      "founderName": "Karan Grover",
+      "founderImage": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Enterprise workflow software platform",
+      "signalScore": 93,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$11.7M financing led by Trilogy Equity Partners",
+        "Enterprise workflow software platform",
+        "Available through AWS and Google Cloud marketplaces"
+      ],
+      "pitchSummary": "Kanu AI announced $11.7 million in funding led by Trilogy Equity Partners, with participation from a16z speedrun, BMW i Ventures, and Accel. The Seattle-based company has more than doubled its revenue each quarter since launch and serves enterprises across multiple verticals.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Karan,\n\nI came across Kanu AI's recent update: \"$11.7M financing led by Trilogy Equity Partners\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Kanu Emerges from Stealth to Build AGI for the Enterprise",
+        "url": "https://www.prnewswire.com/news-releases/kanu-emerges-from-stealth-to-build-agi-for-the-enterprise-302893866.html"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$11.7M financing led by Trilogy Equity Partners",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/kanu-emerges-from-stealth-to-build-agi-for-the-enterprise-302893866.html",
+          "observedAt": "2026-09-30T00:00:00"
+        },
+        {
+          "text": "Enterprise workflow software platform",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/kanu-emerges-from-stealth-to-build-agi-for-the-enterprise-302893866.html",
+          "observedAt": "2026-09-30T00:00:00"
+        },
+        {
+          "text": "Available through AWS and Google Cloud marketplaces",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/kanu-emerges-from-stealth-to-build-agi-for-the-enterprise-302893866.html",
+          "observedAt": "2026-09-30T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#8037D7",
+      "sourceNewsId": 39310354,
+      "sourcePublishedAt": "2026-09-30T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-30957123",
+      "name": "Agon",
+      "founderName": "Tristam Constant",
+      "founderImage": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Applied Intuition",
+      "founderBackground": "Previously at Applied Intuition",
+      "headline": "Autonomy testing and validation platform",
+      "signalScore": 95,
+      "stage": "Seed",
+      "signals": [
+        "$23M seed following $7M pre-seed",
+        "Autonomy testing and validation platform",
+        "Founding team includes Applied Intuition and Anduril alumni"
+      ],
+      "pitchSummary": "Agon, a London- and Berlin-based autonomy testing and validation startup, emerged from stealth with $30M in funding ($7M pre-seed and $23M seed) backed by Lakestar, 201 Ventures, D3, Lux, and XYZ, along with strategic investor David Helgason, founder of Unity Technologies who serves as chairman. The company is building a virtual \"synthetic battle arena\" that allows defense tech companies to train and validate AI-powered autonomous weapon systems against adaptive virtual adversaries drawn from live conflict intelligence, addressing the cost and speed limitations of real-world and bespoke simulated testing environments.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Tristam,\n\nI came across Agon's recent update: \"$23M seed following $7M pre-seed\". We are researching physical ai and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "First Look: Agon Emerges from Stealth with $30M in Funding",
+        "url": "https://www.tectonicdefense.com/first-look-agon-emerges-from-stealth-with-30m-in-funding/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$23M seed following $7M pre-seed",
+          "sourceUrl": "https://www.tectonicdefense.com/first-look-agon-emerges-from-stealth-with-30m-in-funding/",
+          "observedAt": "2026-07-29T14:10:40"
+        },
+        {
+          "text": "Autonomy testing and validation platform",
+          "sourceUrl": "https://www.tectonicdefense.com/first-look-agon-emerges-from-stealth-with-30m-in-funding/",
+          "observedAt": "2026-07-29T14:10:40"
+        },
+        {
+          "text": "Founding team includes Applied Intuition and Anduril alumni",
+          "sourceUrl": "https://www.tectonicdefense.com/first-look-agon-emerges-from-stealth-with-30m-in-funding/",
+          "observedAt": "2026-07-29T14:10:40"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Physical AI",
+      "themeColor": "#37D751",
+      "sourceNewsId": 30957123,
+      "sourcePublishedAt": "2026-07-29T14:10:40",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-35713626",
+      "name": "Bloom Security",
+      "founderName": "Itay Keren",
+      "founderImage": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Deployments reported at dozens of enterprises",
+      "signalScore": 93,
+      "stage": "Seed",
+      "signals": [
+        "$20M seed round announced",
+        "Deployments reported at dozens of enterprises",
+        "Thirty-person endpoint-security team"
+      ],
+      "pitchSummary": "Bloom Security emerged from stealth with a $20m seed round led by Glilot Capital Partners and Ten Eleven Ventures. The company's platform governs AI-era software on corporate devices, with a 30-person team and existing deployments at dozens of enterprises.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Itay,\n\nI came across Bloom Security's recent update: \"$20M seed round announced\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Bloom Security exits stealth with $20m to tame AI endpoints",
+        "url": "https://fintech.global/2026/08/04/bloom-security-exits-stealth-with-20m-to-tame-ai-endpoints/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$20M seed round announced",
+          "sourceUrl": "https://fintech.global/2026/08/04/bloom-security-exits-stealth-with-20m-to-tame-ai-endpoints/",
+          "observedAt": "2026-08-04T00:00:00"
+        },
+        {
+          "text": "Deployments reported at dozens of enterprises",
+          "sourceUrl": "https://fintech.global/2026/08/04/bloom-security-exits-stealth-with-20m-to-tame-ai-endpoints/",
+          "observedAt": "2026-08-04T00:00:00"
+        },
+        {
+          "text": "Thirty-person endpoint-security team",
+          "sourceUrl": "https://fintech.global/2026/08/04/bloom-security-exits-stealth-with-20m-to-tame-ai-endpoints/",
+          "observedAt": "2026-08-04T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#D7374B",
+      "sourceNewsId": 35713626,
+      "sourcePublishedAt": "2026-08-04T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-31422845",
+      "name": "Maximum",
+      "founderName": "Randy Fernando",
+      "founderImage": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Marqeta",
+      "founderBackground": "Previously at Marqeta",
+      "headline": "AI-powered operating system for banks",
+      "signalScore": 95,
+      "stage": "Seed",
+      "signals": [
+        "$30M seed led by CRV",
+        "AI-powered operating system for banks",
+        "Expanding engineering and customer adoption"
+      ],
+      "pitchSummary": "Former Marqeta executive Randy Fernando has launched Maximum, an AI-powered operating system for banks that replaces legacy infrastructure with custom agents capable of automating complex workflows, emerging from stealth with $30 million in seed funding. The funding round was led by CRV with participation from Pear VC, Restive, Plug and Play Ventures, and Anthemis.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Randy,\n\nI came across Maximum's recent update: \"$30M seed led by CRV\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Agentic infrastructure provider Maximum emerges from stealth",
+        "url": "https://www.fintechfutures.com/fintech-start-ups/maximum-emerges-from-stealth-with-30m-seed-round"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$30M seed led by CRV",
+          "sourceUrl": "https://www.fintechfutures.com/fintech-start-ups/maximum-emerges-from-stealth-with-30m-seed-round",
+          "observedAt": "2026-08-06T07:00:00"
+        },
+        {
+          "text": "AI-powered operating system for banks",
+          "sourceUrl": "https://www.fintechfutures.com/fintech-start-ups/maximum-emerges-from-stealth-with-30m-seed-round",
+          "observedAt": "2026-08-06T07:00:00"
+        },
+        {
+          "text": "Expanding engineering and customer adoption",
+          "sourceUrl": "https://www.fintechfutures.com/fintech-start-ups/maximum-emerges-from-stealth-with-30m-seed-round",
+          "observedAt": "2026-08-06T07:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#377AD7",
+      "sourceNewsId": 31422845,
+      "sourcePublishedAt": "2026-08-06T07:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-31687319",
+      "name": "LILY Labs",
+      "founderName": "Milan Wiedemann",
+      "founderImage": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Cloud infrastructure platform publicly launched",
+      "signalScore": 91,
+      "stage": "Pre-Seed",
+      "signals": [
+        "New funding led by Match VC announced",
+        "Cloud infrastructure platform publicly launched",
+        "Automated scaling and recovery architecture"
+      ],
+      "pitchSummary": "LILY, a German cloud infrastructure startup, has closed a new funding round led by Mätch VC and has made its platform publicly available for the first time. The company aims to radically simplify cloud architecture by replacing traditional components, reducing operational overhead, and automating scaling and recovery.",
+      "targetSector": "AI Infra",
+      "draftEmail": "Hi Milan,\n\nI came across LILY Labs's recent update: \"New funding led by Match VC announced\". We are researching ai infra and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "LILY Labs Emerges from Stealth Mode and Secures Funding from Mätch VC",
+        "url": "https://www.startbase.com/news/lily-verlaesst-den-stealth-modus-und-sichert-sich-finanzierung-von-maetch-vc/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "New funding led by Match VC announced",
+          "sourceUrl": "https://www.startbase.com/news/lily-verlaesst-den-stealth-modus-und-sichert-sich-finanzierung-von-maetch-vc/",
+          "observedAt": "2026-08-11T04:00:00"
+        },
+        {
+          "text": "Cloud infrastructure platform publicly launched",
+          "sourceUrl": "https://www.startbase.com/news/lily-verlaesst-den-stealth-modus-und-sichert-sich-finanzierung-von-maetch-vc/",
+          "observedAt": "2026-08-11T04:00:00"
+        },
+        {
+          "text": "Automated scaling and recovery architecture",
+          "sourceUrl": "https://www.startbase.com/news/lily-verlaesst-den-stealth-modus-und-sichert-sich-finanzierung-von-maetch-vc/",
+          "observedAt": "2026-08-11T04:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "AI Infra",
+      "themeColor": "#A9D737",
+      "sourceNewsId": 31687319,
+      "sourcePublishedAt": "2026-08-11T04:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-29597966",
+      "name": "Nuclear Turbines",
+      "founderName": "Jeremy Owston",
+      "founderImage": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "BAE Systems spinout",
+      "signalScore": 91,
+      "stage": "Pre-Seed",
+      "signals": [
+        "GBP 15M financing led by IQ Capital",
+        "BAE Systems spinout",
+        "Scaling engineering and commercial capabilities"
+      ],
+      "pitchSummary": "Nuclear Turbines, a company spun out of BAE Systems, emerged from stealth after raising £15 million in funding led by IQ Capital, with participation from Rhapsody Venture Partners, Zero Carbon, and Empirical Ventures. The company is developing a compact nuclear power system combining an advanced modular reactor with a commercial gas turbine, targeting markets including data centers, industrial energy users, and hybrid grid deployments.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Jeremy,\n\nI came across Nuclear Turbines's recent update: \"GBP 15M financing led by IQ Capital\". We are researching precision tech and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Nuclear Turbines Emerges From Stealth With £15 Million Funding",
+        "url": "https://pulse2.com/nuclear-turbines-emerges-from-stealth-with-15-million-funding/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "GBP 15M financing led by IQ Capital",
+          "sourceUrl": "https://pulse2.com/nuclear-turbines-emerges-from-stealth-with-15-million-funding/",
+          "observedAt": "2026-07-27T11:40:06"
+        },
+        {
+          "text": "BAE Systems spinout",
+          "sourceUrl": "https://pulse2.com/nuclear-turbines-emerges-from-stealth-with-15-million-funding/",
+          "observedAt": "2026-07-27T11:40:06"
+        },
+        {
+          "text": "Scaling engineering and commercial capabilities",
+          "sourceUrl": "https://pulse2.com/nuclear-turbines-emerges-from-stealth-with-15-million-funding/",
+          "observedAt": "2026-07-27T11:40:06"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "Precision Tech",
+      "themeColor": "#D737D7",
+      "sourceNewsId": 29597966,
+      "sourcePublishedAt": "2026-07-27T11:40:06",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-36224519",
+      "name": "TigerByte Cyber",
+      "founderName": "Sage Secilmis",
+      "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Over $7M in government contracts reported",
+      "signalScore": 94,
+      "stage": "Seed",
+      "signals": [
+        "$3M seed led by Hale Capital Partners",
+        "Over $7M in government contracts reported",
+        "Hardware-focused cybersecurity for edge systems"
+      ],
+      "pitchSummary": "TigerByte Cyber emerged from stealth with $3 million in seed funding led by Hale Capital Partners, with Tenon VC support. The company has secured over $7 million in contracts with US government agencies, including the Space Force, Navy, and DARPA.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Sage,\n\nI came across TigerByte Cyber's recent update: \"$3M seed led by Hale Capital Partners\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "TigerByte Cyber Emerges From Stealth With $3 Million in Funding",
+        "url": "https://www.securityweek.com/tigerbyte-cyber-emerges-from-stealth-with-3-million-in-funding/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$3M seed led by Hale Capital Partners",
+          "sourceUrl": "https://www.securityweek.com/tigerbyte-cyber-emerges-from-stealth-with-3-million-in-funding/",
+          "observedAt": "2026-09-19T14:30:00"
+        },
+        {
+          "text": "Over $7M in government contracts reported",
+          "sourceUrl": "https://www.securityweek.com/tigerbyte-cyber-emerges-from-stealth-with-3-million-in-funding/",
+          "observedAt": "2026-09-19T14:30:00"
+        },
+        {
+          "text": "Hardware-focused cybersecurity for edge systems",
+          "sourceUrl": "https://www.securityweek.com/tigerbyte-cyber-emerges-from-stealth-with-3-million-in-funding/",
+          "observedAt": "2026-09-19T14:30:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#37D7A8",
+      "sourceNewsId": 36224519,
+      "sourcePublishedAt": "2026-09-19T14:30:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-39678740",
+      "name": "Foundational",
+      "founderName": "Hira Virdee",
+      "founderImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Lumi Space",
+      "founderBackground": "Previously at Lumi Space",
+      "headline": "Satellite laser-ranging infrastructure",
+      "signalScore": 97,
+      "stage": "Pre-Seed",
+      "signals": [
+        "GBP 8.2M pre-seed round announced",
+        "Satellite laser-ranging infrastructure",
+        "Expanding automated ground-station network"
+      ],
+      "pitchSummary": "Foundational, a London-based space technology company, emerged from stealth with £8.2 million in pre-seed funding. The company develops satellite-mounted retroreflectors, automated ground stations, and software for precise positioning data via Satellite Laser Ranging.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Hira,\n\nI came across Foundational's recent update: \"GBP 8.2M pre-seed round announced\". We are researching precision tech and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Foundational secures £8.2M pre-seed as it emerges from stealth",
+        "url": "https://tech.eu/2026/10/01/foundational-secures-ps82m-pre-seed-as-it-emerges-from-stealth/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "GBP 8.2M pre-seed round announced",
+          "sourceUrl": "https://tech.eu/2026/10/01/foundational-secures-ps82m-pre-seed-as-it-emerges-from-stealth/",
+          "observedAt": "2026-10-01T00:00:00"
+        },
+        {
+          "text": "Satellite laser-ranging infrastructure",
+          "sourceUrl": "https://tech.eu/2026/10/01/foundational-secures-ps82m-pre-seed-as-it-emerges-from-stealth/",
+          "observedAt": "2026-10-01T00:00:00"
+        },
+        {
+          "text": "Expanding automated ground-station network",
+          "sourceUrl": "https://tech.eu/2026/10/01/foundational-secures-ps82m-pre-seed-as-it-emerges-from-stealth/",
+          "observedAt": "2026-10-01T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Precision Tech",
+      "themeColor": "#D77937",
+      "sourceNewsId": 39678740,
+      "sourcePublishedAt": "2026-10-01T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-41951675",
+      "name": "Ultra Security",
+      "founderName": "Chase Lee",
+      "founderImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Trustpage",
+      "founderBackground": "Previously at Trustpage",
+      "headline": "Runtime visibility and policy enforcement for agents",
+      "signalScore": 97,
+      "stage": "Seed",
+      "signals": [
+        "$10M seed round announced",
+        "Runtime visibility and policy enforcement for agents",
+        "Founder previously built Trustpage"
+      ],
+      "pitchSummary": "Ultra Security emerged from stealth with a $10 million seed round, launching an agentic security platform for autonomous runtimes. The Michigan-based company, founded by former Trustpage CEO Chase Lee, provides runtime visibility and policy enforcement for AI agents using MCP.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Chase,\n\nI came across Ultra Security's recent update: \"$10M seed round announced\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Ultra Security Emerges from Stealth with $10 Million Seed Round",
+        "url": "https://www.startupresearcher.com/news/ultra-security-emerges-from-stealth-with-usd10-million-seed-round"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$10M seed round announced",
+          "sourceUrl": "https://www.startupresearcher.com/news/ultra-security-emerges-from-stealth-with-usd10-million-seed-round",
+          "observedAt": "2026-10-21T21:29:26"
+        },
+        {
+          "text": "Runtime visibility and policy enforcement for agents",
+          "sourceUrl": "https://www.startupresearcher.com/news/ultra-security-emerges-from-stealth-with-usd10-million-seed-round",
+          "observedAt": "2026-10-21T21:29:26"
+        },
+        {
+          "text": "Founder previously built Trustpage",
+          "sourceUrl": "https://www.startupresearcher.com/news/ultra-security-emerges-from-stealth-with-usd10-million-seed-round",
+          "observedAt": "2026-10-21T21:29:26"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#4A37D7",
+      "sourceNewsId": 41951675,
+      "sourcePublishedAt": "2026-10-21T21:29:26",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-39958798",
+      "name": "Tab",
+      "founderName": "Ammar Amdani",
+      "founderImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Adapt Ventures",
+      "founderBackground": "Previously at Adapt Ventures",
+      "headline": "AI agent operates through iMessage and WhatsApp",
+      "signalScore": 97,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Pre-seed valuation reported at $300M",
+        "AI agent operates through iMessage and WhatsApp",
+        "Backed by SV Angel and Valar Ventures"
+      ],
+      "pitchSummary": "Tab emerged from stealth with a $300 million pre-seed valuation, backed by SV Angel, Valar Ventures, and American Spirit. The San Francisco startup builds an AI agent that operates through iMessage and WhatsApp, handling tasks like booking flights and calling businesses.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Ammar,\n\nI came across Tab's recent update: \"Pre-seed valuation reported at $300M\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Tab Emerges From Stealth at $300M to Put an AI Agent in iMessage",
+        "url": "https://www.techjuice.pk/tab-ai-agent-stealth-300-million-valuation-imessage-whatsapp/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Pre-seed valuation reported at $300M",
+          "sourceUrl": "https://www.techjuice.pk/tab-ai-agent-stealth-300-million-valuation-imessage-whatsapp/",
+          "observedAt": "2026-10-07T03:42:00"
+        },
+        {
+          "text": "AI agent operates through iMessage and WhatsApp",
+          "sourceUrl": "https://www.techjuice.pk/tab-ai-agent-stealth-300-million-valuation-imessage-whatsapp/",
+          "observedAt": "2026-10-07T03:42:00"
+        },
+        {
+          "text": "Backed by SV Angel and Valar Ventures",
+          "sourceUrl": "https://www.techjuice.pk/tab-ai-agent-stealth-300-million-valuation-imessage-whatsapp/",
+          "observedAt": "2026-10-07T03:42:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#52D737",
+      "sourceNewsId": 39958798,
+      "sourcePublishedAt": "2026-10-07T03:42:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-41935439",
+      "name": "Watchtower Labs",
+      "founderName": "Souren Aghajanyan",
+      "founderImage": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Microsoft",
+      "founderBackground": "Previously at Microsoft",
+      "headline": "AI-native logistics planning applications",
+      "signalScore": 97,
+      "stage": "Seed",
+      "signals": [
+        "$35M seed led by Shield Capital and Conviction",
+        "AI-native logistics planning applications",
+        "Naval Postgraduate School partnership reported"
+      ],
+      "pitchSummary": "Watchtower Labs emerged from stealth on October 21, 2026, with a $35 million seed round led by Shield Capital and Conviction. The Seattle-based company builds AI-native logistics planning tools for military leaders, having partnered with the Naval Postgraduate School and been selected by the Defense Innovation Unit.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Souren,\n\nI came across Watchtower Labs's recent update: \"$35M seed led by Shield Capital and Conviction\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Watchtower Labs Emerges from Stealth with $35 Million Seed Round",
+        "url": "https://www.startupresearcher.com/news/watchtower-labs-emerges-from-stealth-with-usd35-million-seed-round"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$35M seed led by Shield Capital and Conviction",
+          "sourceUrl": "https://www.startupresearcher.com/news/watchtower-labs-emerges-from-stealth-with-usd35-million-seed-round",
+          "observedAt": "2026-10-21T20:12:16"
+        },
+        {
+          "text": "AI-native logistics planning applications",
+          "sourceUrl": "https://www.startupresearcher.com/news/watchtower-labs-emerges-from-stealth-with-usd35-million-seed-round",
+          "observedAt": "2026-10-21T20:12:16"
+        },
+        {
+          "text": "Naval Postgraduate School partnership reported",
+          "sourceUrl": "https://www.startupresearcher.com/news/watchtower-labs-emerges-from-stealth-with-usd35-million-seed-round",
+          "observedAt": "2026-10-21T20:12:16"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#D73781",
+      "sourceNewsId": 41935439,
+      "sourcePublishedAt": "2026-10-21T20:12:16",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-35294304",
+      "name": "Modus",
+      "founderName": "Daniel Shimoni",
+      "founderImage": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Lusha",
+      "founderBackground": "Previously at Lusha",
+      "headline": "Context Warehouse infrastructure introduced",
+      "signalScore": 95,
+      "stage": "Seed",
+      "signals": [
+        "$10M seed led by Insight Partners",
+        "Context Warehouse infrastructure introduced",
+        "Enterprise deployments across financial services and SaaS"
+      ],
+      "pitchSummary": "Modus, a Tel Aviv-based company, emerged from stealth with a $10 million seed round led by Insight Partners. It introduced the Context Warehouse, an infrastructure layer to reduce AI context retrieval by up to 10x.",
+      "targetSector": "AI Infra",
+      "draftEmail": "Hi Daniel,\n\nI came across Modus's recent update: \"$10M seed led by Insight Partners\". We are researching ai infra and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Modus Emerges From Stealth With $10M Seed Led by Insight Partners",
+        "url": "https://markets.businessinsider.com/news/currencies/modus-emerges-from-stealth-with-10m-seed-led-by-insight-partners-1036377766"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$10M seed led by Insight Partners",
+          "sourceUrl": "https://markets.businessinsider.com/news/currencies/modus-emerges-from-stealth-with-10m-seed-led-by-insight-partners-1036377766",
+          "observedAt": "2026-07-29T00:00:00"
+        },
+        {
+          "text": "Context Warehouse infrastructure introduced",
+          "sourceUrl": "https://markets.businessinsider.com/news/currencies/modus-emerges-from-stealth-with-10m-seed-led-by-insight-partners-1036377766",
+          "observedAt": "2026-07-29T00:00:00"
+        },
+        {
+          "text": "Enterprise deployments across financial services and SaaS",
+          "sourceUrl": "https://markets.businessinsider.com/news/currencies/modus-emerges-from-stealth-with-10m-seed-led-by-insight-partners-1036377766",
+          "observedAt": "2026-07-29T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "AI Infra",
+      "themeColor": "#37B0D7",
+      "sourceNewsId": 35294304,
+      "sourcePublishedAt": "2026-07-29T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-42258514",
+      "name": "Cygrid",
+      "founderName": "Dmitry Kharchenko",
+      "founderImage": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "bonify",
+      "founderBackground": "Previously at bonify",
+      "headline": "Identity enforcement for agents and machines",
+      "signalScore": 97,
+      "stage": "Pre-Seed",
+      "signals": [
+        "EUR 2.66M pre-seed led by Atlantic",
+        "Identity enforcement for agents and machines",
+        "Over 2000 risky actions blocked across 20 organizations reported"
+      ],
+      "pitchSummary": "Cygrid, a Berlin-based identity enforcement platform, emerged from stealth on October 22, 2026, with €2.66 million in pre-seed funding led by Atlantic. The company had already blocked over 2,000 risky identity actions across 20 organizations.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Dmitry,\n\nI came across Cygrid's recent update: \"EUR 2.66M pre-seed led by Atlantic\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Cygrid Emerges From Stealth With €2.66 Million Pre-Seed Funding",
+        "url": "https://www.startupresearcher.com/news/cygrid-emerges-from-stealth-with-2-66-million-pre-seed-funding"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "EUR 2.66M pre-seed led by Atlantic",
+          "sourceUrl": "https://www.startupresearcher.com/news/cygrid-emerges-from-stealth-with-2-66-million-pre-seed-funding",
+          "observedAt": "2026-10-23T12:13:29"
+        },
+        {
+          "text": "Identity enforcement for agents and machines",
+          "sourceUrl": "https://www.startupresearcher.com/news/cygrid-emerges-from-stealth-with-2-66-million-pre-seed-funding",
+          "observedAt": "2026-10-23T12:13:29"
+        },
+        {
+          "text": "Over 2000 risky actions blocked across 20 organizations reported",
+          "sourceUrl": "https://www.startupresearcher.com/news/cygrid-emerges-from-stealth-with-2-66-million-pre-seed-funding",
+          "observedAt": "2026-10-23T12:13:29"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#D7D037",
+      "sourceNewsId": 42258514,
+      "sourcePublishedAt": "2026-10-23T12:13:29",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-32486910",
+      "name": "Dulo",
+      "founderName": "Sebastian Thrun",
+      "founderImage": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Google",
+      "founderBackground": "Previously at Google",
+      "headline": "Applying foundation models to hardware and manufacturing",
+      "signalScore": 93,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Founder publicly disclosed a small stealth robotics team",
+        "Applying foundation models to hardware and manufacturing",
+        "Team includes Waymo and Google Brain experience"
+      ],
+      "pitchSummary": "Sebastian Thrun is launching a stealth robotics startup named Dulo, which aims to apply foundation models to hardware design and manufacturing. The company's team includes leaders from Waymo, Google Brain, and Stanford’s Artificial Intelligence Laboratory.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Sebastian,\n\nI came across Dulo's recent update: \"Founder publicly disclosed a small stealth robotics team\". We are researching physical ai and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Waymo pioneer Sebastian Thrun is building a stealth robotics startup",
+        "url": "https://thenextweb.com/news/sebastian-thrun-dulo-stealth-robotics-startup"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Founder publicly disclosed a small stealth robotics team",
+          "sourceUrl": "https://thenextweb.com/news/sebastian-thrun-dulo-stealth-robotics-startup",
+          "observedAt": "2026-08-19T13:25:50"
+        },
+        {
+          "text": "Applying foundation models to hardware and manufacturing",
+          "sourceUrl": "https://thenextweb.com/news/sebastian-thrun-dulo-stealth-robotics-startup",
+          "observedAt": "2026-08-19T13:25:50"
+        },
+        {
+          "text": "Team includes Waymo and Google Brain experience",
+          "sourceUrl": "https://thenextweb.com/news/sebastian-thrun-dulo-stealth-robotics-startup",
+          "observedAt": "2026-08-19T13:25:50"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "Physical AI",
+      "themeColor": "#A137D7",
+      "sourceNewsId": 32486910,
+      "sourcePublishedAt": "2026-08-19T13:25:50",
+      "stealthStatus": "stealth",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-32929229",
+      "name": "Outer Bio",
+      "founderName": "Michael Polansky",
+      "founderImage": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Four-week tissue viability reported",
+      "signalScore": 91,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Yuna human-skin research platform unveiled",
+        "Four-week tissue viability reported",
+        "Dataset spans more than 300 donors and 10000 treatments"
+      ],
+      "pitchSummary": "Outer Bio unveiled Yuna, an ex vivo human skin research platform, as it emerged from stealth, claiming it keeps full-thickness human skin viable and measurable for four or more weeks. The company has generated over 10 terabytes of data from more than 300 donors and 10,000 treatments, and is screening 5.9 million compounds.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Michael,\n\nI came across Outer Bio's recent update: \"Yuna human-skin research platform unveiled\". We are researching precision tech and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Outer Bio Emerges From Stealth With Human Skin Testing Platform Yuna",
+        "url": "https://www.citybiz.co/article/893332/outer-bio-emerges-from-stealth-with-human-skin-testing-platform-yuna/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Yuna human-skin research platform unveiled",
+          "sourceUrl": "https://www.citybiz.co/article/893332/outer-bio-emerges-from-stealth-with-human-skin-testing-platform-yuna/",
+          "observedAt": "2026-08-24T16:11:05"
+        },
+        {
+          "text": "Four-week tissue viability reported",
+          "sourceUrl": "https://www.citybiz.co/article/893332/outer-bio-emerges-from-stealth-with-human-skin-testing-platform-yuna/",
+          "observedAt": "2026-08-24T16:11:05"
+        },
+        {
+          "text": "Dataset spans more than 300 donors and 10000 treatments",
+          "sourceUrl": "https://www.citybiz.co/article/893332/outer-bio-emerges-from-stealth-with-human-skin-testing-platform-yuna/",
+          "observedAt": "2026-08-24T16:11:05"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "Precision Tech",
+      "themeColor": "#37D772",
+      "sourceNewsId": 32929229,
+      "sourcePublishedAt": "2026-08-24T16:11:05",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-40579917",
+      "name": "Harbor",
+      "founderName": "Jesús Santos",
+      "founderImage": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Inventory and risk monitoring for AI agents",
+      "signalScore": 95,
+      "stage": "Seed",
+      "signals": [
+        "$10M seed funding announced",
+        "Inventory and risk monitoring for AI agents",
+        "Insurance coverage focused on regulated enterprises"
+      ],
+      "pitchSummary": "Harbor, a San Francisco insurtech, launched publicly on October 13, 2026, with a $10 million seed round to build a platform that inventories, monitors, and insures AI agents used by banks and insurers. The company targets highly regulated sectors, aiming to fill a coverage gap as insurers add AI exclusions to policies.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Jesús,\n\nI came across Harbor's recent update: \"$10M seed funding announced\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Harbor emerges from stealth with $10M seed round to insure AI agents",
+        "url": "https://cryptobriefing.com/harbor-ai-raises-10m-ai-agent-insurance/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$10M seed funding announced",
+          "sourceUrl": "https://cryptobriefing.com/harbor-ai-raises-10m-ai-agent-insurance/",
+          "observedAt": "2026-10-13T16:54:21"
+        },
+        {
+          "text": "Inventory and risk monitoring for AI agents",
+          "sourceUrl": "https://cryptobriefing.com/harbor-ai-raises-10m-ai-agent-insurance/",
+          "observedAt": "2026-10-13T16:54:21"
+        },
+        {
+          "text": "Insurance coverage focused on regulated enterprises",
+          "sourceUrl": "https://cryptobriefing.com/harbor-ai-raises-10m-ai-agent-insurance/",
+          "observedAt": "2026-10-13T16:54:21"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#D74437",
+      "sourceNewsId": 40579917,
+      "sourcePublishedAt": "2026-10-13T16:54:21",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-41780483",
+      "name": "Origin",
+      "founderName": "Yogesh Ghaturle",
+      "founderImage": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Perpule",
+      "founderBackground": "Previously at Perpule",
+      "headline": "OG-1 construction robot in customer pilots",
+      "signalScore": 95,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$20M financing announced",
+        "OG-1 construction robot in customer pilots",
+        "Targeting 150 robots by the end of 2027"
+      ],
+      "pitchSummary": "Origin raised $20 million in funding to deploy its OG-1 construction robot and expand customer pilots. The company targets 150 robots by end of 2027 and plans to add interior trades like taping and drywall installation.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Yogesh,\n\nI came across Origin's recent update: \"$20M financing announced\". We are researching physical ai and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Origin Emerges From Stealth With $20 Million For Construction Robots",
+        "url": "https://menafn.com/1111832891/Origin-Emerges-From-Stealth-With-20-Million-For-Construction-Robots"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$20M financing announced",
+          "sourceUrl": "https://menafn.com/1111832891/Origin-Emerges-From-Stealth-With-20-Million-For-Construction-Robots",
+          "observedAt": "2026-10-19T06:09:51"
+        },
+        {
+          "text": "OG-1 construction robot in customer pilots",
+          "sourceUrl": "https://menafn.com/1111832891/Origin-Emerges-From-Stealth-With-20-Million-For-Construction-Robots",
+          "observedAt": "2026-10-19T06:09:51"
+        },
+        {
+          "text": "Targeting 150 robots by the end of 2027",
+          "sourceUrl": "https://menafn.com/1111832891/Origin-Emerges-From-Stealth-With-20-Million-For-Construction-Robots",
+          "observedAt": "2026-10-19T06:09:51"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "Physical AI",
+      "themeColor": "#3759D7",
+      "sourceNewsId": 41780483,
+      "sourcePublishedAt": "2026-10-19T06:09:51",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-42278335",
+      "name": "Slingshot Insurance",
+      "founderName": "Ethan Genteman",
+      "founderImage": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Palomar Holdings",
+      "founderBackground": "Previously at Palomar Holdings",
+      "headline": "AI-native embedded-insurance infrastructure",
+      "signalScore": 97,
+      "stage": "Seed",
+      "signals": [
+        "$27M seed co-led by Rally and Skyward",
+        "AI-native embedded-insurance infrastructure",
+        "Vertical Insure signed as a design partner"
+      ],
+      "pitchSummary": "Slingshot Insurance emerged from stealth on October 22, 2026, with a $27 million seed round co-led by Rally Ventures and Skyward Group. The Minneapolis-based company, co-founded by Ethan Genteman, provides AI-native infrastructure for embedded insurance products.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Ethan,\n\nI came across Slingshot Insurance's recent update: \"$27M seed co-led by Rally and Skyward\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Slingshot Insurance Emerges from Stealth With $27 Million Seed Round",
+        "url": "https://www.startupresearcher.com/news/slingshot-insurance-emerges-from-stealth-with-27-million-seed-round"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$27M seed co-led by Rally and Skyward",
+          "sourceUrl": "https://www.startupresearcher.com/news/slingshot-insurance-emerges-from-stealth-with-27-million-seed-round",
+          "observedAt": "2026-10-23T14:26:41"
+        },
+        {
+          "text": "AI-native embedded-insurance infrastructure",
+          "sourceUrl": "https://www.startupresearcher.com/news/slingshot-insurance-emerges-from-stealth-with-27-million-seed-round",
+          "observedAt": "2026-10-23T14:26:41"
+        },
+        {
+          "text": "Vertical Insure signed as a design partner",
+          "sourceUrl": "https://www.startupresearcher.com/news/slingshot-insurance-emerges-from-stealth-with-27-million-seed-round",
+          "observedAt": "2026-10-23T14:26:41"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#88D737",
+      "sourceNewsId": 42278335,
+      "sourcePublishedAt": "2026-10-23T14:26:41",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-35550194",
+      "name": "BlueLedger AI",
+      "founderName": "Tiana Stoddart",
+      "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Reconciles fragmented public-market records",
+      "signalScore": 92,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Platform launched at ALL IN 2026",
+        "Reconciles fragmented public-market records",
+        "Paid issuer pilots precede planned retail access"
+      ],
+      "pitchSummary": "BlueLedger AI emerged from stealth at ALL IN 2026, offering a platform to reconcile fragmented stock-market records and uncover discrepancies. The company, backed by MaxWave Capital, starts with paid issuer pilots and plans retail access.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Tiana,\n\nI came across BlueLedger AI's recent update: \"Platform launched at ALL IN 2026\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "BlueLedger Emerges from Stealth to Strengthen Trust in Public Markets",
+        "url": "https://www.prnewswire.com/news-releases/blueledger-emerges-from-stealth-to-strengthen-trust-in-public-markets-302882083.html"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Platform launched at ALL IN 2026",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/blueledger-emerges-from-stealth-to-strengthen-trust-in-public-markets-302882083.html",
+          "observedAt": "2026-09-17T00:00:00"
+        },
+        {
+          "text": "Reconciles fragmented public-market records",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/blueledger-emerges-from-stealth-to-strengthen-trust-in-public-markets-302882083.html",
+          "observedAt": "2026-09-17T00:00:00"
+        },
+        {
+          "text": "Paid issuer pilots precede planned retail access",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/blueledger-emerges-from-stealth-to-strengthen-trust-in-public-markets-302882083.html",
+          "observedAt": "2026-09-17T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#D737B7",
+      "sourceNewsId": 35550194,
+      "sourcePublishedAt": "2026-09-17T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-39201248",
+      "name": "RemoteThreat",
+      "founderName": "Chris Thompson",
+      "founderImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Enterprise security-assessment platform launched",
+      "signalScore": 95,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$7M pre-seed funding announced",
+        "Enterprise security-assessment platform launched",
+        "Strategic advisory partnership with The Nakasone Group"
+      ],
+      "pitchSummary": "RemoteThreat emerged from stealth with $7 million in pre-seed funding and launched its O/C/O Platform for enterprise red teams and government operators. The platform integrates eight systems for offensive cyber operations, with AI assistance under operator control.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Chris,\n\nI came across RemoteThreat's recent update: \"$7M pre-seed funding announced\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "RemoteThreat Emerges From Stealth With $7M and Offensive Cyber Platform",
+        "url": "https://www.citybiz.co/article/910589/remotethreat-emerges-from-stealth-with-7m-and-offensive-cyber-platform/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$7M pre-seed funding announced",
+          "sourceUrl": "https://www.citybiz.co/article/910589/remotethreat-emerges-from-stealth-with-7m-and-offensive-cyber-platform/",
+          "observedAt": "2026-09-29T12:51:39"
+        },
+        {
+          "text": "Enterprise security-assessment platform launched",
+          "sourceUrl": "https://www.citybiz.co/article/910589/remotethreat-emerges-from-stealth-with-7m-and-offensive-cyber-platform/",
+          "observedAt": "2026-09-29T12:51:39"
+        },
+        {
+          "text": "Strategic advisory partnership with The Nakasone Group",
+          "sourceUrl": "https://www.citybiz.co/article/910589/remotethreat-emerges-from-stealth-with-7m-and-offensive-cyber-platform/",
+          "observedAt": "2026-09-29T12:51:39"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#37D7C9",
+      "sourceNewsId": 39201248,
+      "sourcePublishedAt": "2026-09-29T12:51:39",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-39695691",
+      "name": "Soteris",
+      "founderName": "Sunit Shah",
+      "founderImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Pine River Capital",
+      "founderBackground": "Previously at Pine River Capital",
+      "headline": "Machine learning for insurance-policy selection",
+      "signalScore": 96,
+      "stage": "Seed",
+      "signals": [
+        "Over $8M seed funding reported",
+        "Machine learning for insurance-policy selection",
+        "Founder built an insurance business at Pine River Capital"
+      ],
+      "pitchSummary": "Soteris, a machine-learning insurer, exited stealth with a product that identifies unprofitable policies within profitable books. The company raised over $8 million in seed funding and claims its software cuts claim payouts by 5-15 percentage points, raising profit by 70-125%.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Sunit,\n\nI came across Soteris's recent update: \"Over $8M seed funding reported\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Soteris comes out of stealth to find the policies costing insurers money",
+        "url": "https://startupbeat.com/soteris-comes-out-of-stealth-to-find-the-policies-costing-insurers-money/39643/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Over $8M seed funding reported",
+          "sourceUrl": "https://startupbeat.com/soteris-comes-out-of-stealth-to-find-the-policies-costing-insurers-money/39643/",
+          "observedAt": "2026-09-22T00:00:00"
+        },
+        {
+          "text": "Machine learning for insurance-policy selection",
+          "sourceUrl": "https://startupbeat.com/soteris-comes-out-of-stealth-to-find-the-policies-costing-insurers-money/39643/",
+          "observedAt": "2026-09-22T00:00:00"
+        },
+        {
+          "text": "Founder built an insurance business at Pine River Capital",
+          "sourceUrl": "https://startupbeat.com/soteris-comes-out-of-stealth-to-find-the-policies-costing-insurers-money/39643/",
+          "observedAt": "2026-09-22T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#D79A37",
+      "sourceNewsId": 39695691,
+      "sourcePublishedAt": "2026-09-22T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-29613910",
+      "name": "Enigma",
+      "founderName": "Jonathan Jacobi",
+      "founderImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Microsoft",
+      "founderBackground": "Previously at Microsoft",
+      "headline": "Over 100 robots for human-interaction research",
+      "signalScore": 95,
+      "stage": "Seed",
+      "signals": [
+        "$71M seed co-led by Index and Ribbit",
+        "Over 100 robots for human-interaction research",
+        "Facilities in Israel and California"
+      ],
+      "pitchSummary": "Enigma, a robotics research lab less than a year old, has raised a $71 million seed round co-led by Index Ventures and Ribbit Capital, with participation from Conviction Partners, as it emerged from stealth on July 27, 2026. The company is opening a fleet of more than 100 proprietary robots housed in facilities in Israel and California to online users worldwide, turning human-robot interaction into a large-scale experiment to study how people naturally instruct machines.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Jonathan,\n\nI came across Enigma's recent update: \"$71M seed co-led by Index and Ribbit\". We are researching physical ai and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Enigma Emerges From Stealth With $71M to Rethink How Humans Control Robots",
+        "url": "https://www.unite.ai/enigma-emerges-from-stealth-with-70m-for-robot-interfaces/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$71M seed co-led by Index and Ribbit",
+          "sourceUrl": "https://www.unite.ai/enigma-emerges-from-stealth-with-70m-for-robot-interfaces/",
+          "observedAt": "2026-07-27T13:52:02"
+        },
+        {
+          "text": "Over 100 robots for human-interaction research",
+          "sourceUrl": "https://www.unite.ai/enigma-emerges-from-stealth-with-70m-for-robot-interfaces/",
+          "observedAt": "2026-07-27T13:52:02"
+        },
+        {
+          "text": "Facilities in Israel and California",
+          "sourceUrl": "https://www.unite.ai/enigma-emerges-from-stealth-with-70m-for-robot-interfaces/",
+          "observedAt": "2026-07-27T13:52:02"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Physical AI",
+      "themeColor": "#6C37D7",
+      "sourceNewsId": 29613910,
+      "sourcePublishedAt": "2026-07-27T13:52:02",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-31222162",
+      "name": "Reimagine Robotics",
+      "founderName": "Jonathan Scholz",
+      "founderImage": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Google DeepMind",
+      "founderBackground": "Previously at Google DeepMind",
+      "headline": "Deployments in manufacturing and electronics disassembly",
+      "signalScore": 93,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Robots learn tasks through human demonstrations",
+        "Deployments in manufacturing and electronics disassembly",
+        "Founded by former Google DeepMind robotics team members"
+      ],
+      "pitchSummary": "Reimagine Robotics Ltd emerged from stealth on Tuesday with robots designed to learn tasks through human demonstration rather than specialist programming. The London and Sydney-based startup, founded in April 2025 by former Google DeepMind Applied Robotics team members, has already deployed its robots in advanced manufacturing and electronics disassembly facilities.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Jonathan,\n\nI came across Reimagine Robotics's recent update: \"Robots learn tasks through human demonstrations\". We are researching physical ai and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Reimagine Robotics emerges from stealth with robots that ‘learn on the job’",
+        "url": "https://www.therobotreport.com/reimagine-robotics-emerges-stealth-with-robotslearn-on-the-job/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Robots learn tasks through human demonstrations",
+          "sourceUrl": "https://www.therobotreport.com/reimagine-robotics-emerges-stealth-with-robotslearn-on-the-job/",
+          "observedAt": "2026-08-03T07:00:51"
+        },
+        {
+          "text": "Deployments in manufacturing and electronics disassembly",
+          "sourceUrl": "https://www.therobotreport.com/reimagine-robotics-emerges-stealth-with-robotslearn-on-the-job/",
+          "observedAt": "2026-08-03T07:00:51"
+        },
+        {
+          "text": "Founded by former Google DeepMind robotics team members",
+          "sourceUrl": "https://www.therobotreport.com/reimagine-robotics-emerges-stealth-with-robotslearn-on-the-job/",
+          "observedAt": "2026-08-03T07:00:51"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "Physical AI",
+      "themeColor": "#37D73D",
+      "sourceNewsId": 31222162,
+      "sourcePublishedAt": "2026-08-03T07:00:51",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-38775912",
+      "name": "Awear",
+      "founderName": "Ash Saulsbury",
+      "founderImage": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Apple",
+      "founderBackground": "Previously at Apple",
+      "headline": "Built around Snapdragon AR1+ smart glasses",
+      "signalScore": 94,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Personal AI platform launched at Snapdragon Summit",
+        "Built around Snapdragon AR1+ smart glasses",
+        "User-controlled cross-device AI context"
+      ],
+      "pitchSummary": "Awear emerged from stealth at Qualcomm's Snapdragon Summit, launching a cross-device, context-aware personal AI platform built around smart glasses. The platform lets users own their AI agents while brands create differentiated experiences, with privacy and trust built into the architecture.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Ash,\n\nI came across Awear's recent update: \"Personal AI platform launched at Snapdragon Summit\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Emerging from Stealth, Awear Introduces a New Platform for Personal AI",
+        "url": "https://www.prnewswire.com/news-releases/emerging-from-stealth-awear-introduces-a-new-platform-for-personal-ai-302888183.html"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Personal AI platform launched at Snapdragon Summit",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/emerging-from-stealth-awear-introduces-a-new-platform-for-personal-ai-302888183.html",
+          "observedAt": "2026-09-23T00:00:00"
+        },
+        {
+          "text": "Built around Snapdragon AR1+ smart glasses",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/emerging-from-stealth-awear-introduces-a-new-platform-for-personal-ai-302888183.html",
+          "observedAt": "2026-09-23T00:00:00"
+        },
+        {
+          "text": "User-controlled cross-device AI context",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/emerging-from-stealth-awear-introduces-a-new-platform-for-personal-ai-302888183.html",
+          "observedAt": "2026-09-23T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#D73760",
+      "sourceNewsId": 38775912,
+      "sourcePublishedAt": "2026-09-23T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-39436591",
+      "name": "Blackfuel",
+      "founderName": "Xavier Fischer",
+      "founderImage": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Liquid-cooled GPU infrastructure announced",
+      "signalScore": 93,
+      "stage": "Pre-Seed",
+      "signals": [
+        "First deployment planned at Digital Realty BCN1",
+        "Liquid-cooled GPU infrastructure announced",
+        "Dedicated clusters and fractional GPU capacity offered"
+      ],
+      "pitchSummary": "Blackfuel launched on September 30 and plans its first deployment at Digital Realty's BCN1 data center in Barcelona, Spain. The deployment will use liquid-cooled Dell PowerRack systems with AMD Instinct MI355X accelerators, offering dedicated GPU clusters and fractional capacity.",
+      "targetSector": "AI Infra",
+      "draftEmail": "Hi Xavier,\n\nI came across Blackfuel's recent update: \"First deployment planned at Digital Realty BCN1\". We are researching ai infra and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "AI cloud provider Blackfuel emerges from stealth, plans first deployment in Spain",
+        "url": "https://www.datacenterdynamics.com/en/news/ai-cloud-provider-blackfuel-emerges-from-stealth-plans-first-deployment-in-spain/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "First deployment planned at Digital Realty BCN1",
+          "sourceUrl": "https://www.datacenterdynamics.com/en/news/ai-cloud-provider-blackfuel-emerges-from-stealth-plans-first-deployment-in-spain/",
+          "observedAt": "2026-10-01T16:50:32"
+        },
+        {
+          "text": "Liquid-cooled GPU infrastructure announced",
+          "sourceUrl": "https://www.datacenterdynamics.com/en/news/ai-cloud-provider-blackfuel-emerges-from-stealth-plans-first-deployment-in-spain/",
+          "observedAt": "2026-10-01T16:50:32"
+        },
+        {
+          "text": "Dedicated clusters and fractional GPU capacity offered",
+          "sourceUrl": "https://www.datacenterdynamics.com/en/news/ai-cloud-provider-blackfuel-emerges-from-stealth-plans-first-deployment-in-spain/",
+          "observedAt": "2026-10-01T16:50:32"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "AI Infra",
+      "themeColor": "#378FD7",
+      "sourceNewsId": 39436591,
+      "sourcePublishedAt": "2026-10-01T16:50:32",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-39194551",
+      "name": "Tremont AI",
+      "founderName": "Luca Weishaupt",
+      "founderImage": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "Technology licensed from Mass General Brigham",
+      "signalScore": 93,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Multimodal platform for preclinical drug-safety research",
+        "Technology licensed from Mass General Brigham",
+        "Integrates evidence across toxicology studies"
+      ],
+      "pitchSummary": "Tremont AI, a Boston-based biomedical AI company, emerged from stealth to develop multimodal foundation models and AI agents for preclinical drug safety. The models build on technology licensed from Mass General Brigham to help scientists analyze toxicity data across studies.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Luca,\n\nI came across Tremont AI's recent update: \"Multimodal platform for preclinical drug-safety research\". We are researching precision tech and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Tremont AI Emerges from Stealth to Bring Multimodal AI to Preclinical Drug Safety",
+        "url": "https://www.financialcontent.com/article/bizwire-2026-9-29-tremont-ai-emerges-from-stealth-to-bring-multimodal-ai-to-preclinical-drug-safety"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Multimodal platform for preclinical drug-safety research",
+          "sourceUrl": "https://www.financialcontent.com/article/bizwire-2026-9-29-tremont-ai-emerges-from-stealth-to-bring-multimodal-ai-to-preclinical-drug-safety",
+          "observedAt": "2026-09-29T11:05:00"
+        },
+        {
+          "text": "Technology licensed from Mass General Brigham",
+          "sourceUrl": "https://www.financialcontent.com/article/bizwire-2026-9-29-tremont-ai-emerges-from-stealth-to-bring-multimodal-ai-to-preclinical-drug-safety",
+          "observedAt": "2026-09-29T11:05:00"
+        },
+        {
+          "text": "Integrates evidence across toxicology studies",
+          "sourceUrl": "https://www.financialcontent.com/article/bizwire-2026-9-29-tremont-ai-emerges-from-stealth-to-bring-multimodal-ai-to-preclinical-drug-safety",
+          "observedAt": "2026-09-29T11:05:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Funding stage is unconfirmed; Pre-Seed is a display grouping.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "Precision Tech",
+      "themeColor": "#BED737",
+      "sourceNewsId": 39194551,
+      "sourcePublishedAt": "2026-09-29T11:05:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
+    },
+    {
+      "id": "akta-news-35331315",
+      "name": "RadiantOps",
+      "founderName": "Travis Kimmel",
+      "founderImage": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "GitPrime",
+      "founderBackground": "Previously at GitPrime",
+      "headline": "Engineering intelligence tracks developer and agent activity",
+      "signalScore": 96,
+      "stage": "Seed",
+      "signals": [
+        "$7M seed led by Foundation Capital",
+        "Engineering intelligence tracks developer and agent activity",
+        "Founded by former GitPrime founders"
+      ],
+      "pitchSummary": "RadiantOps emerged from stealth with $7 million in seed funding led by Foundation Capital. The Durango-based company builds an engineering intelligence platform tracking developer and AI agent activity.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Travis,\n\nI came across RadiantOps's recent update: \"$7M seed led by Foundation Capital\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "RadiantOps Emerges From Stealth With $7 Million for AI Engineering Analytics",
+        "url": "https://www.citybiz.co/article/904620/radiantops-emerges-from-stealth-with-7-million-for-ai-engineering-analytics/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$7M seed led by Foundation Capital",
+          "sourceUrl": "https://www.citybiz.co/article/904620/radiantops-emerges-from-stealth-with-7-million-for-ai-engineering-analytics/",
+          "observedAt": "2026-09-16T21:46:05"
+        },
+        {
+          "text": "Engineering intelligence tracks developer and agent activity",
+          "sourceUrl": "https://www.citybiz.co/article/904620/radiantops-emerges-from-stealth-with-7-million-for-ai-engineering-analytics/",
+          "observedAt": "2026-09-16T21:46:05"
+        },
+        {
+          "text": "Founded by former GitPrime founders",
+          "sourceUrl": "https://www.citybiz.co/article/904620/radiantops-emerges-from-stealth-with-7-million-for-ai-engineering-analytics/",
+          "observedAt": "2026-09-16T21:46:05"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#C237D7",
+      "sourceNewsId": 35331315,
+      "sourcePublishedAt": "2026-09-16T21:46:05",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-35054166",
+      "name": "DataAgent",
+      "founderName": "Ishay Yaari",
+      "founderImage": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Cloudify",
+      "founderBackground": "Previously at Cloudify",
+      "headline": "Fifteen-person autonomous SRE team",
+      "signalScore": 96,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$10M pre-seed led by MizMaa and Alicorn",
+        "Fifteen-person autonomous SRE team",
+        "Recruiting go-to-market staff in the United States"
+      ],
+      "pitchSummary": "DataAgent emerged from stealth with its remediation-first Digital Immune System platform and closed a $10 million pre-seed round led by MizMaa Ventures and Alicorn Venture Partners. The company, with 15 employees, will use the funds to bring the platform to market and accelerate North American customer adoption.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Ishay,\n\nI came across DataAgent's recent update: \"$10M pre-seed led by MizMaa and Alicorn\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "DataAgent Emerges From Stealth with $10M Pre-Seed for Autonomous SRE Platform",
+        "url": "https://www.thefastmode.com/investments-and-expansions/50444-dataagent-emerges-from-stealth-with-10m-pre-seed-for-autonomous-sre-platform"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$10M pre-seed led by MizMaa and Alicorn",
+          "sourceUrl": "https://www.thefastmode.com/investments-and-expansions/50444-dataagent-emerges-from-stealth-with-10m-pre-seed-for-autonomous-sre-platform",
+          "observedAt": "2026-09-02T00:00:00"
+        },
+        {
+          "text": "Fifteen-person autonomous SRE team",
+          "sourceUrl": "https://www.thefastmode.com/investments-and-expansions/50444-dataagent-emerges-from-stealth-with-10m-pre-seed-for-autonomous-sre-platform",
+          "observedAt": "2026-09-02T00:00:00"
+        },
+        {
+          "text": "Recruiting go-to-market staff in the United States",
+          "sourceUrl": "https://www.thefastmode.com/investments-and-expansions/50444-dataagent-emerges-from-stealth-with-10m-pre-seed-for-autonomous-sre-platform",
+          "observedAt": "2026-09-02T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#37D794",
+      "sourceNewsId": 35054166,
+      "sourcePublishedAt": "2026-09-02T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-35046058",
+      "name": "QueryStory",
+      "founderName": "Shapor Naghibzadeh",
+      "founderImage": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Google",
+      "founderBackground": "Previously at Google",
+      "headline": "Auditable enterprise AI analysis with SQL visibility",
+      "signalScore": 96,
+      "stage": "Seed",
+      "signals": [
+        "$6M seed round announced",
+        "Auditable enterprise AI analysis with SQL visibility",
+        "Human-review workflows and confidence indicators"
+      ],
+      "pitchSummary": "QueryStory emerged from stealth on August 26, 2026, raising a $6 million seed round at a $60 million valuation. The platform surfaces SQL queries, confidence indicators, and human-review workflows for enterprise AI analysis.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Shapor,\n\nI came across QueryStory's recent update: \"$6M seed round announced\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "QueryStory exits stealth with $6M seed to make enterprise AI answers auditable",
+        "url": "https://www.aichatdaily.com/ai-business/querystory-exits-stealth-6m-seed-make-enterprise-ai"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$6M seed round announced",
+          "sourceUrl": "https://www.aichatdaily.com/ai-business/querystory-exits-stealth-6m-seed-make-enterprise-ai",
+          "observedAt": "2026-08-26T00:00:00"
+        },
+        {
+          "text": "Auditable enterprise AI analysis with SQL visibility",
+          "sourceUrl": "https://www.aichatdaily.com/ai-business/querystory-exits-stealth-6m-seed-make-enterprise-ai",
+          "observedAt": "2026-08-26T00:00:00"
+        },
+        {
+          "text": "Human-review workflows and confidence indicators",
+          "sourceUrl": "https://www.aichatdaily.com/ai-business/querystory-exits-stealth-6m-seed-make-enterprise-ai",
+          "observedAt": "2026-08-26T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#D76537",
+      "sourceNewsId": 35046058,
+      "sourcePublishedAt": "2026-08-26T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-39245100",
+      "name": "Rig Security",
+      "founderName": "Guy Kozliner",
+      "founderImage": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Wiz",
+      "founderBackground": "Previously at Wiz",
+      "headline": "Agent identity and authorization risk platform",
+      "signalScore": 97,
+      "stage": "Seed",
+      "signals": [
+        "$12M seed led by Ten Eleven and Brightmind",
+        "Agent identity and authorization risk platform",
+        "Production use reported at Fortune 200 organizations"
+      ],
+      "pitchSummary": "Rig Security emerged from stealth with $12 million in seed funding led by Ten Eleven Ventures and Brightmind Partners. The Tel Aviv-based firm's platform uses ML and graph modeling to distinguish AI agents from human users, with RICE and Bifrost components.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Guy,\n\nI came across Rig Security's recent update: \"$12M seed led by Ten Eleven and Brightmind\". We are researching agentic workflows and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Rig Security Emerges From Stealth With $12M to Tackle Agentic AI Identity Risks",
+        "url": "https://www.securityweek.com/rig-security-emerges-from-stealth-with-12m-to-tackle-agentic-ai-identity-risks/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$12M seed led by Ten Eleven and Brightmind",
+          "sourceUrl": "https://www.securityweek.com/rig-security-emerges-from-stealth-with-12m-to-tackle-agentic-ai-identity-risks/",
+          "observedAt": "2026-09-29T12:00:00"
+        },
+        {
+          "text": "Agent identity and authorization risk platform",
+          "sourceUrl": "https://www.securityweek.com/rig-security-emerges-from-stealth-with-12m-to-tackle-agentic-ai-identity-risks/",
+          "observedAt": "2026-09-29T12:00:00"
+        },
+        {
+          "text": "Production use reported at Fortune 200 organizations",
+          "sourceUrl": "https://www.securityweek.com/rig-security-emerges-from-stealth-with-12m-to-tackle-agentic-ai-identity-risks/",
+          "observedAt": "2026-09-29T12:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder."
+      ],
+      "discoverySector": "Agentic Workflows",
+      "themeColor": "#3738D7",
+      "sourceNewsId": 39245100,
+      "sourcePublishedAt": "2026-09-29T12:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": true
+    },
+    {
+      "id": "akta-news-35022401",
+      "name": "Flottando",
+      "founderName": "Badr Bounafaa",
+      "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder",
+      "headline": "AI-driven fleet operations platform",
+      "signalScore": 94,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Pre-seed round led by HFGA Investment Holding",
+        "AI-driven fleet operations platform",
+        "Deployments at hundreds of European companies reported"
+      ],
+      "pitchSummary": "Flottando, a Geneva-based fleet management startup, closed a pre-seed round led by HFGA Investment Holding, exiting stealth. The company, built on AI to execute fleet tasks, was bootstrapped for three years and now has institutional capital.",
+      "targetSector": "B2B SaaS",
+      "draftEmail": "Hi Badr,\n\nI came across Flottando's recent update: \"Pre-seed round led by HFGA Investment Holding\". We are researching b2b saas and would enjoy learning more about your product, early customer feedback, and roadmap.\n\nWould you be open to a brief introductory conversation?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Flottando exits stealth driven by strong italian demand and pre-seed funding",
+        "url": "https://www.startupticker.ch/en/news/flottando-exits-stealth-driven-by-strong-italian-demand-and-pre-seed-funding"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Pre-seed round led by HFGA Investment Holding",
+          "sourceUrl": "https://www.startupticker.ch/en/news/flottando-exits-stealth-driven-by-strong-italian-demand-and-pre-seed-funding",
+          "observedAt": "2026-09-14T00:00:00"
+        },
+        {
+          "text": "AI-driven fleet operations platform",
+          "sourceUrl": "https://www.startupticker.ch/en/news/flottando-exits-stealth-driven-by-strong-italian-demand-and-pre-seed-funding",
+          "observedAt": "2026-09-14T00:00:00"
+        },
+        {
+          "text": "Deployments at hundreds of European companies reported",
+          "sourceUrl": "https://www.startupticker.ch/en/news/flottando-exits-stealth-driven-by-strong-italian-demand-and-pre-seed-funding",
+          "observedAt": "2026-09-14T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Portrait is illustrative, not a verified photograph of the founder.",
+        "Prior employer not supplied by the retrieved source."
+      ],
+      "discoverySector": "B2B SaaS",
+      "themeColor": "#67D737",
+      "sourceNewsId": 35022401,
+      "sourcePublishedAt": "2026-09-14T00:00:00",
+      "stealthStatus": "emerged",
+      "backgroundVerified": false
     }
   ],
   "provenance": {
@@ -462,12 +2853,133 @@
       39310343,
       39670705,
       33865927,
-      35071927
+      35071927,
+      35707038,
+      35039388,
+      31428366,
+      35074386,
+      40214619,
+      40557279,
+      36205631,
+      36061363,
+      32696230,
+      33093956,
+      35043171,
+      39690609,
+      39310354,
+      30957123,
+      35713626,
+      31422845,
+      31687319,
+      29597966,
+      36224519,
+      39678740,
+      41951675,
+      39958798,
+      41935439,
+      35294304,
+      42258514,
+      32486910,
+      32929229,
+      40579917,
+      41780483,
+      42278335,
+      35550194,
+      39201248,
+      39695691,
+      29613910,
+      31222162,
+      38775912,
+      39436591,
+      39194551,
+      35331315,
+      35054166,
+      35046058,
+      39245100,
+      35022401
     ],
     "notes": [
-      "Retrieved through authenticated akta.pro MCP tools: news_signals, news_detail, company_search, and company_data_concise.",
-      "These are real companies with published stealth-exit reports, not invented stealth identities.",
-      "Sector labels, email drafts, and evidence-coverage scores are application-derived. Missing employment history and stock portraits remain disclosed."
-    ]
+      "Company identities, public founder names, and three source-linked claims per company were retrieved through authenticated akta.pro MCP news tools.",
+      "The dataset is a dated snapshot of stealth or stealth-exit reporting, not a live stream.",
+      "Portrait provenance and unconfirmed fields remain explicit; sector labels, scores, theme colors, and intro drafts are application-derived."
+    ],
+    "coverage": {
+      "profiles": 50,
+      "namedFounders": 50,
+      "sourcedPriorEmployers": 29,
+      "confirmedFundingStages": 32,
+      "validatedPortraitUrls": 12
+    },
+    "imageValidation": {
+      "checkedAt": "2026-10-24T17:27:20.002Z",
+      "method": "HTTP HEAD with redirect following; status 200 and image content type",
+      "uniqueUrls": [
+        {
+          "url": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&crop=faces&q=90&w=1200",
+          "status": "200",
+          "contentType": "image/jpeg"
+        }
+      ]
+    },
+    "scoring": {
+      "method": "evidence-coverage-v1",
+      "formula": "85 base + 2 founder + 2 source + 2 supported prior employer + 2 confirmed stage + 0–3 publication recency + 1 stealth report; capped at 98",
+      "meaning": "Evidence coverage, not investment probability"
+    }
   }
 }
