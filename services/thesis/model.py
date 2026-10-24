@@ -77,8 +77,9 @@ def _embed_cached(texts: dict[str, str], cache_file: Path) -> dict[str, np.ndarr
 
 
 def _first_number(s: str | None) -> int | None:
-    digits = "".join(ch if ch.isdigit() else " " for ch in (s or "")).split()
-    return int(digits[0]) if digits else None
+    """First number in a range like "51-200" or "1,001-5,000". Thousands separators stay part of the number."""
+    m = re.search(r"\d[\d,]*", s or "")
+    return int(m.group(0).replace(",", "")) if m else None
 
 
 # Themes are matched against the sector label only, never the description. A security
