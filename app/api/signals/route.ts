@@ -17,10 +17,10 @@ export async function GET(request: Request) {
   const startedAt = performance.now();
   const headers = { "Cache-Control": "no-store" };
   let thesis: ThesisName | undefined;
-  let learned = false;
+  let learned = true;
   try {
     const query = new URL(request.url).searchParams;
-    learned = query.get("ranking") === "learned";
+    learned = query.get("ranking") !== "baseline";
     const values = query.getAll("thesis");
     if (values.length > 1) throw new Error("Ambiguous thesis");
     if (values[0]?.trim()) thesis = normalizeThesis(values[0]);
@@ -41,7 +41,7 @@ export async function GET(request: Request) {
     return NextResponse.json({
       success: true, data, source: demo ? "sample" : "live", startups: data,
       meta: { dataSource: demo ? "mock" : "akta.pro", retrieval: result.source, count: data.length, totalCount: result.data.length,
-        ranking: ranking ? { source: ranking.source, reason: ranking.reason, actionCount: ranking.actionCount } : { source: "baseline" },
+        ranking: ranking ? { source: ranking.source, backend: ranking.backend, reason: ranking.reason, actionCount: ranking.actionCount } : { source: "baseline" },
         thesis: thesis ?? null, ruleVersion: thesis ? THESIS_RULE_VERSION : null, demo, reason: result.reason,
         refreshing: result.refreshing ?? false, fetchedAt: result.fetchedAt, cached: result.cached },
     }, { headers: { ...headers, "X-Data-Source": demo ? "mock" : "akta.pro", "X-Data-Retrieval": result.source, "X-Startup-Count": String(data.length) } });

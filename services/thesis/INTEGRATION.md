@@ -13,7 +13,7 @@ by the runtime.
 - [x] Preserve Next.js UI, the 50-entry seed, PRISM and the akta live/mock hierarchy.
 - [x] Import Python ranking, readback, standalone UI and pull utility in this folder.
 - [x] Export existing profiles without changing IDs or inventing headcounts/employers.
-- [x] Add read-only `/ranking` and an opt-in, bounded Next.js ranking adapter.
+- [x] Add read-only `/ranking` and a bounded Next.js adapter with automatic fallback.
 - [x] Keep named-thesis scoring and three-bullet IC memos separate from learned probabilities.
 - [x] Complete TypeScript, regression, Python service and final Git checks.
 
@@ -34,7 +34,7 @@ services/thesis/.venv/bin/pip install -r services/thesis/requirements.txt
 python3 services/thesis/export_seed.py
 cd services/thesis
 # Set NICRRON_API_KEY in the process environment or this directory's ignored .env.
-.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8001
+.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000
 ```
 
 Embedding setup calls Nicrron `/embeddings` using
@@ -44,15 +44,37 @@ valid `NICRRON_API_KEY` or complete cached embeddings. Readback uses
 The optional original pull utility also requires `AKTA_API_KEY` and supports
 `CREDIT_BUDGET`. Next.js continues loading its own `.env.local` normally.
 
-Set `THESIS_RANKER_URL=http://127.0.0.1:8001` in Next.js and restart it.
-`GET /api/signals?ranking=learned&thesis=AI%20Agents` first strictly filters for
-thesis, then applies the service order. Without `ranking=learned`, no model
-request is made. The adapter has a 750ms deadline; timeout, invalid data and
-nonmatching IDs retain baseline order. Unmatched/seen profiles stay at the end
-so the deck never silently loses source data. The client must manage seen cards.
-`learnedMatch.probability` is null until the logistic model is fitted; it never
-replaces `signalScore` or `thesisScore`. PRISM dispatch traces include output
-count and whether model or baseline ordering was used.
+Next.js defaults to `http://localhost:8000`; optionally set
+`THESIS_RANKER_URL` to another private service address and restart Next.js.
+`GET /api/signals` automatically requests `/ranking`. A `thesis=AI%20Agents`
+query strictly filters the deck before ranking; all other named theses retain
+their existing filtering rules. `ranking=baseline` explicitly bypasses the
+Python request and uses the original named-thesis order.
+
+Both ranking and feedback enforce a 750ms total upstream deadline, including
+response streaming, and cap upstream bodies at 200 KB. Connection errors,
+timeouts, bad JSON, invalid schemas and nonmatching ranking IDs automatically
+use TypeScript. With no feedback, that scorer keeps baseline order. Recorded
+save/intro actions favor the same sector, passes reduce sector preference, and
+track does not train preferences. Reviewed profiles move to the end; none of the
+50 source records are removed or modified. `learnedMatch.preferenceScore` is an
+uncalibrated local count; `probability` stays null locally. Only a fitted Python
+model supplies a probability. Neither backend changes `signalScore` or
+`thesisScore`. `meta.ranking.backend` identifies `python` or `typescript`, and
+PRISM dispatch traces keep recording the output count and ordering source.
+
+`POST /api/feedback` accepts `{id, action}` (or `{uuid, action}`) with
+`pass`, `save`, `track`, or `intro`. It validates the ID against the hydrated
+profiles and proxies `{uuid, action}` to Python `/action`. Feedback is recorded
+in the local TypeScript store before the proxy call, so a service failure does
+not lose the demo decision. Successful responses include `meta.backend`,
+`meta.reason` when falling back, `meta.duplicate`, and action counts. Repeating
+the same action is idempotent; a different action for an already reviewed ID
+returns 409. Invalid inputs return 400/413/415 and unknown IDs return 404.
+Upstream failures, including 404/409 from an out-of-sync Python pool, retain the
+local decision and return success with `backend: "typescript"`. No uncertain
+POST is retried, and offline feedback is not automatically replayed to Python.
+Frontend callers should use `/api/feedback`, not the private Python URL.
 
 The service accepts `POST /action {uuid, action}` with pass/save/track/intro;
 save+intro are positive, pass negative, track excluded from fitting. It exposes
@@ -66,8 +88,12 @@ handoff. The standalone UI in this folder exercises these endpoints directly.
 This inherited service has one in-memory partner session, no authentication or
 fund isolation, and resets on restart. Keep it private and run one worker for a
 single-partner demo. Do not expose it as a multi-user public service; introduce
-session-scoped persistent state and authentication before doing that. Next.js
-continues serving the seed if the service is not deployed. Inference availability
+session-scoped persistent state and authentication before doing that.
+The TypeScript feedback store is also process-local and single-partner: it
+survives route-bundle reuse but not a restart, multiple workers, or serverless
+instances. This is a heuristic fallback rather than logistic regression.
+Next.js continues serving the seed and accepting feedback if Python is offline.
+Inference availability
 and real PRISM delivery require configured credentials; regression checks use
 stubs and do not claim sponsor delivery.
 
@@ -77,6 +103,7 @@ stubs and do not claim sponsor delivery.
 npx tsc --noEmit
 node tests/backend/thesis-memo.cjs
 node tests/backend/ranker.cjs
+node tests/backend/feedback-fallback.cjs
 services/thesis/.venv/bin/python tests/backend/test_thesis_service.py
 ```
 
@@ -86,3 +113,8 @@ Validation: TypeScript and targeted lint passed. Offline HTTP tests exercised
 50-profile dispatch, strict thesis selection, ranking fallback, memo generation,
 PRISM payloads, feedback fitting, the 10-action readback and reset. Sponsor calls
 were stubbed; real inference and PRISM delivery were not tested with credentials.
+
+The proxy was also exercised over real HTTP against a local FastAPI process
+with stubbed embeddings/readback, then exercised again after terminating that
+process. Both routes switched from Python to TypeScript and retained all 50
+profiles. A never-resolving upstream returned the fallback in about 750ms.
