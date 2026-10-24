@@ -42,6 +42,8 @@
   button:hover { border-color: var(--accent); }
   button small { display: block; color: var(--muted); font-size: 11px; }
   .empty { color: var(--muted); padding: 40px 0; text-align: center; }
+  button.fund { display: block; width: 100%; text-align: left; margin: 0 0 8px; padding: 12px 14px; }
+  button.fund small { margin-top: 2px; line-height: 1.4; }
   .bar { display: grid; grid-template-columns: 1fr 70px; gap: 8px; align-items: center; font-size: 13px; margin: 5px 0; }
   .track { height: 8px; background: var(--line); border-radius: 4px; position: relative; }
   .fill { position: absolute; top: 0; height: 100%; border-radius: 4px; }
@@ -56,7 +58,7 @@
 </style>
 </head>
 <body>
-<header><h1>Thesis</h1><span id="progress"></span></header>
+<header><h1>Thesis</h1><span><span id="fund"></span><span id="progress"></span></span></header>
 <main>
   <section class="panel" id="card-panel"><div class="empty">Loading…</div></section>
   <aside class="panel">
@@ -144,8 +146,38 @@ function renderThesis(t) {
   }
 }
 
+let choosingFund = false;
+
+// First screen: the partner picks a fund, and its thesis decides which company comes first.
+async function showFunds() {
+  const funds = await fetch("/funds").then(r => r.json());
+  const p = $("card-panel");
+  p.replaceChildren(el("h2", { textContent: "Which fund are you sourcing for?" }));
+  current = null;
+  for (const f of funds) {
+    const b = el("button", { className: "fund" }, el("b", { textContent: f.name }), el("small", { textContent: f.thesis }));
+    b.onclick = async () => {
+      await fetch("/fund", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: f.id }) });
+      choosingFund = false;
+      load();
+    };
+    p.append(b);
+  }
+}
+
 async function load() {
-  const [n, t] = await Promise.all([fetch("/next").then(r => r.json()), fetch("/thesis").then(r => r.json())]);
+  const t = await fetch("/thesis").then(r => r.json());
+  const fund = $("fund");
+  fund.replaceChildren();
+  if (!t.fund || choosingFund) {
+    $("progress").textContent = "";
+    await showFunds(); renderThesis(t);
+    return t;
+  }
+  const change = el("a", { href: "#", textContent: "change" });
+  change.onclick = (e) => { e.preventDefault(); choosingFund = true; load(); };
+  fund.append(`${t.fund} · `, change, " · ");
+  const n = await fetch("/next").then(r => r.json());
   renderCard(n); renderThesis(t);
   return t;
 }

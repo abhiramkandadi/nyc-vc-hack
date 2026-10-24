@@ -13,16 +13,17 @@ from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
-from model import ACTIONS, Ranker, load_embeddings
+from model import ACTIONS, Ranker, load_embeddings, load_fund_embeddings
 from readback import generate
 
 COMPANIES_FILE = Path("companies.json")
+FUNDS_FILE = Path("funds.json")
 INDEX_FILE = Path("index.html")
 READBACK_EVERY = 10  # first readback at this many actions, then again every this many
 
 lock = threading.Lock()
 state: dict = {"ranker": None, "readback": None, "readback_error": None, "readback_at": 0,
-               "readback_pending": False, "epoch": 0}
+               "readback_pending": False, "epoch": 0, "funds": [], "fund_vectors": {}, "fund": None}
 
 
 @asynccontextmanager
@@ -31,6 +32,8 @@ async def lifespan(app: FastAPI):
         raise RuntimeError("companies.json not found. Run pull.py first.")
     companies = json.loads(COMPANIES_FILE.read_text(encoding="utf-8"))
     state["ranker"] = Ranker(companies, load_embeddings(companies))
+    funds = json.loads(FUNDS_FILE.read_text(encoding="utf-8"))
+    state["funds"], state["fund_vectors"] = funds, load_fund_embeddings(funds)
     yield
 
 
@@ -40,6 +43,10 @@ app = FastAPI(title="Thesis", lifespan=lifespan)
 class ActionIn(BaseModel):
     uuid: str
     action: str
+
+
+class FundIn(BaseModel):
+    id: str
 
 
 def _names(ranker: Ranker, actions: tuple[str, ...]) -> list[str]:
@@ -60,6 +67,24 @@ def _described(ranker: Ranker, actions: tuple[str, ...]) -> list[str]:
 @app.get("/")
 def index() -> FileResponse:
     return FileResponse(INDEX_FILE, headers={"Cache-Control": "no-store"})
+
+
+@app.get("/funds")
+def funds() -> list[dict]:
+    return state["funds"]
+
+
+@app.post("/fund")
+def select_fund(body: FundIn) -> dict:
+    """Pick the fund whose thesis starts the ranking. This starts a fresh session."""
+    with lock:
+        fund = next((f for f in state["funds"] if f["id"] == body.id), None)
+        if fund is None:
+            raise HTTPException(404, f"unknown fund {body.id}")
+        state["ranker"].set_fund(fund["id"], state["fund_vectors"][fund["id"]])
+        state.update(readback=None, readback_error=None, readback_at=0, readback_pending=False,
+                     epoch=state["epoch"] + 1, fund=fund["name"])
+    return {"fund": fund["name"]}
 
 
 @app.get("/next")
@@ -124,7 +149,21 @@ def thesis() -> dict:
             "readback_error": state["readback_error"],
             "readback_at": state["readback_at"],
             "readback_pending": state["readback_pending"],
+            "fund": state["fund"],
         }
+
+
+@app.get("/ranking")
+def ranking() -> dict:
+    """Read-only snapshot for the Next.js adapter; cold-start scores are not probabilities."""
+    with lock:
+        r: Ranker = state["ranker"]
+        fitted = r.clf is not None
+        return {"fitted": fitted, "n_actions": len(r.actions),
+                "ranked": [{"id": item["company"]["uuid"],
+                            "score": item["score"] if fitted else None,
+                            "reasons": r.reasons(item["company"]["uuid"])}
+                           for item in r.ranked_unseen()]}
 
 
 @app.post("/reset")
@@ -134,15 +173,3 @@ def reset() -> dict:
         state.update(readback=None, readback_error=None, readback_at=0, readback_pending=False,
                      epoch=state["epoch"] + 1)
     return {"ok": True}
-
-
-@app.get("/ranking")
-def ranking() -> dict:
-    """Read-only snapshot for the Next.js adapter; cold-start scores are not probabilities."""
-    with lock:
-        r: Ranker = state["ranker"]
-        return {"fitted": r.clf is not None, "n_actions": len(r.actions),
-                "ranked": [{"id": item["company"]["uuid"],
-                            "score": item["score"] if r.clf is not None else None,
-                            "reasons": r.reasons(item["company"]["uuid"])}
-                           for item in r.ranked_unseen()]}
