@@ -3,7 +3,7 @@
 import { Check, Inbox, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
-import { SAMPLE_THREADS } from "@/lib/sampleThreads";
+import { SAMPLE_THREADS, type SampleThread } from "@/lib/sampleThreads";
 import type { StealthStartup } from "@/lib/mockData";
 
 export interface MatchRecord {
@@ -35,6 +35,27 @@ function preview(m: MatchRecord): string {
   if (m.emailOpened) return "Intro email opened in your mail app";
   const body = m.startup.draftEmail.split("\n").filter(Boolean)[1] ?? m.startup.draftEmail;
   return `Draft ready: ${body}`;
+}
+
+function SampleAvatar({ thread }: { thread: SampleThread }) {
+  const [failed, setFailed] = useState(false);
+  const initials = thread.name.split(/[\s.]+/).filter(Boolean).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+  if (thread.domain && !failed) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${thread.domain}&sz=128`}
+        alt={`${thread.org} logo`}
+        onError={() => setFailed(true)}
+        className="h-12 w-12 shrink-0 rounded-full border border-gray-200 bg-white object-contain p-2"
+      />
+    );
+  }
+  return (
+    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-200 text-sm font-bold text-gray-600">
+      {initials}
+    </span>
+  );
 }
 
 export default function MessagesSidebar({ matches, thesis, selectedId, onSelectMatch }: Props) {
@@ -151,9 +172,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
         <ul aria-label="Sample conversations">
           {SAMPLE_THREADS.map((t) => (
             <li key={t.id} className="flex items-center gap-3 border-l-4 border-transparent px-3 py-3">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-200 text-sm font-bold text-gray-600">
-                {t.name.split(/[\s.]+/).filter(Boolean).map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
-              </span>
+              <SampleAvatar thread={t} />
               <div className="min-w-0 flex-1">
                 <div className="flex items-baseline justify-between gap-2">
                   <p className="truncate text-base font-bold text-gray-900">
