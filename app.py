@@ -9,14 +9,16 @@ import threading
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from model import ACTIONS, Ranker, load_embeddings
+from readback import generate
 
 COMPANIES_FILE = Path("companies.json")
 INDEX_FILE = Path("index.html")
+READBACK_EVERY = 5  # write a new readback after every this many actions
 
 lock = threading.Lock()
 state: dict = {"ranker": None, "readback": None, "readback_error": None, "readback_at": 0}
@@ -61,8 +63,19 @@ def next_company() -> dict:
         return out
 
 
+def write_readback(n: int, weights: dict, saved: list[str], passed: list[str]) -> None:
+    """Runs in the background so the swipe response never waits on the LLM."""
+    try:
+        text, error = generate(weights, saved, passed), None
+    except Exception as e:  # shown to the partner as it is, never replaced with made-up text
+        text, error = None, str(e)
+    with lock:
+        if n >= state["readback_at"]:
+            state.update(readback=text, readback_error=error, readback_at=n)
+
+
 @app.post("/action")
-def post_action(body: ActionIn) -> dict:
+def post_action(body: ActionIn, background: BackgroundTasks) -> dict:
     if body.action not in ACTIONS:
         raise HTTPException(422, f"action must be one of {ACTIONS}")
     with lock:
@@ -73,7 +86,12 @@ def post_action(body: ActionIn) -> dict:
             raise HTTPException(404, f"unknown company {body.uuid}")
         except ValueError as e:
             raise HTTPException(409, str(e))
-        return {"n_actions": len(r.actions), "remaining": len(r.companies) - len(r.seen())}
+        n = len(r.actions)
+        if n % READBACK_EVERY == 0:
+            background.add_task(write_readback, n, r.weights(),
+                                _names(r, ("save", "intro")), _names(r, ("pass",)))
+        return {"n_actions": n, "remaining": len(r.companies) - len(r.seen()),
+                "readback_pending": n % READBACK_EVERY == 0}
 
 
 @app.get("/thesis")
