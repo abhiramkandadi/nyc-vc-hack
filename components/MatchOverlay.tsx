@@ -1,36 +1,58 @@
 "use client";
 
+import confetti from "canvas-confetti";
 import { motion } from "framer-motion";
-import { Check, Send, X, Zap } from "lucide-react";
-import { useState } from "react";
+import { Flame, Mail, X, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
 import type { StealthStartup } from "@/lib/mockData";
 
 interface Props {
   startup: StealthStartup;
   superInvest: boolean;
+  /** "match" celebrates a fresh match; "chat" reopens an existing one without confetti. */
+  mode: "match" | "chat";
+  emailOpened: boolean;
   onClose: () => void;
   onSend: (s: StealthStartup) => void;
 }
 
-export default function MatchOverlay({ startup, superInvest, onClose, onSend }: Props) {
-  const [sent, setSent] = useState(false);
+export default function MatchOverlay({ startup, superInvest, mode, emailOpened, onClose, onSend }: Props) {
+  const [draft, setDraft] = useState(startup.draftEmail);
+  const [sent, setSent] = useState(emailOpened);
+
+  useEffect(() => {
+    if (mode !== "match") return;
+    confetti({
+      particleCount: 120,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ["#FF385C", "#FF1744", "#FFD700", "#10B981"],
+    });
+  }, [mode]);
+
+  const sendIntro = () => {
+    const subject = `Intro: ${startup.name}`;
+    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(draft)}`;
+    setSent(true);
+    onSend(startup);
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-40 flex items-center justify-center bg-gray-900/50 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-40 flex items-center justify-center bg-gray-900/60 p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
-      aria-label="Match"
+      aria-label={mode === "match" ? "Match" : `${startup.name} pitch`}
     >
       <motion.div
         initial={{ scale: 0.85, y: 24 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className="relative w-full max-w-md rounded-3xl border border-gray-200 bg-white p-6 text-gray-900 shadow-2xl"
+        className="relative max-h-[95vh] w-full max-w-md overflow-y-auto rounded-3xl border border-gray-200 bg-white p-6 text-gray-900 shadow-2xl"
       >
         <button
           onClick={onClose}
@@ -40,53 +62,56 @@ export default function MatchOverlay({ startup, superInvest, onClose, onSend }: 
           <X className="h-4 w-4" />
         </button>
 
-        <h2 className="text-center font-display text-4xl font-bold tracking-tight text-[#FF385C]">
-          {superInvest ? "SUPER-INVEST!" : "IT'S A MATCH!"}
+        <h2 className="bg-gradient-to-r from-[#FF385C] via-rose-500 to-amber-400 bg-clip-text text-center font-display text-4xl font-extrabold italic tracking-tight text-transparent">
+          {mode === "chat" ? startup.name : superInvest ? "SUPER-INVEST!" : "IT'S A MATCH!"}
         </h2>
-        {superInvest && (
-          <p className="mt-1 flex items-center justify-center gap-1 text-xs text-amber-500">
-            <Zap className="h-3.5 w-3.5" /> Priority outreach flagged
+        {mode === "match" && (
+          <p className="mt-1 text-center text-xs text-gray-500">
+            {superInvest ? (
+              <span className="inline-flex items-center gap-1 text-amber-600">
+                <Zap className="h-3.5 w-3.5" /> Priority outreach flagged
+              </span>
+            ) : (
+              <>You and {startup.founderName} both want this conversation.</>
+            )}
           </p>
         )}
 
-        <div className="mt-5 flex items-center gap-3">
-          <FounderPhoto startup={startup} className="h-16 w-16 rounded-full border border-gray-200 object-cover object-top" />
-          <div>
-            <p className="font-display text-lg font-semibold leading-tight">{startup.founderName}</p>
-            <p className="text-xs text-gray-500">
-              {startup.founderBackground} · {startup.name}
-            </p>
-          </div>
+        <div className="mt-5 flex items-center justify-center">
+          <span className="z-10 -mr-3 flex h-20 w-20 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br from-[#FF385C] to-rose-500 shadow-lg">
+            <Flame className="h-9 w-9 fill-white text-white" aria-label="You" />
+          </span>
+          <FounderPhoto
+            startup={startup}
+            className="h-20 w-20 rounded-full border-4 border-white object-cover object-top shadow-lg"
+          />
         </div>
+        <p className="mt-3 text-center text-sm font-semibold text-gray-900">{startup.founderName}</p>
+        <p className="text-center text-xs text-gray-500">
+          {startup.founderBackground} · {startup.name}
+        </p>
 
         <div className="mt-4">
-          <p className="mb-1.5 font-mono text-[10px] uppercase tracking-wider text-gray-400">
-            Auto-drafted pitch
-          </p>
-          <pre className="max-h-48 overflow-y-auto whitespace-pre-wrap rounded-xl border border-gray-200 bg-gray-50 p-3 font-sans text-sm leading-relaxed text-gray-700">
-            {startup.draftEmail}
-          </pre>
+          <label htmlFor="intro-draft" className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+            Intro email (editable)
+          </label>
+          <textarea
+            id="intro-draft"
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            rows={8}
+            className="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 p-3 text-sm leading-relaxed text-gray-700 outline-none focus:border-[#FF385C]"
+          />
         </div>
 
         <button
-          disabled={sent}
-          onClick={() => {
-            setSent(true);
-            onSend(startup);
-          }}
-          className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-[#FF385C] py-3 text-sm font-semibold text-white shadow-md transition hover:brightness-110 disabled:bg-emerald-50 disabled:text-emerald-600 disabled:shadow-none"
+          onClick={sendIntro}
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FF385C] to-rose-600 py-3 text-sm font-semibold text-white shadow-md transition hover:brightness-110"
         >
-          {sent ? (
-            <>
-              <Check className="h-4 w-4" /> Draft saved (not emailed)
-            </>
-          ) : (
-            <>
-              <Send className="h-4 w-4" /> Send Outreach
-            </>
-          )}
+          <Mail className="h-4 w-4" /> {sent ? "Open in mail app again" : "Send Intro Email"}
         </button>
-        <button onClick={onClose} className="mt-2 w-full py-2 text-xs text-gray-500 hover:text-gray-900">
+        <p className="mt-1.5 text-center text-[11px] text-gray-400">Opens your mail app with this draft. Add the recipient and send.</p>
+        <button onClick={onClose} className="mt-1 w-full py-2 text-xs text-gray-500 hover:text-gray-900">
           Keep swiping
         </button>
       </motion.div>
