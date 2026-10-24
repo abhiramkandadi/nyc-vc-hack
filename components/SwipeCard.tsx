@@ -6,7 +6,7 @@ import { BadgeCheck, Heart, Landmark, RotateCcw, Star, TrendingUp, Users, X, typ
 import { useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import FounderPhoto, { PortraitContext } from "./FounderPhoto";
-import type { MediaKind, StealthStartup } from "@/lib/mockData";
+import { recentActivity, type MediaKind, type StealthStartup } from "@/lib/mockData";
 
 export type SwipeDirection = "left" | "right" | "up";
 
@@ -50,6 +50,7 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
   const rotate = useTransform(x, [-220, 0, 220], [-14, 0, 14]);
   const mediaKind = useContext(PortraitContext)[startup.id]?.kind;
   const mediaLabel = mediaKind ? MEDIA_LABEL[mediaKind] : undefined;
+  const activity = recentActivity(startup);
 
   const fling = (d: SwipeDirection) => {
     onImpact(d);
@@ -86,6 +87,12 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
           ))}
         </div>
 
+        {activity && (
+          <div className="absolute left-3 top-6 flex items-center gap-1.5 rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+            <span className={`h-2 w-2 rounded-full ${activity.recent ? "animate-pulse bg-emerald-400" : "bg-gray-300"}`} />
+            In the news · {activity.label}
+          </div>
+        )}
         <div className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md">
           {startup.signalScore}% match
         </div>

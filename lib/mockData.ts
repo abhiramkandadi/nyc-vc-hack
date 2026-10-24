@@ -18,6 +18,8 @@ export interface StealthStartup {
   pitchSummary: string;
   targetSector: TargetSector;
   draftEmail: string;
+  /** When the source news item was published (ISO), from akta.pro data. */
+  sourcePublishedAt?: string;
   /** Latest akta.pro news item, present only when live hydration succeeds. */
   liveNews?: { title: string; url: string };
 }
@@ -83,6 +85,16 @@ export const DIVERSE_MEDIA_POOL: readonly string[] = MEDIA_POOL.map((m) => m.url
 
 /** Headshots only, for the per-image error fallback. */
 export const FALLBACK_PORTRAITS: readonly string[] = MEDIA_POOL.filter((m) => m.kind === "headshot").map((m) => m.url);
+
+/** Recency of a founder's latest news, from real akta.pro data. Null when the date is unknown. */
+export function recentActivity(s: Pick<StealthStartup, "sourcePublishedAt">): { label: string; recent: boolean } | null {
+  if (!s.sourcePublishedAt) return null;
+  const t = Date.parse(s.sourcePublishedAt);
+  if (!Number.isFinite(t)) return null;
+  const days = Math.max(0, Math.floor((Date.now() - t) / 86_400_000));
+  const label = days === 0 ? "today" : days === 1 ? "1d ago" : days < 60 ? `${days}d ago` : `${Math.floor(days / 30)}mo ago`;
+  return { label, recent: days <= 7 };
+}
 
 export function hashString(key: string): number {
   let h = 0;

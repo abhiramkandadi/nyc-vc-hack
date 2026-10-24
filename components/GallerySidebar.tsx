@@ -2,7 +2,7 @@
 
 import { Heart } from "lucide-react";
 import FounderPhoto from "./FounderPhoto";
-import type { StealthStartup } from "@/lib/mockData";
+import { recentActivity, type StealthStartup } from "@/lib/mockData";
 
 interface Props {
   startups: StealthStartup[];
@@ -39,6 +39,12 @@ export default function GallerySidebar({ startups, currentId, matchedIds, live, 
           >
             <FounderPhoto startup={s} className="h-full w-full object-cover object-top transition duration-300 group-hover:scale-105" />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+            {recentActivity(s)?.recent && (
+              <span className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-black/40 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-md">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+                {recentActivity(s)?.label}
+              </span>
+            )}
             {matchedIds.has(s.id) && (
               <span className="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-white/90 shadow">
                 <Heart className="h-3.5 w-3.5 fill-emerald-500 text-emerald-500" />

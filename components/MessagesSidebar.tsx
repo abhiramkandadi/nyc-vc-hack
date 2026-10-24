@@ -3,6 +3,7 @@
 import { Check, Inbox, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
+import { recentActivity } from "@/lib/mockData";
 import { SAMPLE_THREADS, type SampleThread } from "@/lib/sampleThreads";
 import type { StealthStartup } from "@/lib/mockData";
 
@@ -131,6 +132,10 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
             </span>
           ))}
         </div>
+        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-500" />
+          Active in NYC • Sourcing Physical AI
+        </p>
         <p className="mt-3 text-xs italic text-gray-500">Making NYC the biggest startup ecosystem in the world.</p>
         <p className="mt-1 text-xs text-gray-400">{thesis}</p>
       </section>
@@ -162,6 +167,9 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
                       <p className="truncate text-base font-bold text-gray-900">
                         {m.startup.founderName} • {m.startup.name}
                       </p>
+                      {recentActivity(m.startup)?.recent && (
+                        <span className="h-2.5 w-2.5 shrink-0 animate-pulse rounded-full bg-emerald-500" title={`In the news ${recentActivity(m.startup)?.label}`} />
+                      )}
                       <span className="shrink-0 text-[11px] text-gray-400">{timeAgo(m.matchedAt, now)}</span>
                     </div>
                     <div className="flex items-center justify-between gap-2">
