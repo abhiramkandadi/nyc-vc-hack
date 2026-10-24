@@ -5,6 +5,7 @@
 State lives in memory for one partner session. POST /reset starts over.
 """
 import json
+import os
 import threading
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -16,7 +17,8 @@ from pydantic import BaseModel
 from model import ACTIONS, Ranker, load_embeddings, load_fund_embeddings
 from readback import generate
 
-COMPANIES_FILE = Path("companies.json")
+# COMPANIES_FILE lets a host point at a data file kept outside the repo, such as a mounted secret file.
+COMPANIES_FILE = Path(os.environ.get("COMPANIES_FILE", "companies.json"))
 FUNDS_FILE = Path("funds.json")
 INDEX_FILE = Path("index.html")
 READBACK_EVERY = 10  # first readback at this many actions, then again every this many

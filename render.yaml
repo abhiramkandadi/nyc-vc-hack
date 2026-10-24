@@ -1,0 +1,34 @@
+# Render Blueprint: creates both services from this repo.
+# Render dashboard > New > Blueprint > pick this repo > paste NICRRON_API_KEY for both services > Apply.
+# This deploys the committed 50-company demo seed. To use the full 180 companies, see the README.
+services:
+  - type: web
+    name: companytinder-ranking
+    runtime: python
+    plan: free
+    rootDir: services/thesis
+    buildCommand: pip install -r requirements.txt && python export_seed.py
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /funds
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: NICRRON_API_KEY
+        sync: false
+
+  - type: web
+    name: companytinder
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      # Must be the public URL of the ranking service above. Check it in the Render dashboard.
+      - key: THESIS_RANKER_URL
+        value: https://companytinder-ranking.onrender.com
+      - key: NICRRON_API_KEY
+        sync: false
