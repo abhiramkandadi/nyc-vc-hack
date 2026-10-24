@@ -1,6 +1,6 @@
 "use client";
 
-import { animate, motion, useMotionValue, useTransform } from "framer-motion";
+import { animate, motion, useAnimationControls, useMotionValue, useTransform } from "framer-motion";
 import { BadgeCheck, Heart, Landmark, RotateCcw, Star, TrendingUp, Users, X, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
@@ -33,17 +33,22 @@ interface TopCardProps {
   startup: StealthStartup;
   forced: SwipeDirection | null;
   onSwipe: (d: SwipeDirection) => void;
+  onImpact: () => void;
 }
 
-function TopCard({ startup, forced, onSwipe }: TopCardProps) {
+function TopCard({ startup, forced, onSwipe, onImpact }: TopCardProps) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotate = useTransform(x, [-220, 0, 220], [-14, 0, 14]);
-  const likeOpacity = useTransform(x, [30, X_THRESHOLD], [0, 1]);
-  const nopeOpacity = useTransform(x, [-X_THRESHOLD, -30], [1, 0]);
-  const superOpacity = useTransform(y, [-Y_THRESHOLD, -40], [1, 0]);
+  const likeOpacity = useTransform(x, [20, X_THRESHOLD], [0, 1]);
+  const likeScale = useTransform(x, [20, X_THRESHOLD], [0.5, 1.3]);
+  const nopeOpacity = useTransform(x, [-X_THRESHOLD, -20], [1, 0]);
+  const nopeScale = useTransform(x, [-X_THRESHOLD, -20], [1.3, 0.5]);
+  const superOpacity = useTransform(y, [-Y_THRESHOLD, -20], [1, 0]);
+  const superScale = useTransform(y, [-Y_THRESHOLD, -20], [1.3, 0.5]);
 
   const fling = (d: SwipeDirection) => {
+    onImpact();
     const mv = d === "up" ? y : x;
     animate(mv, d === "left" ? -700 : d === "up" ? -800 : 700, { duration: 0.3 }).then(() => onSwipe(d));
   };
@@ -81,24 +86,29 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
           {startup.signalScore}% match
         </div>
 
-        <motion.span
-          style={{ opacity: likeOpacity }}
-          className="pointer-events-none absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 rotate-[18deg] whitespace-nowrap rounded-2xl border-8 border-emerald-500 bg-black/40 px-6 py-2 text-5xl font-extrabold uppercase tracking-wider text-emerald-400 shadow-2xl backdrop-blur-sm"
-        >
-          Term sheet 💖
-        </motion.span>
-        <motion.span
-          style={{ opacity: nopeOpacity }}
-          className="pointer-events-none absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 rotate-[-18deg] whitespace-nowrap rounded-2xl border-8 border-red-500 bg-black/40 px-6 py-2 text-5xl font-extrabold uppercase tracking-wider text-red-500 shadow-2xl backdrop-blur-sm"
-        >
-          No deal ❌
-        </motion.span>
-        <motion.span
-          style={{ opacity: superOpacity }}
-          className="pointer-events-none absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 rotate-[-5deg] whitespace-nowrap rounded-2xl border-8 border-sky-400 bg-black/40 px-6 py-2 text-5xl font-extrabold uppercase tracking-wider text-sky-400 shadow-2xl backdrop-blur-sm"
-        >
-          Lead invest ⚡
-        </motion.span>
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <motion.div
+            style={{ opacity: likeOpacity, scale: likeScale, rotate: 22 }}
+            className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-double border-emerald-500 bg-emerald-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-emerald-400 drop-shadow-[0_20px_50px_rgba(16,185,129,0.7)] backdrop-blur-md md:text-7xl"
+          >
+            <span>Term</span>
+            <span>Sheet 💖</span>
+          </motion.div>
+          <motion.div
+            style={{ opacity: nopeOpacity, scale: nopeScale, rotate: -22 }}
+            className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-dashed border-red-600 bg-red-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-red-600 drop-shadow-[0_20px_50px_rgba(220,38,38,0.7)] backdrop-blur-md md:text-7xl"
+          >
+            <span>No</span>
+            <span>Deal ❌</span>
+          </motion.div>
+          <motion.div
+            style={{ opacity: superOpacity, scale: superScale, rotate: -8 }}
+            className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-sky-400 bg-sky-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-sky-300 drop-shadow-[0_20px_50px_rgba(56,189,248,0.7)] backdrop-blur-md md:text-7xl"
+          >
+            <span>Super</span>
+            <span>Invest ⚡</span>
+          </motion.div>
+        </div>
 
         <div className="absolute inset-x-4 bottom-3 text-white">
           <h2 className="flex items-center gap-2 text-3xl font-black leading-tight">
@@ -152,10 +162,14 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
   const top = startups[0];
   const next = startups[1];
   const locked = !top || !!forced;
+  const shake = useAnimationControls();
+  const impact = () => {
+    shake.start({ x: [0, -10, 10, -5, 5, 0], transition: { duration: 0.15, ease: "easeOut" } });
+  };
 
   return (
     <div className="flex h-full max-h-[920px] w-full flex-col gap-5">
-      <div className="relative min-h-0 w-full max-w-[520px] flex-1 self-center">
+      <motion.div animate={shake} className="relative min-h-0 w-full max-w-[520px] flex-1 self-center">
         {next && (
           <div
             aria-hidden="true"
@@ -167,13 +181,14 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
             key={top.id}
             startup={top}
             forced={forced}
+            onImpact={impact}
             onSwipe={(d) => {
               setForced(null);
               onSwipe(d, top);
             }}
           />
         )}
-      </div>
+      </motion.div>
 
       <div className="flex shrink-0 items-center justify-center gap-5 pb-1" role="group" aria-label="Swipe actions">
         <button
