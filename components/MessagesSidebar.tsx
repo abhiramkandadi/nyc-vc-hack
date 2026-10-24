@@ -202,7 +202,6 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
                 </div>
                 <div className="flex items-center justify-between gap-2">
                   <p className={`truncate text-sm ${t.unread ? "font-semibold text-gray-800" : "text-gray-500"}`}>{t.preview}</p>
-                  <span className="shrink-0 rounded bg-gray-100 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-gray-400">Sample</span>
                   {t.unread && <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#FF385C]" aria-label="Unread" />}
                 </div>
               </div>

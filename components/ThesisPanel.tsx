@@ -65,7 +65,7 @@ export default function ThesisPanel({ data }: { data: ThesisData | null }) {
         <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">Your thesis</h3>
         <span className="text-[11px] font-medium text-gray-400">{n} {n === 1 ? "action" : "actions"}</span>
       </div>
-      <p className="mb-2 text-[11px] font-medium text-gray-500">{data?.mode === "demo" ? "Somya demo · illustrative starting preferences" : data?.mode === "learned" ? "Learned from session feedback" : "Session feedback"}</p>
+      <p className="mb-2 text-[11px] font-medium text-gray-500">{data?.mode === "demo" ? "Starting preferences" : data?.mode === "learned" ? "Learned from session feedback" : "Session feedback"}</p>
       <div aria-live="polite" aria-atomic="true">{readback}</div>
       {data?.readback_error && data.readback && <p className="mt-2 text-xs text-amber-600">Latest readback failed: {data.readback_error}</p>}
 

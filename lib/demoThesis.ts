@@ -41,7 +41,7 @@ export function createSomyaDemoThesis(actions: DemoThesisAction[]): ThesisData {
     n_actions: actions.length, weights, mode: "demo", readback_pending: false,
     readback_error: null, fund: null,
     readback: actions.length
-      ? `Somya demo: strongest preferences are ${top.join(" and ")}. This session: ${saved} saved or intro-ready, ${passed} passed. Track keeps a company on watch without changing preference weights.`
-      : "Somya demo starts with a preference for technical founders, developer tools and AI agents, and early B2B teams. Pass, save, track or request an intro to shape this session’s filter.",
+      ? `Strongest preferences are ${top.join(" and ")}. This session: ${saved} saved or intro-ready, ${passed} passed. Track keeps a company on watch without changing preference weights.`
+      : "Your filter starts with a preference for technical founders, developer tools and AI agents, and early B2B teams. Pass, save, track or request an intro to shape this session’s filter.",
   };
 }

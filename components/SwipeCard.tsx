@@ -26,9 +26,9 @@ const SIGNAL_STYLE: Record<SignalKind, { icon: LucideIcon; pill: string }> = {
 };
 
 const MEDIA_LABEL: Partial<Record<MediaKind, string>> = {
-  hq: "🏢 NYC HQ",
-  hardware: "🤖 Physical AI Lab",
-  infra: "⚡ Stealth Infra",
+  hq: "Workspace",
+  hardware: "Robotics & hardware",
+  infra: "Infrastructure",
 };
 
 const KIND_ORDER: SignalKind[] = ["velocity", "team", "legal"];

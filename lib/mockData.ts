@@ -181,20 +181,37 @@ export function portraitFor(profile: PortraitProfile): string {
   return DEMO_PORTRAITS[hashString(profile.id) % DEMO_PORTRAITS.length];
 }
 
-/** Assign stock demo photography once per deck; sourced portraits always take precedence. */
+/** Image identity ignores crop/size parameters, so URL variants cannot reuse a photo. */
+function mediaIdentity(src: string): string {
+  return src.match(/photo-[a-zA-Z0-9-]+/)?.[0] ?? src.match(/pexels-photo-\d+/)?.[0] ?? src.split("?")[0];
+}
+
+/** Preserve sourced portraits, then fill remaining slots from unique portrait/sector assets. */
 export function assignUniquePortraits(
   startups: readonly (Pick<StealthStartup, "id" | "founderImage" | "targetSector"> & Partial<Pick<StealthStartup, "founderName" | "imageIsPlaceholder">>)[],
 ): Record<string, AssignedMedia> {
   const out: Record<string, AssignedMedia> = {};
   const used = new Set<string>();
-  for (const startup of [...startups].sort((a, b) => a.id.localeCompare(b.id))) {
-    let src = portraitFor(startup);
-    if (!FOUNDER_PHOTOS[startup.id] && !startup.id.startsWith("nyc-") && startup.imageIsPlaceholder !== false) {
-      const available = DEMO_PORTRAITS.filter((url) => !used.has(url));
-      if (available.length) src = available[hashString(startup.id) % available.length];
-    }
-    used.add(src);
-    out[startup.id] = { src, kind: "headshot" };
+  const ordered = [...startups].sort((a, b) => a.id.localeCompare(b.id));
+  const portraits = DEMO_PORTRAITS.map((src) => ({ src, kind: "headshot" as MediaKind }));
+  const associated = MEDIA_POOL.filter((media) => media.kind !== "headshot").map((media) => ({ src: media.url, kind: media.kind }));
+  // Reserve real photos first so fallback choices cannot take their slots.
+  for (const startup of ordered) {
+    if (!FOUNDER_PHOTOS[startup.id] && startup.imageIsPlaceholder !== false && !startup.id.startsWith("nyc-")) continue;
+    const src = portraitFor(startup), key = mediaIdentity(src);
+    if (!used.has(key)) { out[startup.id] = { src, kind: "headshot" }; used.add(key); }
+  }
+  for (const startup of ordered) {
+    if (out[startup.id]) continue;
+    const kind: MediaKind = startup.targetSector === "Physical AI" ? "hardware" : startup.targetSector === "B2B SaaS" ? "hq" : "infra";
+    const relevant = associated.filter((media) => media.kind === kind);
+    const candidates = hashString(startup.id) % 3 === 0 ? [...relevant, ...portraits, ...associated] : [...portraits, ...relevant, ...associated];
+    const available = candidates.filter((media, index) => !used.has(mediaIdentity(media.src)) && candidates.findIndex((other) => mediaIdentity(other.src) === mediaIdentity(media.src)) === index);
+    const pick = available[hashString(startup.id) % Math.min(available.length, 4)];
+    // Only an exhausted or unexpectedly large deck uses a unique local image.
+    const media = pick ?? { src: initialsPortrait(startup), kind: "headshot" as MediaKind };
+    out[startup.id] = media;
+    used.add(mediaIdentity(media.src));
   }
   return out;
 }

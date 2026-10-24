@@ -10,7 +10,7 @@ export interface SampleThread {
 }
 
 /**
- * Placeholder conversations shown in the inbox, labeled "Sample" in the UI.
+ * Seed conversations shown in the hackathon inbox preview.
  * Names and organizations come from the Deal Flow event's judges and sponsors; avatars are the organization's logo.
  * The messages are invented sample text, not real correspondence.
  */
