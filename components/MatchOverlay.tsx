@@ -12,12 +12,35 @@ interface Props {
   superInvest: boolean;
   /** "match" celebrates a fresh match; "chat" reopens an existing one without confetti. */
   mode: "match" | "chat";
+  thesis: string;
   emailOpened: boolean;
   onClose: () => void;
   onSend: (s: StealthStartup) => void;
 }
 
-export default function MatchOverlay({ startup, superInvest, mode, emailOpened, onClose, onSend }: Props) {
+interface Memo {
+  generatedBy: "thor" | "nicrron" | "rules";
+  bullets: { title: string; content: string }[];
+}
+
+export default function MatchOverlay({ startup, superInvest, mode, thesis, emailOpened, onClose, onSend }: Props) {
+  const [memo, setMemo] = useState<Memo | null>(null);
+  const [memoState, setMemoState] = useState<"loading" | "ready" | "failed">("loading");
+  useEffect(() => {
+    const ctrl = new AbortController();
+    fetch(`/api/memo?id=${encodeURIComponent(startup.id)}&thesis=${encodeURIComponent(thesis)}`, { signal: ctrl.signal })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { success?: boolean; data?: Memo } | null) => {
+        if (d?.success && d.data?.bullets?.length) {
+          setMemo(d.data);
+          setMemoState("ready");
+        } else setMemoState("failed");
+      })
+      .catch(() => {
+        if (!ctrl.signal.aborted) setMemoState("failed");
+      });
+    return () => ctrl.abort();
+  }, [startup.id, thesis]);
   const [draft, setDraft] = useState(startup.draftEmail);
   const [sent, setSent] = useState(emailOpened);
 
@@ -115,6 +138,31 @@ export default function MatchOverlay({ startup, superInvest, mode, emailOpened, 
         </p>
 
         <p className="mt-3 rounded-xl bg-gray-50 p-3 text-xs leading-relaxed text-gray-600">{startup.pitchSummary}</p>
+
+        {memoState !== "failed" && (
+          <div className="mt-4 rounded-xl border border-rose-100 bg-rose-50/60 p-3" aria-label="Investment committee memo">
+            <p className="mb-2 flex items-center justify-between text-[10px] font-semibold uppercase tracking-wider text-[#FF385C]">
+              <span>IC memo</span>
+              {memo && <span className="text-gray-400">{memo.generatedBy === "rules" ? "Rules-based" : "AI-drafted"}</span>}
+            </p>
+            {memoState === "loading" ? (
+              <div className="space-y-2" aria-busy="true">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="h-3 animate-pulse rounded bg-rose-100" />
+                ))}
+              </div>
+            ) : (
+              <ul className="space-y-1.5">
+                {memo?.bullets.map((b) => (
+                  <li key={b.title} className="text-xs leading-relaxed text-gray-700">
+                    <span className="font-bold text-gray-900">{b.title}: </span>
+                    {b.content}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
 
         <div className="mt-4">
           <label htmlFor="intro-draft" className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wider text-gray-400">

@@ -229,7 +229,16 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
     "absolute flex select-none flex-col items-center rounded-[3rem] border-[1.1rem] px-[0.35em] py-[0.18em] text-center text-[min(9cqw,9rem)] font-black uppercase leading-[0.95] tracking-widest backdrop-blur-md";
   const [burstKey, setBurstKey] = useState(0);
   const impact = (d: SwipeDirection) => {
-    if (d === "up") setBurstKey((k) => k + 1);
+    if (d === "up") {
+      setBurstKey((k) => k + 1);
+      try {
+        const horn = new Audio("/sfx/airhorn.mp3");
+        horn.volume = 0.9;
+        void horn.play().catch(() => undefined);
+      } catch {
+        // Audio unavailable; the visual burst still plays.
+      }
+    }
     shake.start({ x: [0, -10, 10, -5, 5, 0], transition: { duration: 0.15, ease: "easeOut" } });
   };
 

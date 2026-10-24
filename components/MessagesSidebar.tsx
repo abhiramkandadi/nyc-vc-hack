@@ -61,7 +61,8 @@ function SampleAvatar({ thread }: { thread: SampleThread }) {
 export default function MessagesSidebar({ matches, thesis, selectedId, onSelectMatch }: Props) {
   const [now, setNow] = useState(() => Date.now());
   const [editing, setEditing] = useState(false);
-  const [name, setName] = useState("Shrikar Swami");
+  const [avatarOk, setAvatarOk] = useState(true);
+  const [name, setName] = useState("Somya Gupta");
   const [title, setTitle] = useState("General Partner @ Deal Flow VC");
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 30_000);
@@ -77,9 +78,19 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
       <section className="border-b border-gray-200 pb-5" aria-label="Your profile">
         <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-500">Your profile</h3>
         <div className="flex items-center gap-4">
-          <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF385C] to-amber-400 text-xl font-bold text-white ring-2 ring-[#FF385C] ring-offset-2">
-            {initials}
-          </span>
+          {avatarOk ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src="/profile.jpg"
+              alt={name}
+              onError={() => setAvatarOk(false)}
+              className="h-16 w-16 shrink-0 rounded-full object-cover ring-2 ring-[#FF385C] ring-offset-2"
+            />
+          ) : (
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF385C] to-amber-400 text-xl font-bold text-white ring-2 ring-[#FF385C] ring-offset-2">
+              {initials}
+            </span>
+          )}
           <div className="min-w-0 flex-1">
             {editing ? (
               <div className="flex flex-col gap-1">
@@ -166,10 +177,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
           </ul>
         )}
 
-        <div className="flex items-center justify-between px-3 pb-1 pt-4">
-          <h4 className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Sample conversations</h4>
-        </div>
-        <ul aria-label="Sample conversations">
+        <ul aria-label="More conversations">
           {SAMPLE_THREADS.map((t) => (
             <li key={t.id} className="flex items-center gap-3 border-l-4 border-transparent px-3 py-3">
               <SampleAvatar thread={t} />
@@ -182,6 +190,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
                 </div>
                 <div className="flex items-center justify-between gap-2">
                   <p className={`truncate text-sm ${t.unread ? "font-semibold text-gray-800" : "text-gray-500"}`}>{t.preview}</p>
+                  <span className="shrink-0 rounded bg-gray-100 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-gray-400">Sample</span>
                   {t.unread && <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#FF385C]" aria-label="Unread" />}
                 </div>
               </div>

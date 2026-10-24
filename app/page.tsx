@@ -11,13 +11,7 @@ import SwipeCard, { type SwipeDirection } from "@/components/SwipeCard";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
 import { PortraitContext } from "@/components/FounderPhoto";
 import { useDominantColor } from "@/lib/useDominantColor";
-import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, type StealthStartup, type TargetSector } from "@/lib/mockData";
-
-const PRESET_SECTORS: Record<Preset, TargetSector[]> = {
-  "Plug & Play": ["B2B SaaS"],
-  "Everywhere VC": ["AI Infra", "AI Agents", "B2B SaaS", "Physical AI"],
-  "AI Agents": ["AI Agents", "AI Infra"],
-};
+import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, type StealthStartup } from "@/lib/mockData";
 
 let seq = 0;
 const stamp = () => new Date().toLocaleTimeString("en-US", { hour12: false });
@@ -34,32 +28,33 @@ export default function Home() {
   const [source, setSource] = useState<"live" | "sample">("sample");
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const deck = useMemo(
-    () => startups.filter((s) => PRESET_SECTORS[preset].includes(s.targetSector)),
-    [preset, startups],
-  );
-  const remaining = deck.slice(index);
+  // The API already filters and ranks the deck for the active thesis.
+  const remaining = startups.slice(index);
   const portraits = useMemo(() => assignUniquePortraits(startups), [startups]);
 
   const log = useCallback((step: TraceEntry["step"], message: string, status: TraceEntry["status"]) => {
     setLogs((l) => [...l, { id: `t${seq++}`, ts: stamp(), step, message, status }]);
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/api/signals")
+  const requestId = useRef(0);
+  const loadDeck = useCallback((thesisName: Preset) => {
+    const id = ++requestId.current;
+    fetch(`/api/signals?thesis=${encodeURIComponent(thesisName)}&ranking=learned`)
       .then((r) => (r.ok ? r.json() : null))
       .then((d: { source: "live" | "sample"; startups: StealthStartup[] } | null) => {
-        if (!cancelled && d?.startups?.length) {
-          setStartups(d.startups);
-          setSource(d.source);
-        }
+        // Ignore stale responses from an earlier tab click.
+        if (id !== requestId.current || !d?.startups?.length) return;
+        setStartups(d.startups);
+        setSource(d.source);
+        setIndex(0);
+        setHistory([]);
       })
       .catch(() => undefined);
-    return () => {
-      cancelled = true;
-    };
   }, []);
+
+  useEffect(() => {
+    loadDeck("Everywhere VC");
+  }, [loadDeck]);
 
   useEffect(() => {
     const t = timers.current;
@@ -95,6 +90,14 @@ export default function Home() {
     setIndex((i) => i + 1);
     setHistory((h) => [...h, { startup: s, wasMatch: d !== "left" && !matches.some((x) => x.startup.id === s.id) }]);
     log("swipe", `${d === "left" ? "Pass" : d === "up" ? "Super-Invest" : "Match"}: ${s.name}`, "info");
+    // Fire-and-forget so the swipe animation is never blocked by the network.
+    fetch("/api/feedback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      // The feedback route accepts pass | save | track | intro: Match saves, Super-Invest asks for an intro.
+      body: JSON.stringify({ id: s.id, startupId: s.id, action: d === "left" ? "pass" : d === "up" ? "intro" : "save", gesture: d === "left" ? "pass" : d === "up" ? "super_invest" : "match", thesis: preset }),
+      keepalive: true,
+    }).catch(() => undefined);
     if (d === "left") return;
     setMatches((m) =>
       m.some((x) => x.startup.id === s.id)
@@ -114,7 +117,6 @@ export default function Home() {
   const handleSelectFounder = (s: StealthStartup) => {
     const i = startups.findIndex((x) => x.id === s.id);
     if (i < 0) return;
-    setPreset("Everywhere VC");
     setIndex(i);
     setHistory([]);
     log("swipe", `Jumped to ${s.name}`, "info");
@@ -125,6 +127,7 @@ export default function Home() {
     setIndex(0);
     setHistory([]);
     log("swipe", `Preset → ${p}`, "info");
+    loadDeck(p);
   };
 
   const activeStartup = remaining[0] ?? startups[0];
@@ -194,6 +197,7 @@ export default function Home() {
             startup={overlay.startup}
             superInvest={overlay.superInvest}
             mode={overlay.mode}
+            thesis={preset}
             emailOpened={matches.find((m) => m.startup.id === overlay.startup.id)?.emailOpened ?? false}
             onClose={() => setOverlay(null)}
             onSend={(s) => {
