@@ -153,34 +153,7 @@ export interface AktaNewsQuery {
   limit?: number;
   offset?: number;
 }
-async function aktaNews(query: AktaNewsQuery, options: RequestOptions): Promise<AktaSignalPage> {
-  const apiKey = key("AKTA_API_KEY", "akta");
-  const url = new URL(apiUrl(process.env.AKTA_API_URL || "https://api.akta.pro/api/v1", "news"));
-  if (query.company !== undefined) url.searchParams.set("company", text(query.company, "company", 2_048));
-  if (query.query !== undefined) url.searchParams.set("query", text(query.query, "query", 1_000));
-  url.searchParams.set("limit", String(numeric(query.limit ?? 10, "limit", 1, 100, true)));
-  url.searchParams.set("offset", String(numeric(query.offset ?? 0, "offset", 0, Number.MAX_SAFE_INTEGER, true)));
-  const raw = record(await request("akta", url.toString(), "GET", { "x-api-key": apiKey }, undefined, options), "akta");
-  if (!Array.isArray(raw.data)) throw new SponsorApiError("akta", "INVALID_RESPONSE");
-  const data = raw.data.map((item): AktaNewsSignal => {
-    const row = record(item, "akta");
-    if (!(typeof row.id === "string" && row.id.length > 0) && !(typeof row.id === "number" && Number.isFinite(row.id))) throw new SponsorApiError("akta", "INVALID_RESPONSE");
-    return { id: row.id as string | number, title: text(row.title, "news title"), url: text(row.url, "source URL", 4_096),
-      published_date: row.published_date == null ? null : text(row.published_date, "publication timestamp", 100),
-      ai_summary: row.ai_summary == null ? null : text(row.ai_summary, "news summary", 32_000) };
-  });
-  return { provider: "akta.pro", fetchedAt: new Date().toISOString(), data,
-    total: numeric(raw.total, "total", 0, Number.MAX_SAFE_INTEGER, true), count: numeric(raw.count, "count", 0, 100, true),
-    limit: numeric(raw.limit, "limit", 1, 100, true), offset: numeric(raw.offset, "offset", 0, Number.MAX_SAFE_INTEGER, true) };
-}
-/** Retrieves documented company-scoped NEWS signals; not fabricated GitHub/filing data. */
-export function fetchCompanySignals(company: string, query: Omit<AktaNewsQuery, "company"> = {}, options: RequestOptions = {}): Promise<AktaSignalPage> {
-  return aktaNews({ ...query, company }, options);
-}
-/** Keyword monitoring; a mention of 'stealth' does not verify stealth status. */
-export function fetchStealthNews(query: AktaNewsQuery = {}, options: RequestOptions = {}): Promise<AktaSignalPage> {
-  return aktaNews({ ...query, query: query.query ?? "stealth startup" }, options);
-}
+// The akta.pro news client was removed: this repo must never call akta.pro and spend credits.
 
 export interface RoundtablePostOptions extends RequestOptions {
   /** Optional sponsor-confirmed relative ingestion path; no endpoint is invented. */
@@ -327,7 +300,6 @@ export async function withSolariBrowser<T>(options: SolariBrowserOptions, work: 
 
 /** Flat exports above and a discoverable grouped interface share the same clients. */
 export const sponsorStack = {
-  akta: { fetchCompanySignals, fetchStealthNews },
   roundtable: { post: postRoundtablePayload },
   prism: { exportTrace: exportPrismTrace },
   nicrron: { chat: nicrronChat },
