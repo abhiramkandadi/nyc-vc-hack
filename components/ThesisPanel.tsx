@@ -21,7 +21,7 @@ function Bar({ name, weight, max }: { name: string; weight: number; max: number 
       >
         <span className="absolute left-1/2 top-[-2px] h-3 w-px bg-gray-300" />
         <span
-          className={`absolute top-0 h-full rounded-full ${positive ? "bg-emerald-500" : "bg-[#FF385C]"}`}
+          className={`absolute top-0 h-full rounded-full transition-[width,left] duration-300 motion-reduce:transition-none ${positive ? "bg-emerald-500" : "bg-[#FF385C]"}`}
           style={positive ? { left: "50%", width: `${share}%` } : { left: `${50 - share}%`, width: `${share}%` }}
         />
       </span>
@@ -65,7 +65,8 @@ export default function ThesisPanel({ data }: { data: ThesisData | null }) {
         <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">Your thesis</h3>
         <span className="text-[11px] font-medium text-gray-400">{n} {n === 1 ? "action" : "actions"}</span>
       </div>
-      {readback}
+      <p className="mb-2 text-[11px] font-medium text-gray-500">{data?.mode === "demo" ? "Somya demo · illustrative starting preferences" : data?.mode === "learned" ? "Learned from session feedback" : "Session feedback"}</p>
+      <div aria-live="polite" aria-atomic="true">{readback}</div>
       {data?.readback_error && data.readback && <p className="mt-2 text-xs text-amber-600">Latest readback failed: {data.readback_error}</p>}
 
       <h3 className="mb-2 mt-5 text-xs font-bold uppercase tracking-wider text-gray-500">What the model weighs</h3>

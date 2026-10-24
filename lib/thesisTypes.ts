@@ -1,6 +1,8 @@
 /** What the thesis panel reads from GET /api/thesis. */
 export interface ThesisData {
   n_actions: number;
+  /** Demo priors and local heuristics stay distinct from the Python model. */
+  mode?: "demo" | "learned";
   /** Learned weight per readable feature. Positive leans toward it, negative away from it. */
   weights: Record<string, number>;
   readback: string | null;

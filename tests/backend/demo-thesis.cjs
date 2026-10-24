@@ -1,0 +1,15 @@
+const assert = require('node:assert/strict');
+const path = require('node:path');
+const { createSomyaDemoThesis } = require(path.resolve(__dirname, '../../lib/demoThesis.ts'));
+const startup = {id:'a',name:'AgentKit',founderName:'Test Founder',targetSector:'AI Agents',headline:'Agent framework',pitchSummary:'AI agent developer tooling',exCompany:'Stripe',stage:'Pre-Seed'};
+const initial = createSomyaDemoThesis([]);
+assert.equal(initial.n_actions,0);assert.equal(initial.mode,'demo');assert.equal(Object.keys(initial.weights).length,6);assert(initial.readback.includes('Somya'));
+const saved = createSomyaDemoThesis([{startup,action:'save'}]);
+const passed = createSomyaDemoThesis([{startup,action:'pass'}]);
+assert(saved.weights['developer tools and AI agents']>initial.weights['developer tools and AI agents']);
+assert(passed.weights['developer tools and AI agents']<initial.weights['developer tools and AI agents']);
+assert.equal(saved.n_actions,1);assert.equal(saved.readback_pending,false);
+assert.deepEqual(createSomyaDemoThesis([]),initial);
+assert.deepEqual(createSomyaDemoThesis([{startup,action:'track'}]).weights,initial.weights);
+assert.deepEqual(initial,createSomyaDemoThesis([]));
+console.log('PASS demo cold start, opposite feedback updates, track neutrality and reload/rewind reset');

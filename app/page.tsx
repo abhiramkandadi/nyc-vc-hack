@@ -12,6 +12,7 @@ import ThesisPanel from "@/components/ThesisPanel";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
 import { PortraitContext } from "@/components/FounderPhoto";
 import { useDominantColor } from "@/lib/useDominantColor";
+import { createSomyaDemoThesis, type DemoThesisAction } from "@/lib/demoThesis";
 import type { ThesisData } from "@/lib/thesisTypes";
 import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, videoFor, type StealthStartup } from "@/lib/mockData";
 
@@ -41,7 +42,8 @@ export default function Home() {
   const [history, setHistory] = useState<{ startup: StealthStartup; wasMatch: boolean }[]>([]);
   const [startups, setStartups] = useState<StealthStartup[]>(MOCK_STEALTH_STARTUPS);
   const [source, setSource] = useState<"live" | "sample">("sample");
-  const [thesisData, setThesisData] = useState<ThesisData | null>(null);
+  const [thesisData, setThesisData] = useState<ThesisData | null>(() => createSomyaDemoThesis([]));
+  const demoActions = useRef<DemoThesisAction[]>([]);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   // The API already filters and ranks the deck for the active thesis.
@@ -54,13 +56,17 @@ export default function Home() {
 
   /** Learned weights and the readback, from the thesis service through /api/thesis. */
   const refreshThesis = useCallback(
-    () =>
-      fetch("/api/thesis", { cache: "no-store" })
+    () => {
+      const actionCount = demoActions.current.length;
+      return fetch("/api/thesis", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .then((d: { success?: boolean; data?: ThesisData } | null) => {
-          if (d?.success && d.data) setThesisData(d.data);
+          if (actionCount > 0 && actionCount === demoActions.current.length && d?.success && d.data && Object.keys(d.data.weights).length > 0) {
+            setThesisData({ ...d.data, mode: "learned", n_actions: actionCount });
+          }
         })
-        .catch(() => undefined),
+        .catch(() => undefined);
+    },
     [],
   );
   useEffect(() => {
@@ -141,6 +147,8 @@ export default function Home() {
   const handleRewind = () => {
     const last = history[history.length - 1];
     if (!last) return;
+    demoActions.current = demoActions.current.slice(0, -1);
+    setThesisData(createSomyaDemoThesis(demoActions.current));
     setHistory((h) => h.slice(0, -1));
     setIndex((i) => Math.max(0, i - 1));
     if (last.wasMatch) setMatches((m) => m.filter((x) => x.startup.id !== last.startup.id));
@@ -157,6 +165,8 @@ export default function Home() {
 
   const handleSwipe = (d: SwipeDirection, s: StealthStartup) => {
     const action = ACTION[d];
+    demoActions.current = [...demoActions.current, { startup: s, action }];
+    setThesisData(createSomyaDemoThesis(demoActions.current));
     const isMatch = d === "right" || d === "down"; // save and intro open the match flow
     setIndex((i) => i + 1);
     setHistory((h) => [...h, { startup: s, wasMatch: isMatch && !matches.some((x) => x.startup.id === s.id) }]);
