@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, Inbox, Pencil } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import FounderPhoto from "./FounderPhoto";
 import { SAMPLE_THREADS, type SampleThread } from "@/lib/sampleThreads";
 import { founderLabel, type StealthStartup } from "@/lib/mockData";
@@ -21,6 +21,8 @@ interface Props {
   thesis: string;
   selectedId: string | null;
   onSelectMatch: (m: MatchRecord) => void;
+  /** Shown between the profile and the pipeline, for example the thesis panel. */
+  panel?: ReactNode;
 }
 
 function timeAgo(ts: number, now: number): string {
@@ -58,7 +60,7 @@ function SampleAvatar({ thread }: { thread: SampleThread }) {
   );
 }
 
-export default function MessagesSidebar({ matches, thesis, selectedId, onSelectMatch }: Props) {
+export default function MessagesSidebar({ matches, thesis, selectedId, onSelectMatch, panel }: Props) {
   const [now, setNow] = useState(() => Date.now());
   const [editing, setEditing] = useState(false);
   const [avatarOk, setAvatarOk] = useState(true);
@@ -133,6 +135,8 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
         </div>
         <p className="mt-3 text-xs text-gray-500">{thesis}</p>
       </section>
+
+      {panel}
 
       <section className="-mx-3 flex-1 pb-4" aria-label="Deal pipeline">
         <div className="flex items-center justify-between pb-2 pt-5">

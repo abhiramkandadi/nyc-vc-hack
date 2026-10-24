@@ -18,6 +18,11 @@ export interface StealthStartup {
   pitchSummary: string;
   targetSector: TargetSector;
   draftEmail: string;
+  /**
+   * The thesis service's learned match for this company. Present only on a learned ranking.
+   * `probability` is null until the model has fitted, and then the badge must stay hidden.
+   */
+  learnedMatch?: { probability: number | null; reasons: string[]; fitted: boolean };
   /** The source's own sector label, finer than the four-way targetSector. */
   sectorLabel?: string;
   /** Latest akta.pro news item, present only when live hydration succeeds. */

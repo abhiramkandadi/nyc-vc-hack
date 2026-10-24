@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { thesisServiceUrl } from "@/lib/thesisService";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -7,22 +8,8 @@ const ACTIONS = ["pass", "save", "track", "intro"] as const;
 type Action = (typeof ACTIONS)[number];
 const headers = { "Cache-Control": "no-store" };
 
-/** The thesis service, or null when it is not configured or the URL is unsafe. */
-function serviceUrl(path: string): URL | null {
-  const configured = process.env.THESIS_RANKER_URL?.trim();
-  if (!configured) return null;
-  try {
-    const url = new URL(configured);
-    if (!["http:", "https:"].includes(url.protocol) || url.username || url.password || url.search || url.hash) return null;
-    url.pathname = url.pathname.replace(/\/$/, "") + path;
-    return url;
-  } catch {
-    return null;
-  }
-}
-
 async function forward(path: string, body?: unknown): Promise<Response> {
-  const url = serviceUrl(path);
+  const url = thesisServiceUrl(path);
   if (!url) return NextResponse.json({ success: false, error: { code: "NOT_CONFIGURED" } }, { status: 503, headers });
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 2_000);

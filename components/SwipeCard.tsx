@@ -87,9 +87,15 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
           ))}
         </div>
 
-        <div className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md">
-          {startup.signalScore}% match
-        </div>
+        {/* The learned probability, shown only once the model has fitted. Never the evidence-coverage score. */}
+        {startup.learnedMatch?.fitted && startup.learnedMatch.probability != null && (
+          <div
+            className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md"
+            title={startup.learnedMatch.reasons.length ? `Because: ${startup.learnedMatch.reasons.join(", ")}` : "Learned from your actions"}
+          >
+            {Math.round(startup.learnedMatch.probability * 100)}% match
+          </div>
+        )}
         {mediaLabel && (
           <div className="absolute right-3 top-[3.25rem] rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
             {mediaLabel}

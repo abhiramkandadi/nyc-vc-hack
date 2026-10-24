@@ -8,9 +8,11 @@ import GallerySidebar from "@/components/GallerySidebar";
 import MessagesSidebar, { type MatchRecord } from "@/components/MessagesSidebar";
 import MatchOverlay from "@/components/MatchOverlay";
 import SwipeCard, { type SwipeDirection } from "@/components/SwipeCard";
+import ThesisPanel from "@/components/ThesisPanel";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
 import { PortraitContext } from "@/components/FounderPhoto";
 import { useDominantColor } from "@/lib/useDominantColor";
+import type { ThesisData } from "@/lib/thesisTypes";
 import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, type StealthStartup } from "@/lib/mockData";
 
 /** left = pass, right = save, up = track, and the Intro button sends "down". */
@@ -30,6 +32,7 @@ export default function Home() {
   const [history, setHistory] = useState<{ startup: StealthStartup; wasMatch: boolean }[]>([]);
   const [startups, setStartups] = useState<StealthStartup[]>(MOCK_STEALTH_STARTUPS);
   const [source, setSource] = useState<"live" | "sample">("sample");
+  const [thesisData, setThesisData] = useState<ThesisData | null>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   // The API already filters and ranks the deck for the active thesis.
@@ -39,6 +42,27 @@ export default function Home() {
   const log = useCallback((step: TraceEntry["step"], message: string, status: TraceEntry["status"]) => {
     setLogs((l) => [...l, { id: `t${seq++}`, ts: stamp(), step, message, status }]);
   }, []);
+
+  /** Learned weights and the readback, from the thesis service through /api/thesis. */
+  const refreshThesis = useCallback(
+    () =>
+      fetch("/api/thesis", { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d: { success?: boolean; data?: ThesisData } | null) => {
+          if (d?.success && d.data) setThesisData(d.data);
+        })
+        .catch(() => undefined),
+    [],
+  );
+  useEffect(() => {
+    void refreshThesis();
+  }, [refreshThesis]);
+  // A readback takes several seconds. Poll while the service says it is writing one.
+  useEffect(() => {
+    if (!thesisData?.readback_pending) return;
+    const t = setTimeout(() => void refreshThesis(), 1200);
+    return () => clearTimeout(t);
+  }, [thesisData, refreshThesis]);
 
   const indexRef = useRef(0);
   indexRef.current = index;
@@ -92,7 +116,9 @@ export default function Home() {
     (s: StealthStartup) => {
       const steps: [TraceEntry["step"], string][] = [
         ["akta.pro signal fetch", `${s.signals.length} signals for ${s.name}${s.liveNews ? " + latest news" : ""}`],
-        ["Thor/Nicrron LLM evaluation", `Thesis fit scored ${s.signalScore}/100 for ${s.targetSector}`],
+        ["Thor/Nicrron LLM evaluation", s.learnedMatch?.fitted && s.learnedMatch.probability != null
+          ? `Learned match ${Math.round(s.learnedMatch.probability * 100)}% for ${s.name}`
+          : `Evidence coverage ${s.signalScore}/100 for ${s.targetSector}; no learned match yet`],
         ["Roundtable bus handoff", "SourcingAgent → ICDiligenceAgent deal_brief queued"],
         ["PRISM export", `Trace exported for ${s.name}`],
       ];
@@ -113,7 +139,10 @@ export default function Home() {
     log("swipe", `Rewind: ${last.startup.name}`, "info");
     // Take the action back in the model too, so the screen and the learned weights agree.
     fetch("/api/feedback", { method: "DELETE" })
-      .then(() => reorderDeck(preset))
+      .then(() => {
+        reorderDeck(preset);
+        void refreshThesis();
+      })
       .catch(() => undefined);
   };
 
@@ -134,6 +163,7 @@ export default function Home() {
       .then((r) => {
         if (!r.ok) throw new Error(String(r.status));
         reorderDeck(preset);
+        void refreshThesis();
       })
       .catch(() => log("swipe", `Thesis service did not record ${ACTION_LABEL[action]} for ${s.name}`, "info"));
     if (d === "left") return;
@@ -234,6 +264,7 @@ export default function Home() {
         thesis={thesis}
         selectedId={overlay?.mode === "chat" ? overlay.startup.id : null}
         onSelectMatch={handleOpenChat}
+        panel={<ThesisPanel data={thesisData} />}
       />
 
       <AnimatePresence>

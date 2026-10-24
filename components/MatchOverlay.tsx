@@ -109,7 +109,7 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
         </button>
 
         <h2 className="bg-gradient-to-r from-[#FF385C] via-rose-500 to-amber-400 bg-clip-text text-center font-display text-4xl font-extrabold italic tracking-tight text-transparent">
-          {mode === "chat" ? startup.name : superInvest ? "SUPER-INVEST!" : "IT'S A MATCH!"}
+          {mode === "chat" ? startup.name : superInvest ? "INTRO REQUESTED!" : "IT'S A MATCH!"}
         </h2>
         {mode === "match" && (
           <p className="mt-1 text-center text-xs text-gray-500">
