@@ -1,3 +1,6 @@
+> **Historical notes.** This file records how the ranking service was first imported into the Next.js app.
+> The commands and file locations in it are out of date. See the README in the repo root for setup and for what the product does.
+
 # Next.js integration of Abhi's thesis service
 
 Imported from `origin/master` at `f38525539d888139bd05b0423460651f82189757`.
