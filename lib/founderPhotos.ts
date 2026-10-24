@@ -4,6 +4,10 @@
  * Only add a photo when the person's identity is certain and the source allows reuse.
  */
 export const FOUNDER_PHOTOS: Record<string, string> = {
+  // Mark Kardashov, from his a16z speedrun founder profile.
+  "02mqjeu": "/founders/02mqjeu.jpg",
+  // Jeremy Owston, from the Nuclear Turbines company team page.
+  "akta-news-29597966": "/founders/akta-news-29597966.png",
   // Sebastian Thrun (Dulo)
   "akta-news-32486910": "/founders/akta-news-32486910.jpg",
   // Charlie Cheng (TeRAM)
@@ -34,6 +38,8 @@ export const FOUNDER_PHOTOS: Record<string, string> = {
 
 /** Source / attribution shown as a tooltip on each photo. */
 export const PHOTO_CREDITS: Record<string, string> = {
+  "02mqjeu": "Mark Kardashov — https://speedrun.a16z.com/companies/keewano/mark-kardashov",
+  "akta-news-29597966": "Jeremy Owston — Nuclear Turbines official team photo: https://www.nuclearturbines.com/",
   "akta-news-32486910": "Photo: Christopher Michel, CC BY 2.0, via Wikimedia Commons",
   "akta-news-39683006": "Photo from the TeRAM website",
   "0000uxu": "Photo from the Beltic website",

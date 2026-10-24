@@ -7,6 +7,8 @@ export interface StealthStartup {
   founderName: string;
   founderAvatar: string;
   founderImage: string;
+  /** False only when the provider supplies an actual portrait, rather than illustrative media. */
+  imageIsPlaceholder?: boolean;
   /** Accent hex used for the ambient stage glow; derived from the id when absent. */
   themeColor?: string;
   exCompany: string;
@@ -153,54 +155,51 @@ export interface AssignedMedia {
   kind: MediaKind;
 }
 
-const SECTOR_KIND: Record<TargetSector, MediaKind> = {
-  "Physical AI": "hardware",
-  "AI Infra": "infra",
-  "AI Agents": "infra",
-  "B2B SaaS": "hq",
-};
+type PortraitProfile = Pick<StealthStartup, "id"> & Partial<Pick<StealthStartup, "founderName" | "founderImage" | "imageIsPlaceholder">>;
 
-/**
- * Assigns every startup a distinct image. A valid founder image is kept unless an earlier startup already
- * uses it. Otherwise the next unused pool image is taken: headshots first, then the sector's own category,
- * then anything unused. Repeats happen only once the whole pool is used.
- */
+/** Never label an unrelated stock person as a sourced founder. */
+export function initialsPortrait(profile: PortraitProfile): string {
+  const initials = (profile.founderName || profile.id).trim().split(/\s+/).slice(0, 2).map((part) => Array.from(part)[0] ?? "").join("").toUpperCase().replace(/[&<>"']/g, "");
+  const color = THEME_PALETTE[hashString(profile.id) % THEME_PALETTE.length];
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1100" viewBox="0 0 900 1100"><defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="${color}"/><stop offset="1" stop-color="#18181b"/></linearGradient></defs><rect width="900" height="1100" fill="url(#bg)"/><text x="450" y="550" text-anchor="middle" dominant-baseline="middle" font-family="system-ui,sans-serif" font-weight="600" font-size="200" fill="#fff">${initials}</text></svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+/** Curated illustrative portraits for the demo; these are not identity evidence. */
+const DEMO_PORTRAITS = [
+  "photo-1500648767791-00dcc994a43e", "photo-1507003211169-0a1dd7228f2d",
+  "photo-1519085360753-af0119f7cbe7", "photo-1521119989659-a83eee488004",
+  "photo-1542909168-82c3e7fdca5c", "photo-1568602471122-7832951cc4c5",
+].map((photo) => `https://images.unsplash.com/${photo}?auto=format&fit=crop&crop=faces&q=85&w=1200`).concat([
+  2379004, 220453, 614810, 1043474, 1040880, 1222271, 1681010, 2182970,
+  3785077, 1438081, 1819483, 834863, 874158, 91227,
+].map((id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1200`));
+export function portraitFor(profile: PortraitProfile): string {
+  if (FOUNDER_PHOTOS[profile.id]) return FOUNDER_PHOTOS[profile.id];
+  if (profile.imageIsPlaceholder === false && isValidUrl(profile.founderImage)) return profile.founderImage;
+  // Preserve deliberately authored sample profiles rather than recasting them.
+  if (profile.id.startsWith("nyc-") && isValidUrl(profile.founderImage)) return profile.founderImage;
+  return DEMO_PORTRAITS[hashString(profile.id) % DEMO_PORTRAITS.length];
+}
+
+/** Assign stock demo photography once per deck; sourced portraits always take precedence. */
 export function assignUniquePortraits(
-  startups: readonly Pick<StealthStartup, "id" | "founderImage" | "targetSector">[],
+  startups: readonly (Pick<StealthStartup, "id" | "founderImage" | "targetSector"> & Partial<Pick<StealthStartup, "founderName" | "imageIsPlaceholder">>)[],
 ): Record<string, AssignedMedia> {
-  const used = new Set<string>();
   const out: Record<string, AssignedMedia> = {};
-  for (const s of startups) {
-    const real = FOUNDER_PHOTOS[s.id];
-    if (real) out[s.id] = { src: real, kind: "headshot" };
-  }
-  for (const s of startups) {
-    if (out[s.id]) continue;
-    if (isValidUrl(s.founderImage) && !used.has(photoKey(s.founderImage))) {
-      used.add(photoKey(s.founderImage));
-      out[s.id] = { src: s.founderImage, kind: mediaKindOf(s.founderImage) };
+  const used = new Set<string>();
+  for (const startup of [...startups].sort((a, b) => a.id.localeCompare(b.id))) {
+    let src = portraitFor(startup);
+    if (!FOUNDER_PHOTOS[startup.id] && !startup.id.startsWith("nyc-") && startup.imageIsPlaceholder !== false) {
+      const available = DEMO_PORTRAITS.filter((url) => !used.has(url));
+      if (available.length) src = available[hashString(startup.id) % available.length];
     }
-  }
-  for (const s of startups) {
-    if (out[s.id]) continue;
-    const sector = SECTOR_KIND[s.targetSector] ?? "headshot";
-    const order = [
-      ...MEDIA_POOL.filter((m) => m.kind === "headshot"),
-      ...MEDIA_POOL.filter((m) => m.kind === sector),
-      ...MEDIA_POOL,
-    ];
-    const free = order.filter((m) => !used.has(photoKey(m.url)));
-    const list = free.length ? free : MEDIA_POOL;
-    const pick = list[hashString(s.id) % Math.min(list.length, free.length ? 4 : list.length)];
-    used.add(photoKey(pick.url));
-    out[s.id] = { src: pick.url, kind: pick.kind };
+    used.add(src);
+    out[startup.id] = { src, kind: "headshot" };
   }
   return out;
 }
-
-/** Deterministic headshot fallback for a single broken image. */
 export function fallbackPortrait(key: string): string {
-  return FALLBACK_PORTRAITS[hashString(key) % FALLBACK_PORTRAITS.length];
+  return DEMO_PORTRAITS[hashString(key) % DEMO_PORTRAITS.length];
 }
 
 function avatar(initials: string, background: string): string {

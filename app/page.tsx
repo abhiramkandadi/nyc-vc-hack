@@ -13,16 +13,13 @@ import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
 import { PortraitContext } from "@/components/FounderPhoto";
 import { useDominantColor } from "@/lib/useDominantColor";
 import { createSomyaDemoThesis, type DemoThesisAction } from "@/lib/demoThesis";
+import { arrangeVideoDemoDeck } from "@/lib/founderVideos";
 import type { ThesisData } from "@/lib/thesisTypes";
 import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, videoFor, type StealthStartup } from "@/lib/mockData";
 
-/** Demo order: the first card has no video, the second has one, and the rest keep their ranked order. */
+/** Demo opening: one photo card, then two videos; other profiles keep their order. */
 function arrangeDeck(list: StealthStartup[]): StealthStartup[] {
-  const firstPlain = list.findIndex((s) => !videoFor(s));
-  const firstVideo = list.findIndex((s) => !!videoFor(s));
-  if (firstPlain < 0 || firstVideo < 0) return list;
-  const rest = list.filter((_, i) => i !== firstPlain && i !== firstVideo);
-  return [list[firstPlain], list[firstVideo], ...rest];
+  return arrangeVideoDemoDeck(list, videoFor);
 }
 
 /** left = pass, right = save, up = track, and the Intro button sends "down". */
@@ -95,8 +92,10 @@ export default function Home() {
         if (id !== syncId.current || !d?.startups?.length || d.meta?.ranking?.source !== "model") return;
         setStartups((prev) => {
           const acted = prev.slice(0, indexRef.current);
-          const actedIds = new Set(acted.map((x) => x.id));
-          return [...acted, ...d.startups.filter((x) => !actedIds.has(x.id))];
+          // Preserve the opening photo/video/video demo sequence through model refreshes.
+          const opening = prev.slice(indexRef.current, 3);
+          const pinnedIds = new Set([...acted, ...opening].map((x) => x.id));
+          return [...acted, ...opening, ...d.startups.filter((x) => !pinnedIds.has(x.id))];
         });
       })
       .catch(() => undefined);
