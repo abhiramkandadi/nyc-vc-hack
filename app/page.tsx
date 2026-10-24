@@ -150,7 +150,7 @@ export default function Home() {
         <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 
         <main className="relative z-10 flex min-h-0 w-full flex-1 flex-col items-center justify-center px-6 py-4">
-          <div className="relative flex h-full w-full max-w-[560px] flex-col">
+          <div className="relative flex h-full w-full max-w-[580px] flex-col">
             {remaining.length > 0 ? (
               <SwipeCard startups={remaining} onSwipe={handleSwipe} onRewind={handleRewind} canRewind={history.length > 0} />
             ) : (

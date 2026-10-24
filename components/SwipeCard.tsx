@@ -72,7 +72,7 @@ function TopCard({ startup, forced, onSwipe, onImpact }: TopCardProps) {
       className="absolute inset-0 flex cursor-grab select-none flex-col justify-between overflow-hidden rounded-[36px] border border-gray-200/80 bg-white shadow-2xl active:cursor-grabbing"
     >
       {/* Image area */}
-      <div className="relative h-[65%] w-full shrink-0 bg-gray-200">
+      <div className="relative h-[62%] w-full shrink-0 bg-gray-200">
         <FounderPhoto startup={startup} className="h-full w-full object-cover object-top" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
@@ -84,30 +84,6 @@ function TopCard({ startup, forced, onSwipe, onImpact }: TopCardProps) {
 
         <div className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md">
           {startup.signalScore}% match
-        </div>
-
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <motion.div
-            style={{ opacity: likeOpacity, scale: likeScale, rotate: 22 }}
-            className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-double border-emerald-500 bg-emerald-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-emerald-400 drop-shadow-[0_20px_50px_rgba(16,185,129,0.7)] backdrop-blur-md md:text-7xl"
-          >
-            <span>Term</span>
-            <span>Sheet 💖</span>
-          </motion.div>
-          <motion.div
-            style={{ opacity: nopeOpacity, scale: nopeScale, rotate: -22 }}
-            className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-dashed border-red-600 bg-red-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-red-600 drop-shadow-[0_20px_50px_rgba(220,38,38,0.7)] backdrop-blur-md md:text-7xl"
-          >
-            <span>No</span>
-            <span>Deal ❌</span>
-          </motion.div>
-          <motion.div
-            style={{ opacity: superOpacity, scale: superScale, rotate: -8 }}
-            className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-sky-400 bg-sky-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-sky-300 drop-shadow-[0_20px_50px_rgba(56,189,248,0.7)] backdrop-blur-md md:text-7xl"
-          >
-            <span>Super</span>
-            <span>Invest ⚡</span>
-          </motion.div>
         </div>
 
         <div className="absolute inset-x-4 bottom-3 text-white">
@@ -146,6 +122,31 @@ function TopCard({ startup, forced, onSwipe, onImpact }: TopCardProps) {
           )}
         </div>
       </div>
+
+      {/* Stamps sit on the card root so they cover the whole card, not just the photo. */}
+      <div className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center p-4">
+        <motion.div
+          style={{ opacity: likeOpacity, scale: likeScale, rotate: 22 }}
+          className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-double border-emerald-500 bg-emerald-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-emerald-400 drop-shadow-[0_20px_50px_rgba(16,185,129,0.7)] backdrop-blur-md md:text-7xl"
+        >
+          <span>Term</span>
+          <span>Sheet 💖</span>
+        </motion.div>
+        <motion.div
+          style={{ opacity: nopeOpacity, scale: nopeScale, rotate: -22 }}
+          className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-dashed border-red-600 bg-red-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-red-600 drop-shadow-[0_20px_50px_rgba(220,38,38,0.7)] backdrop-blur-md md:text-7xl"
+        >
+          <span>No</span>
+          <span>Deal ❌</span>
+        </motion.div>
+        <motion.div
+          style={{ opacity: superOpacity, scale: superScale, rotate: -8 }}
+          className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-sky-400 bg-sky-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-sky-300 drop-shadow-[0_20px_50px_rgba(56,189,248,0.7)] backdrop-blur-md md:text-7xl"
+        >
+          <span>Super</span>
+          <span>Invest ⚡</span>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }
@@ -169,7 +170,7 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
 
   return (
     <div className="flex h-full max-h-[1200px] w-full flex-col gap-5">
-      <motion.div animate={shake} className="relative min-h-0 w-full max-w-[560px] flex-1 self-center">
+      <motion.div animate={shake} className="relative min-h-0 w-full max-w-[580px] flex-1 self-center">
         {next && (
           <div
             aria-hidden="true"
