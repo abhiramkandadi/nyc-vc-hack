@@ -136,6 +136,17 @@ def post_action(body: ActionIn, background: BackgroundTasks) -> dict:
                 "readback_pending": due}
 
 
+@app.post("/undo")
+def undo() -> dict:
+    """Take back the latest action, for the UI's Rewind button."""
+    with lock:
+        r: Ranker = state["ranker"]
+        uuid = r.undo()
+        if uuid is None:
+            raise HTTPException(409, "nothing to undo")
+        return {"undone": uuid, "n_actions": len(r.actions)}
+
+
 @app.get("/thesis")
 def thesis() -> dict:
     with lock:

@@ -146,6 +146,14 @@ class Ranker:
         self.actions.append((uuid, action))
         self._fit()
 
+    def undo(self) -> str | None:
+        """Drop the latest action and refit. Returns that company's uuid, or None if there was none."""
+        if not self.actions:
+            return None
+        uuid, _ = self.actions.pop()
+        self._fit()
+        return uuid
+
     def reset(self) -> None:
         self.actions, self.clf = [], None
 

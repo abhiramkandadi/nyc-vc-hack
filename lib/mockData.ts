@@ -18,9 +18,17 @@ export interface StealthStartup {
   pitchSummary: string;
   targetSector: TargetSector;
   draftEmail: string;
+  /** The source's own sector label, finer than the four-way targetSector. */
+  sectorLabel?: string;
   /** Latest akta.pro news item, present only when live hydration succeeds. */
   liveNews?: { title: string; url: string };
 }
+
+/** Seeded profiles use this label where the source has no founder or former employer. */
+export const NOT_DISCLOSED = "Not disclosed";
+export const isDisclosed = (value?: string): boolean => !!value && value !== NOT_DISCLOSED;
+/** The founder's name, or the company name when the source lists no founder. */
+export const founderLabel = (s: Pick<StealthStartup, "founderName" | "name">): string => (isDisclosed(s.founderName) ? s.founderName : s.name);
 
 export type MediaKind = "headshot" | "hq" | "hardware" | "infra";
 

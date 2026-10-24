@@ -4,7 +4,7 @@ import { Check, Inbox, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
 import { SAMPLE_THREADS, type SampleThread } from "@/lib/sampleThreads";
-import type { StealthStartup } from "@/lib/mockData";
+import { founderLabel, type StealthStartup } from "@/lib/mockData";
 
 export interface MatchRecord {
   startup: StealthStartup;
@@ -159,7 +159,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-2">
                       <p className="truncate text-base font-bold text-gray-900">
-                        {m.startup.founderName} • {m.startup.name}
+                        {founderLabel(m.startup)} • {m.startup.name}
                       </p>
                       <span className="shrink-0 text-[11px] text-gray-400">{timeAgo(m.matchedAt, now)}</span>
                     </div>

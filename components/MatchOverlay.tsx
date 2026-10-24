@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Flame, Mail, X, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
-import type { StealthStartup } from "@/lib/mockData";
+import { founderLabel, isDisclosed, type StealthStartup } from "@/lib/mockData";
 
 interface Props {
   startup: StealthStartup;
@@ -118,7 +118,7 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
                 <Zap className="h-3.5 w-3.5" /> Priority outreach flagged
               </span>
             ) : (
-              <>You and {startup.founderName} both want this conversation.</>
+              <>You and {founderLabel(startup)} both want this conversation.</>
             )}
           </p>
         )}
@@ -132,9 +132,9 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
             className="h-20 w-20 rounded-full border-4 border-white object-cover object-top shadow-lg"
           />
         </div>
-        <p className="mt-3 text-center text-sm font-semibold text-gray-900">{startup.founderName}</p>
+        <p className="mt-3 text-center text-sm font-semibold text-gray-900">{founderLabel(startup)}</p>
         <p className="text-center text-xs text-gray-500">
-          {startup.founderBackground} · {startup.name}
+          {isDisclosed(startup.founderName) ? `${startup.founderBackground} · ${startup.name}` : `Founders not listed in source · ${startup.sectorLabel ?? startup.targetSector}`}
         </p>
 
         <p className="mt-3 rounded-xl bg-gray-50 p-3 text-xs leading-relaxed text-gray-600">{startup.pitchSummary}</p>

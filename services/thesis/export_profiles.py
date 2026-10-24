@@ -103,6 +103,7 @@ def convert(c: dict, i: int) -> dict:
         "exCompany": prev[0] if prev else NOT_DISCLOSED,
         "founderBackground": background, "headline": signals[0], "signalScore": score,
         "stage": "Seed", "signals": signals, "pitchSummary": description, "targetSector": tag,
+        "sectorLabel": (c.get("sector") or "").split(" (")[0] or tag,
         "draftEmail": (f"Hi {first or 'team'},\n\nI came across {c['name']}'s recent update: \"{signals[0]}\". "
                        f"We are researching {tag.lower()} and would enjoy learning more about your product, "
                        "early customer feedback, and roadmap.\n\nWould you be open to a brief introductory "
