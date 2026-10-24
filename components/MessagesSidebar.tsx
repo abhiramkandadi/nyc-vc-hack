@@ -51,8 +51,8 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
   const initials = name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
 
   return (
-    <aside className="hidden h-full w-[360px] shrink-0 flex-col overflow-y-auto border-l border-gray-200 bg-white xl:flex">
-      <section className="border-b border-gray-200 p-5" aria-label="Your profile">
+    <aside className="hidden h-full w-[380px] shrink-0 flex-col overflow-y-auto border-l border-gray-200 bg-white p-6 xl:flex">
+      <section className="border-b border-gray-200 pb-5" aria-label="Your profile">
         <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-500">Your profile</h3>
         <div className="flex items-center gap-4">
           <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF385C] to-amber-400 text-xl font-bold text-white ring-2 ring-[#FF385C] ring-offset-2">
@@ -76,7 +76,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
               </div>
             ) : (
               <>
-                <p className="truncate font-display text-lg font-extrabold text-gray-900">{name}</p>
+                <p className="truncate font-display text-xl font-bold text-gray-900">{name}</p>
                 <span className="mt-1 inline-block max-w-full rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-[11px] font-semibold text-[#FF385C]">
                   {title}
                 </span>
@@ -94,8 +94,8 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
         <p className="mt-3 text-xs text-gray-500">{thesis}</p>
       </section>
 
-      <section className="flex-1 pb-4" aria-label="Deal pipeline">
-        <div className="flex items-center justify-between px-5 pb-2 pt-4">
+      <section className="-mx-3 flex-1 pb-4" aria-label="Deal pipeline">
+        <div className="flex items-center justify-between pb-2 pt-5">
           <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">Messages / Deal pipeline</h3>
           {unread > 0 && <span className="rounded-full bg-[#FF385C] px-2 py-0.5 text-[11px] font-bold text-white">{unread}</span>}
         </div>
@@ -110,20 +110,20 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
               <li key={m.startup.id}>
                 <button
                   onClick={() => onSelectMatch(m)}
-                  className={`flex w-full cursor-pointer items-center gap-3 border-l-4 px-4 py-3 text-left transition-all hover:border-[#FF385C] hover:bg-rose-50/50 ${
+                  className={`flex w-full cursor-pointer items-center gap-3 border-l-4 px-3 py-3.5 text-left transition-all hover:border-[#FF385C] hover:bg-rose-50/50 ${
                     selectedId === m.startup.id ? "border-[#FF385C] bg-rose-50/50" : "border-transparent"
                   }`}
                 >
                   <FounderPhoto startup={m.startup} className="h-12 w-12 shrink-0 rounded-full object-cover object-top" />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-2">
-                      <p className="truncate text-sm font-semibold text-gray-900">
+                      <p className="truncate text-base font-bold text-gray-900">
                         {m.startup.founderName} • {m.startup.name}
                       </p>
                       <span className="shrink-0 text-[11px] text-gray-400">{timeAgo(m.matchedAt, now)}</span>
                     </div>
                     <div className="flex items-center justify-between gap-2">
-                      <p className={`truncate text-xs ${m.unread ? "font-semibold text-gray-800" : "text-gray-500"}`}>
+                      <p className={`truncate text-sm ${m.unread ? "font-semibold text-gray-800" : "text-gray-500"}`}>
                         {m.superInvest ? "⭐ " : ""}
                         {preview(m)}
                       </p>

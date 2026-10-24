@@ -126,7 +126,7 @@ export default function Home() {
   const thesis = preset === "Everywhere VC" ? "Thesis: Everywhere VC" : `Thesis: ${preset}`;
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#F8F9FA] font-sans text-gray-900">
+    <div className="flex h-screen w-screen justify-between overflow-hidden bg-[#F8F9FA] font-sans text-gray-900">
       <GallerySidebar
         startups={startups}
         currentId={remaining[0]?.id ?? null}
@@ -135,15 +135,15 @@ export default function Home() {
         onSelect={handleSelectFounder}
       />
 
-      <div className="relative flex h-full min-w-0 flex-1 flex-col overflow-y-auto">
+      <div className="relative flex h-full min-w-0 flex-1 flex-col overflow-hidden">
         <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 
-        <main className="flex w-full flex-1 items-center justify-center p-6">
-          <div className="relative my-auto flex h-[840px] w-full max-w-[480px] flex-col justify-between">
+        <main className="flex min-h-0 w-full flex-1 flex-col items-center justify-center p-4">
+          <div className="relative flex h-full w-full max-w-[520px] flex-col">
             {remaining.length > 0 ? (
               <SwipeCard startups={remaining} onSwipe={handleSwipe} onRewind={handleRewind} canRewind={history.length > 0} />
             ) : (
-              <div className="flex h-[720px] w-full flex-col items-center justify-center gap-4 rounded-[32px] border border-gray-200/80 bg-white p-10 text-center shadow-xl">
+              <div className="flex h-[780px] max-h-full w-full flex-col items-center justify-center gap-4 rounded-[36px] border border-gray-200/80 bg-white p-10 text-center shadow-xl">
                 <h2 className="font-display text-2xl font-bold text-gray-900">You&apos;re all caught up</h2>
                 <p className="text-sm text-gray-500">No more stealth startups for this preset.</p>
                 <button
