@@ -22,19 +22,57 @@ export interface StealthStartup {
   liveNews?: { title: string; url: string };
 }
 
-/** Verified Unsplash portraits used when a founder image is missing or fails to load. */
-export const FALLBACK_PORTRAITS: readonly string[] = [
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=800",
+export type MediaKind = "headshot" | "hq" | "hardware" | "infra";
+
+/** Verified Unsplash media across four visual types, used when a founder image is missing or already taken. */
+export const MEDIA_POOL: readonly { url: string; kind: MediaKind }[] = [
+  { url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1557862921-37829c790f19?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&q=80&w=1200", kind: "headshot" },
+  { url: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&q=80&w=1200", kind: "hq" },
+  { url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1561144257-e32e8efc6c4f?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1625314868143-20e93ce3ff33?auto=format&fit=crop&q=80&w=1200", kind: "hardware" },
+  { url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1200", kind: "infra" },
+  { url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200", kind: "infra" },
+  { url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200", kind: "infra" },
+  { url: "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=1200", kind: "infra" },
+  { url: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1200", kind: "infra" },
+  { url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200", kind: "infra" },
+  { url: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=1200", kind: "infra" },
 ];
+
+export const DIVERSE_MEDIA_POOL: readonly string[] = MEDIA_POOL.map((m) => m.url);
+
+/** Headshots only, for the per-image error fallback. */
+export const FALLBACK_PORTRAITS: readonly string[] = MEDIA_POOL.filter((m) => m.kind === "headshot").map((m) => m.url);
 
 export function hashString(key: string): number {
   let h = 0;
@@ -48,40 +86,69 @@ export function themeColorFor(s: Pick<StealthStartup, "id" | "themeColor">): str
   return s.themeColor || THEME_PALETTE[hashString(s.id) % THEME_PALETTE.length];
 }
 
+export function isValidUrl(value: unknown): value is string {
+  if (typeof value !== "string" || !value) return false;
+  try {
+    const u = new URL(value);
+    return u.protocol === "https:" || u.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
 const photoKey = (url: string): string => url.match(/photo-[\w-]+/)?.[0] ?? url;
+const KIND_BY_PHOTO = new Map(MEDIA_POOL.map((m) => [photoKey(m.url), m.kind] as const));
+
+export function mediaKindOf(url: string): MediaKind {
+  return KIND_BY_PHOTO.get(photoKey(url)) ?? "headshot";
+}
+
+export interface AssignedMedia {
+  src: string;
+  kind: MediaKind;
+}
+
+const SECTOR_KIND: Record<TargetSector, MediaKind> = {
+  "Physical AI": "hardware",
+  "AI Infra": "infra",
+  "AI Agents": "infra",
+  "B2B SaaS": "hq",
+};
 
 /**
- * Assigns each startup a portrait no other startup in the list uses. The founder's own image is kept
- * unless an earlier startup already uses it (or it is missing); then the next unused pool portrait,
- * starting from an id-hash index, is assigned. Beyond the pool size, portraits repeat.
+ * Assigns every startup a distinct image. A valid founder image is kept unless an earlier startup already
+ * uses it. Otherwise the next unused pool image is taken: headshots first, then the sector's own category,
+ * then anything unused. Repeats happen only once the whole pool is used.
  */
-export function assignUniquePortraits(startups: readonly Pick<StealthStartup, "id" | "founderImage">[]): Record<string, string> {
+export function assignUniquePortraits(
+  startups: readonly Pick<StealthStartup, "id" | "founderImage" | "targetSector">[],
+): Record<string, AssignedMedia> {
   const used = new Set<string>();
-  const out: Record<string, string> = {};
+  const out: Record<string, AssignedMedia> = {};
   for (const s of startups) {
-    if (s.founderImage && !used.has(photoKey(s.founderImage))) {
+    if (isValidUrl(s.founderImage) && !used.has(photoKey(s.founderImage))) {
       used.add(photoKey(s.founderImage));
-      out[s.id] = s.founderImage;
+      out[s.id] = { src: s.founderImage, kind: mediaKindOf(s.founderImage) };
     }
   }
   for (const s of startups) {
     if (out[s.id]) continue;
-    const start = hashString(s.id) % FALLBACK_PORTRAITS.length;
-    let pick = FALLBACK_PORTRAITS[start];
-    for (let i = 0; i < FALLBACK_PORTRAITS.length; i++) {
-      const c = FALLBACK_PORTRAITS[(start + i) % FALLBACK_PORTRAITS.length];
-      if (!used.has(photoKey(c))) {
-        pick = c;
-        break;
-      }
-    }
-    used.add(photoKey(pick));
-    out[s.id] = pick;
+    const sector = SECTOR_KIND[s.targetSector] ?? "headshot";
+    const order = [
+      ...MEDIA_POOL.filter((m) => m.kind === "headshot"),
+      ...MEDIA_POOL.filter((m) => m.kind === sector),
+      ...MEDIA_POOL,
+    ];
+    const free = order.filter((m) => !used.has(photoKey(m.url)));
+    const list = free.length ? free : MEDIA_POOL;
+    const pick = list[hashString(s.id) % Math.min(list.length, free.length ? 4 : list.length)];
+    used.add(photoKey(pick.url));
+    out[s.id] = { src: pick.url, kind: pick.kind };
   }
   return out;
 }
 
-/** Deterministic fallback so the same founder always gets the same portrait. */
+/** Deterministic headshot fallback for a single broken image. */
 export function fallbackPortrait(key: string): string {
   return FALLBACK_PORTRAITS[hashString(key) % FALLBACK_PORTRAITS.length];
 }

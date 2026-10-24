@@ -1,10 +1,11 @@
 "use client";
 
-import { animate, motion, useAnimationControls, useMotionValue, useTransform } from "framer-motion";
+import { animate, motion, useAnimationControls, useMotionValue, useTransform, type MotionValue } from "framer-motion";
 import { BadgeCheck, Heart, Landmark, RotateCcw, Star, TrendingUp, Users, X, type LucideIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import FounderPhoto from "./FounderPhoto";
-import type { StealthStartup } from "@/lib/mockData";
+import { useContext, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import FounderPhoto, { PortraitContext } from "./FounderPhoto";
+import type { MediaKind, StealthStartup } from "@/lib/mockData";
 
 export type SwipeDirection = "left" | "right" | "up";
 
@@ -17,6 +18,12 @@ const SIGNAL_STYLE: Record<SignalKind, { icon: LucideIcon; pill: string }> = {
   velocity: { icon: TrendingUp, pill: "border-emerald-200 bg-emerald-50 text-emerald-700" },
   team: { icon: Users, pill: "border-indigo-200 bg-indigo-50 text-indigo-700" },
   legal: { icon: Landmark, pill: "border-amber-200 bg-amber-50 text-amber-700" },
+};
+
+const MEDIA_LABEL: Partial<Record<MediaKind, string>> = {
+  hq: "🏢 NYC HQ",
+  hardware: "🤖 Physical AI Lab",
+  infra: "⚡ Stealth Infra",
 };
 
 const KIND_ORDER: SignalKind[] = ["velocity", "team", "legal"];
@@ -34,18 +41,14 @@ interface TopCardProps {
   forced: SwipeDirection | null;
   onSwipe: (d: SwipeDirection) => void;
   onImpact: () => void;
+  x: MotionValue<number>;
+  y: MotionValue<number>;
 }
 
-function TopCard({ startup, forced, onSwipe, onImpact }: TopCardProps) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
   const rotate = useTransform(x, [-220, 0, 220], [-14, 0, 14]);
-  const likeOpacity = useTransform(x, [20, X_THRESHOLD], [0, 1]);
-  const likeScale = useTransform(x, [20, X_THRESHOLD], [0.5, 1.3]);
-  const nopeOpacity = useTransform(x, [-X_THRESHOLD, -20], [1, 0]);
-  const nopeScale = useTransform(x, [-X_THRESHOLD, -20], [1.3, 0.5]);
-  const superOpacity = useTransform(y, [-Y_THRESHOLD, -20], [1, 0]);
-  const superScale = useTransform(y, [-Y_THRESHOLD, -20], [1.3, 0.5]);
+  const mediaKind = useContext(PortraitContext)[startup.id]?.kind;
+  const mediaLabel = mediaKind ? MEDIA_LABEL[mediaKind] : undefined;
 
   const fling = (d: SwipeDirection) => {
     onImpact();
@@ -85,6 +88,11 @@ function TopCard({ startup, forced, onSwipe, onImpact }: TopCardProps) {
         <div className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md">
           {startup.signalScore}% match
         </div>
+        {mediaLabel && (
+          <div className="absolute right-3 top-[3.25rem] rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
+            {mediaLabel}
+          </div>
+        )}
 
         <div className="absolute inset-x-4 bottom-3 text-white">
           <h2 className="flex items-center gap-2 text-3xl font-black leading-tight">
@@ -123,30 +131,6 @@ function TopCard({ startup, forced, onSwipe, onImpact }: TopCardProps) {
         </div>
       </div>
 
-      {/* Stamps sit on the card root so they cover the whole card, not just the photo. */}
-      <div className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center p-4">
-        <motion.div
-          style={{ opacity: likeOpacity, scale: likeScale, rotate: 22 }}
-          className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-double border-emerald-500 bg-emerald-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-emerald-400 drop-shadow-[0_20px_50px_rgba(16,185,129,0.7)] backdrop-blur-md md:text-7xl"
-        >
-          <span>Term</span>
-          <span>Sheet 💖</span>
-        </motion.div>
-        <motion.div
-          style={{ opacity: nopeOpacity, scale: nopeScale, rotate: -22 }}
-          className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-dashed border-red-600 bg-red-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-red-600 drop-shadow-[0_20px_50px_rgba(220,38,38,0.7)] backdrop-blur-md md:text-7xl"
-        >
-          <span>No</span>
-          <span>Deal ❌</span>
-        </motion.div>
-        <motion.div
-          style={{ opacity: superOpacity, scale: superScale, rotate: -8 }}
-          className="absolute flex select-none flex-col items-center rounded-3xl border-[12px] border-sky-400 bg-sky-950/40 px-10 py-6 text-center text-6xl font-black uppercase leading-none tracking-widest text-sky-300 drop-shadow-[0_20px_50px_rgba(56,189,248,0.7)] backdrop-blur-md md:text-7xl"
-        >
-          <span>Super</span>
-          <span>Invest ⚡</span>
-        </motion.div>
-      </div>
     </motion.div>
   );
 }
@@ -164,6 +148,23 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
   const next = startups[1];
   const locked = !top || !!forced;
   const shake = useAnimationControls();
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  // A new top card starts centered; the previous card's fling offset must not carry over.
+  useEffect(() => {
+    x.set(0);
+    y.set(0);
+  }, [top?.id, x, y]);
+  const likeOpacity = useTransform(x, [20, X_THRESHOLD], [0, 1]);
+  const likeScale = useTransform(x, [20, X_THRESHOLD], [0.5, 1.3]);
+  const nopeOpacity = useTransform(x, [-X_THRESHOLD, -20], [1, 0]);
+  const nopeScale = useTransform(x, [-X_THRESHOLD, -20], [1.3, 0.5]);
+  const superOpacity = useTransform(y, [-Y_THRESHOLD, -20], [1, 0]);
+  const superScale = useTransform(y, [-Y_THRESHOLD, -20], [1.3, 0.5]);
+  const stampBase =
+    "absolute flex select-none flex-col items-center rounded-[3rem] border-[1.1rem] px-[0.35em] py-[0.18em] text-center text-[min(13vw,11rem)] font-black uppercase leading-[0.95] tracking-widest backdrop-blur-md";
   const impact = () => {
     shake.start({ x: [0, -10, 10, -5, 5, 0], transition: { duration: 0.15, ease: "easeOut" } });
   };
@@ -182,6 +183,8 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
             key={top.id}
             startup={top}
             forced={forced}
+            x={x}
+            y={y}
             onImpact={impact}
             onSwipe={(d) => {
               setForced(null);
@@ -190,6 +193,34 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
           />
         )}
       </motion.div>
+
+      {mounted &&
+        createPortal(
+          <div className="pointer-events-none fixed inset-0 z-[60] flex items-center justify-center overflow-hidden" aria-hidden="true">
+            <motion.div
+              style={{ opacity: likeOpacity, scale: likeScale, rotate: 18 }}
+              className={`${stampBase} border-double border-emerald-500 bg-emerald-950/40 text-emerald-400 drop-shadow-[0_20px_50px_rgba(16,185,129,0.7)]`}
+            >
+              <span>Term</span>
+              <span>Sheet 💖</span>
+            </motion.div>
+            <motion.div
+              style={{ opacity: nopeOpacity, scale: nopeScale, rotate: -18 }}
+              className={`${stampBase} border-dashed border-red-600 bg-red-950/40 text-red-600 drop-shadow-[0_20px_50px_rgba(220,38,38,0.7)]`}
+            >
+              <span>No</span>
+              <span>Deal ❌</span>
+            </motion.div>
+            <motion.div
+              style={{ opacity: superOpacity, scale: superScale, rotate: -8 }}
+              className={`${stampBase} border-sky-400 bg-sky-950/40 text-sky-300 drop-shadow-[0_20px_50px_rgba(56,189,248,0.7)]`}
+            >
+              <span>Super</span>
+              <span>Invest ⚡</span>
+            </motion.div>
+          </div>,
+          document.body,
+        )}
 
       <div className="flex shrink-0 items-center justify-center gap-5 pb-1" role="group" aria-label="Swipe actions">
         <button
