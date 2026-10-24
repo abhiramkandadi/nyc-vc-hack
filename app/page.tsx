@@ -104,27 +104,29 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,rgba(255,56,92,0.12),transparent_55%)]">
+    <div className="flex min-h-screen flex-col items-center justify-between bg-[#F3F4F6] font-sans text-gray-900">
       <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 
-      <main className="flex flex-col items-center px-4 py-6">
-        {remaining.length > 0 ? (
-          <SwipeCard startups={remaining} onSwipe={handleSwipe} onRewind={handleRewind} canRewind={history.length > 0} />
-        ) : (
-          <div className="mt-16 flex w-full max-w-[420px] flex-col items-center gap-4 rounded-[32px] border border-white/15 bg-zinc-950/90 p-10 text-center backdrop-blur-2xl">
-            <h2 className="font-display text-2xl font-bold">You&apos;re all caught up</h2>
-            <p className="text-sm text-foreground/60">No more stealth startups for this preset.</p>
-            <button
-              onClick={() => {
-                setIndex(0);
-                setHistory([]);
-              }}
-              className="flex items-center gap-2 rounded-full bg-[#FF385C] px-5 py-2 text-sm font-semibold text-white shadow-[0_0_20px_rgba(255,56,92,0.4)]"
-            >
-              <RotateCcw className="h-4 w-4" /> Reset deck
-            </button>
-          </div>
-        )}
+      <main className="flex w-full flex-1 items-center justify-center px-4 py-6">
+        <div className="relative my-auto flex h-[680px] w-full max-w-[400px] flex-col justify-between">
+          {remaining.length > 0 ? (
+            <SwipeCard startups={remaining} onSwipe={handleSwipe} onRewind={handleRewind} canRewind={history.length > 0} />
+          ) : (
+            <div className="flex h-[580px] w-full flex-col items-center justify-center gap-4 rounded-3xl border border-gray-200/80 bg-white p-10 text-center shadow-xl">
+              <h2 className="font-display text-2xl font-bold text-gray-900">You&apos;re all caught up</h2>
+              <p className="text-sm text-gray-500">No more stealth startups for this preset.</p>
+              <button
+                onClick={() => {
+                  setIndex(0);
+                  setHistory([]);
+                }}
+                className="flex items-center gap-2 rounded-full bg-[#FF385C] px-5 py-2 text-sm font-semibold text-white shadow-md"
+              >
+                <RotateCcw className="h-4 w-4" /> Reset deck
+              </button>
+            </div>
+          )}
+        </div>
       </main>
 
       <AnimatePresence>

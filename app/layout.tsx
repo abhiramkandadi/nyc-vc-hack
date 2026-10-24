@@ -25,17 +25,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#09090b",
-  colorScheme: "dark",
+  themeColor: "#F3F4F6",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark bg-[#09090b]">
+    <html lang="en" className="bg-[#F3F4F6]">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} min-h-screen bg-[#09090b] font-sans text-foreground antialiased selection:bg-coral/30`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} min-h-screen bg-[#F3F4F6] font-sans text-gray-900 antialiased selection:bg-[#FF385C]/20`}
       >
         {children}
       </body>

@@ -52,63 +52,63 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
         else if (info.offset.x > X_THRESHOLD) fling("right");
         else if (info.offset.x < -X_THRESHOLD) fling("left");
       }}
-      className="absolute inset-0 cursor-grab select-none overflow-hidden rounded-[28px] border border-white/10 bg-black shadow-2xl active:cursor-grabbing"
+      className="absolute inset-0 flex cursor-grab select-none flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-xl active:cursor-grabbing"
     >
-      <div className="absolute inset-x-0 top-0 h-[75%]">
-        <FounderPhoto startup={startup} className="h-full w-full object-cover object-top" />
-      </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+      {/* Image area */}
+      <div className="relative h-[380px] w-full shrink-0 bg-gray-200">
+        <FounderPhoto startup={startup} className="h-[380px] w-full object-cover object-top" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-      {/* Badges */}
-      <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 backdrop-blur-md">
-        <span className="relative flex h-2 w-2">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-        </span>
-        {startup.targetSector}
-      </div>
-      <div className="absolute right-4 top-4 rounded-full bg-[#FF385C]/80 px-3 py-1 font-mono text-xs font-bold text-white shadow-lg backdrop-blur-md">
-        {startup.signalScore}% match
+        <div className="absolute inset-x-3 top-2 flex gap-1" aria-hidden="true">
+          {[0, 1, 2, 3].map((i) => (
+            <span key={i} className={`h-1 flex-1 rounded-full ${i === 0 ? "bg-white/90" : "bg-white/40"}`} />
+          ))}
+        </div>
+
+        <div className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md">
+          {startup.signalScore}% match
+        </div>
+
+        <motion.span
+          style={{ opacity: likeOpacity }}
+          className="absolute left-5 top-14 -rotate-12 rounded-lg border-4 border-emerald-400 px-2.5 py-0.5 font-display text-3xl font-extrabold text-emerald-400"
+        >
+          INVEST
+        </motion.span>
+        <motion.span
+          style={{ opacity: nopeOpacity }}
+          className="absolute right-5 top-14 rotate-12 rounded-lg border-4 border-rose-500 px-2.5 py-0.5 font-display text-3xl font-extrabold text-rose-500"
+        >
+          PASS
+        </motion.span>
+        <motion.span
+          style={{ opacity: superOpacity }}
+          className="absolute left-1/2 top-14 -translate-x-1/2 rounded-lg border-4 border-sky-400 px-2.5 py-0.5 font-display text-3xl font-extrabold text-sky-400"
+        >
+          SUPER
+        </motion.span>
+
+        <div className="absolute inset-x-4 bottom-3 text-white">
+          <h2 className="flex items-center gap-2 text-[28px] font-bold leading-tight">
+            {startup.founderName}, <span className="font-normal">{startup.stage}</span>
+            <BadgeCheck className="h-6 w-6 fill-sky-500 text-white" aria-label="Verified" />
+          </h2>
+          <p className="text-sm font-medium text-white">
+            Ex-{startup.exCompany} • {startup.name}
+          </p>
+        </div>
       </div>
 
-      {/* Swipe stamps */}
-      <motion.span
-        style={{ opacity: likeOpacity }}
-        className="absolute left-5 top-16 -rotate-12 rounded-lg border-[3px] border-emerald-400 px-2.5 py-0.5 font-display text-2xl font-extrabold text-emerald-400"
-      >
-        INVEST
-      </motion.span>
-      <motion.span
-        style={{ opacity: nopeOpacity }}
-        className="absolute right-5 top-16 rotate-12 rounded-lg border-[3px] border-red-500 px-2.5 py-0.5 font-display text-2xl font-extrabold text-red-500"
-      >
-        PASS
-      </motion.span>
-      <motion.span
-        style={{ opacity: superOpacity }}
-        className="absolute left-1/2 top-16 -translate-x-1/2 rounded-lg border-[3px] border-sky-400 px-2.5 py-0.5 font-display text-2xl font-extrabold text-sky-400"
-      >
-        SUPER
-      </motion.span>
-
-      {/* Text overlay */}
-      <div className="absolute inset-x-0 bottom-0 px-5 pb-5">
-        <h2 className="flex items-center gap-2 text-2xl font-bold text-white">
-          {startup.founderName},{" "}
-          <span className="text-xl font-normal text-zinc-300">{startup.stage}</span>
-          <BadgeCheck className="h-5 w-5 fill-sky-500 text-black" aria-label="Verified" />
-        </h2>
-        <p className="text-sm font-medium text-zinc-300">
-          {startup.exCompany} • <span className="font-semibold text-white">{startup.name}</span>
-        </p>
-        <p className="mt-1 line-clamp-2 text-xs text-zinc-400">{startup.pitchSummary}</p>
-        <div className="mt-3 flex flex-wrap gap-1.5" aria-label="akta.pro signals">
+      {/* Body */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <p className="line-clamp-2 px-4 pt-3 text-xs font-medium leading-relaxed text-gray-700">{startup.pitchSummary}</p>
+        <div className="mx-4 my-2 flex flex-wrap gap-1.5" aria-label="akta.pro signals">
           {startup.signals.map((s, i) => {
             const { icon: Icon, color } = SIGNAL_ICONS[i];
             return (
               <span
                 key={s}
-                className="flex max-w-full items-center gap-1.5 rounded-lg border border-white/15 bg-white/10 px-2.5 py-1 text-[11px] text-white backdrop-blur-md"
+                className="flex max-w-full items-center gap-1.5 rounded-lg border border-gray-200 bg-gray-100 px-2.5 py-1.5 text-[11px] font-medium text-gray-800"
               >
                 <Icon className={`h-3 w-3 shrink-0 ${color}`} />
                 <span className="truncate">{s}</span>
@@ -116,8 +116,8 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
             );
           })}
           {startup.liveNews && (
-            <span className="flex max-w-full items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] text-emerald-200 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+            <span className="flex max-w-full items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1.5 text-[11px] font-medium text-emerald-800">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
               <span className="truncate">{startup.liveNews.title}</span>
             </span>
           )}
@@ -141,12 +141,12 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
   const locked = !top || !!forced;
 
   return (
-    <div className="flex w-full max-w-[390px] flex-col items-center gap-6">
-      <div className="relative h-[600px] w-full">
+    <div className="flex h-full w-full flex-col justify-between">
+      <div className="relative h-[580px] w-full">
         {next && (
           <div
             aria-hidden="true"
-            className="absolute inset-0 translate-y-3 scale-[0.94] rounded-[28px] border border-white/10 bg-zinc-950 opacity-70"
+            className="absolute inset-0 translate-y-3 scale-[0.94] rounded-3xl border border-gray-200 bg-white opacity-70 shadow-md"
           />
         )}
         {top && (
@@ -162,31 +162,31 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
         )}
       </div>
 
-      <div className="flex items-center gap-4" role="group" aria-label="Swipe actions">
+      <div className="flex items-center justify-center gap-4" role="group" aria-label="Swipe actions">
         <button
           onClick={onRewind}
           disabled={!canRewind || !!forced}
           aria-label="Rewind"
           title="Rewind"
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-400 transition hover:scale-110 disabled:opacity-30 disabled:hover:scale-100"
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-amber-500 shadow-md transition hover:scale-110 disabled:opacity-40 disabled:hover:scale-100"
         >
-          <RotateCcw className="h-5 w-5" strokeWidth={2.5} />
+          <RotateCcw className="h-5 w-5" strokeWidth={3} />
         </button>
         <button
           onClick={() => setForced("left")}
           disabled={locked}
           aria-label="Pass"
           title="Pass"
-          className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-red-500 bg-red-500/10 text-red-500 shadow-lg shadow-red-500/20 transition hover:scale-110 disabled:opacity-40"
+          className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-200 bg-white text-xl text-rose-500 shadow-lg transition hover:scale-110 disabled:opacity-40"
         >
-          <X className="h-7 w-7" strokeWidth={3} />
+          <X className="h-7 w-7" strokeWidth={3.5} />
         </button>
         <button
           onClick={() => setForced("up")}
           disabled={locked}
           aria-label="Super-Invest"
           title="Super-Invest"
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-sky-400 bg-sky-400/10 text-sky-400 transition hover:scale-110 disabled:opacity-40"
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-sky-400 shadow-md transition hover:scale-110 disabled:opacity-40"
         >
           <Star className="h-5 w-5 fill-sky-400" />
         </button>
@@ -195,9 +195,9 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
           disabled={locked}
           aria-label="Match"
           title="Match"
-          className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-[#FF385C] to-rose-600 text-white shadow-xl shadow-[#FF385C]/40 transition hover:scale-110 disabled:opacity-40"
+          className="flex h-16 w-16 items-center justify-center rounded-full border border-gray-200 bg-white text-2xl text-emerald-500 shadow-xl transition hover:scale-110 disabled:opacity-40"
         >
-          <Heart className="h-7 w-7 fill-white" />
+          <Heart className="h-7 w-7 fill-emerald-500" />
         </button>
       </div>
     </div>
