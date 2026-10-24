@@ -47,7 +47,7 @@ def _names(ranker: Ranker, actions: tuple[str, ...]) -> list[str]:
 
 @app.get("/")
 def index() -> FileResponse:
-    return FileResponse(INDEX_FILE)
+    return FileResponse(INDEX_FILE, headers={"Cache-Control": "no-store"})
 
 
 @app.get("/next")
@@ -58,7 +58,9 @@ def next_company() -> dict:
         out = {"n_actions": len(r.actions), "remaining": len(ranked), "company": None}
         if ranked:
             top = ranked[0]
-            out.update(company=top["company"], score=top["score"],
+            # Only a fitted model gives a probability. Before that the score is just an ordering.
+            fitted = r.clf is not None
+            out.update(company=top["company"], score=top["score"] if fitted else None,
                        reasons=r.reasons(top["company"]["uuid"]))
         return out
 

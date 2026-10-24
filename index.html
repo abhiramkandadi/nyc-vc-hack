@@ -103,7 +103,9 @@ function renderCard(data) {
     if (dated.source) kids.push(" ", el("a", { href: dated.source, target: "_blank", rel: "noopener", textContent: "source" }));
     p.append(row("Latest signal", el("div", {}, ...kids)));
   }
-  const m = el("div", { className: "match" }, el("span", { className: "score", textContent: `${Math.round(data.score * 100)}% match` }));
+  const m = el("div", { className: "match" });
+  if (data.score == null) m.append(el("span", { className: "note", textContent: "Save and pass one company each to see a match score." }));
+  else m.append(el("span", { className: "score", textContent: `${Math.round(data.score * 100)}% match` }));
   for (const r of data.reasons || []) m.append(el("span", { className: "tag", textContent: r }));
   p.append(row("Match", m));
 
