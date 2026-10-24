@@ -11,7 +11,16 @@ import SwipeCard, { type SwipeDirection } from "@/components/SwipeCard";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
 import { PortraitContext } from "@/components/FounderPhoto";
 import { useDominantColor } from "@/lib/useDominantColor";
-import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, type StealthStartup } from "@/lib/mockData";
+import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, videoFor, type StealthStartup } from "@/lib/mockData";
+
+/** Demo order: the first card has no video, the second has one, and the rest keep their ranked order. */
+function arrangeDeck(list: StealthStartup[]): StealthStartup[] {
+  const firstPlain = list.findIndex((s) => !videoFor(s));
+  const firstVideo = list.findIndex((s) => !!videoFor(s));
+  if (firstPlain < 0 || firstVideo < 0) return list;
+  const rest = list.filter((_, i) => i !== firstPlain && i !== firstVideo);
+  return [list[firstPlain], list[firstVideo], ...rest];
+}
 
 let seq = 0;
 const stamp = () => new Date().toLocaleTimeString("en-US", { hour12: false });
@@ -44,7 +53,7 @@ export default function Home() {
       .then((d: { source: "live" | "sample"; startups: StealthStartup[] } | null) => {
         // Ignore stale responses from an earlier tab click.
         if (id !== requestId.current || !d?.startups?.length) return;
-        setStartups(d.startups);
+        setStartups(arrangeDeck(d.startups));
         setSource(d.source);
         setIndex(0);
         setHistory([]);
