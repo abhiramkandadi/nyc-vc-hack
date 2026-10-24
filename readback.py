@@ -28,7 +28,8 @@ def build_prompt(weights: dict[str, float], saved: list[str], passed: list[str])
     w = "\n".join(f"- {name}: {v:+.2f}" for name, v in list(weights.items())[:8]) or "- none yet"
     return (
         "A partner swiped through startups. Positive weights mean the partner leans toward that "
-        "feature, negative weights mean away from it.\n\n"
+        "feature, negative weights mean away from it. Each company is shown as "
+        "name (sector, team size).\n\n"
         f"Learned weights:\n{w}\n\n"
         f"Saved: {', '.join(saved[-MAX_NAMES:]) or 'none'}\n"
         f"Passed: {', '.join(passed[-MAX_NAMES:]) or 'none'}\n\n"

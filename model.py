@@ -8,8 +8,7 @@ The API key is read from .env and is never printed.
 import hashlib
 import json
 import os
-from collections import Counter
-from datetime import date, datetime
+import re
 from pathlib import Path
 
 import httpx
@@ -66,50 +65,44 @@ def load_embeddings(companies: list[dict]) -> dict[str, np.ndarray]:
     return {u: np.array(cache[u]["v"], dtype=np.float32) for u in texts}
 
 
-def _parse_date(s: str | None) -> date | None:
-    if not s:
-        return None
-    for fmt, n in (("%Y-%m-%d", 10), ("%Y-%m", 7), ("%Y", 4)):
-        try:
-            return datetime.strptime(s[:n], fmt).date()
-        except ValueError:
-            continue
-    return None
-
-
 def _first_number(s: str | None) -> int | None:
     digits = "".join(ch if ch.isdigit() else " " for ch in (s or "")).split()
     return int(digits[0]) if digits else None
 
 
+# Themes are matched against the sector label only, never the description. A security
+# company that sells to hospitals must not count as healthcare. Patterns use word
+# boundaries because "securities" is not security and "(DEX)" is not a crypto exchange.
+THEMES = {
+    "security": r"\bsecurity\b|penetration|identity\W+(access|orchestration)|zero trust|red team"
+                r"|incident response|privacy",
+    "developer tools and AI agents": r"developer|devsecops|\bsdks?\b|ci/cd|compiler|\bagents?\b",
+    "crypto and blockchain": r"blockchain|crypto|token|defi|on-chain|\bnfts?\b|stablecoin|cross-chain"
+                             r"|layer 2|rollup|decentral|\bamms?\b|digital asset|self-custody"
+                             r"|mining pool|liquidity|lending protocol",
+    "healthcare": r"health|clinic|medical|pharma|drug|prescription|\bcare\b|mrna",
+    "hardware and robotics": r"robot|wearable|\bdevices?\b|electronic|accelerator|cabling|avionics"
+                             r"|spacecraft|reactor|equipment|fiber optic",
+    "services and consulting": r"\bservices\b|consult|advisory|agenc|outsourc|wealth management"
+                               r"|property management",
+}
+_THEME_RE = {name: re.compile(p, re.IGNORECASE) for name, p in THEMES.items()}
+
+
 class Features:
     """Readable features. The names go straight into the thesis readback."""
 
-    def __init__(self, companies: list[dict], top_sectors: int = 10):
-        counts = Counter(c.get("sector") for c in companies if c.get("sector"))
-        self.sectors = [s for s, n in counts.most_common(top_sectors) if n >= 3]
-        self.names = (
-            [f"sector: {s}" for s in self.sectors]
-            + ["has named founders", "two or more founders", "founder has prior employers",
-               "recent funding round", "signal in last 180 days", "founded 2025 or later",
-               "team of 10 or fewer"]
-        )
+    def __init__(self, companies: list[dict]):
+        self.names = list(THEMES) + ["team of 51 or more", "team of 10 or fewer", "has named founders"]
 
-    def vector(self, c: dict, today: date | None = None) -> np.ndarray:
-        today = today or date.today()
-        founders = c.get("founders", [])
-        moves = c.get("recent_moves", [])
-        dates = [d for d in (_parse_date(m.get("date")) for m in moves) if d]
+    def vector(self, c: dict) -> np.ndarray:
+        sector = c.get("sector") or ""
         headcount = _first_number(c.get("headcount_range"))
-        v = [1.0 if c.get("sector") == s else 0.0 for s in self.sectors]
+        v = [1.0 if rx.search(sector) else 0.0 for rx in _THEME_RE.values()]
         v += [
-            1.0 if founders else 0.0,
-            1.0 if len(founders) >= 2 else 0.0,
-            1.0 if any(f.get("previous_companies") for f in founders) else 0.0,
-            1.0 if any(m.get("type") == "Funding Round" for m in moves) else 0.0,
-            1.0 if dates and (today - max(dates)).days <= 180 else 0.0,
-            1.0 if (c.get("founded_year") or 0) >= 2025 else 0.0,
+            1.0 if headcount is not None and headcount >= 51 else 0.0,
             1.0 if headcount is not None and headcount <= 10 else 0.0,
+            1.0 if c.get("founders") else 0.0,
         ]
         return np.array(v, dtype=np.float32)
 
@@ -120,6 +113,13 @@ class Ranker:
         self.index = {c["uuid"]: i for i, c in enumerate(companies)}
         self.features = Features(companies)
         self.F = np.array([self.features.vector(c) for c in companies])
+        # Cold start, before any action: show companies with the most to read first.
+        self.richness = np.array([
+            bool(c.get("founders")) + (len(c.get("founders", [])) >= 2)
+            + any(f.get("previous_companies") for f in c.get("founders", []))
+            + any(m.get("date") for m in c.get("recent_moves", []))
+            for c in companies
+        ], dtype=float)
         E = np.array([embeddings[c["uuid"]] for c in companies])
         self.X = np.hstack([E * EMBED_SCALE, self.F])
         self.actions: list[tuple[str, str]] = []
@@ -162,8 +162,7 @@ class Ranker:
             ref = self.X[pos if pos else neg].mean(axis=0)
             sim = X @ ref / (np.linalg.norm(X, axis=1) * np.linalg.norm(ref) + 1e-9)
             return sim if pos else -sim
-        richness = self.F[idx, 1:4].sum(axis=1) + self.F[idx, 4:6].sum(axis=1)  # cold start
-        return richness.astype(float)
+        return self.richness[idx]  # cold start
 
     def ranked_unseen(self) -> list[dict]:
         seen = self.seen()

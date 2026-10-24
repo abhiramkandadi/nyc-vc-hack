@@ -48,6 +48,11 @@
   .readback { font-size: 15px; margin: 0 0 16px; }
   .note { color: var(--muted); font-size: 13px; }
   .err { color: var(--warn); font-size: 13px; }
+  .spinner { display: inline-block; width: 14px; height: 14px; vertical-align: -2px;
+             border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%;
+             animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 3s; } }
 </style>
 </head>
 <body>
@@ -119,8 +124,14 @@ function renderCard(data) {
 }
 
 function renderThesis(t) {
-  $("readback").textContent = t.readback || (t.n_actions < 5 ? "Act on five companies and your filter appears here." : "Writing your readback…");
-  $("readback-err").textContent = t.readback_error ? `Readback failed: ${t.readback_error}` : "";
+  const rb = $("readback");
+  if (t.readback_pending) {
+    // Show a working state in place of the previous text, so a stale readback is never mistaken for the new one.
+    rb.replaceChildren(el("span", { className: "spinner" }), el("span", { className: "note", textContent: " Reading your swipes…" }));
+  } else {
+    rb.textContent = t.readback || (t.n_actions < 10 ? "Act on ten companies and your filter appears here." : "");
+  }
+  $("readback-err").textContent = t.readback_error && !t.readback_pending ? `Readback failed: ${t.readback_error}` : "";
   const w = $("weights"); w.replaceChildren();
   const entries = Object.entries(t.weights);
   if (!entries.length) { w.append(el("div", { className: "note", textContent: "Weights appear after you save and pass at least one company each." })); return; }
@@ -152,11 +163,10 @@ async function act(action) {
   finally { busy = false; }
 }
 
-// The readback is written in the background every five actions. Poll until it catches up.
+// The readback is written in the background every ten actions. Poll while the server says it is working.
 function waitForReadback(t) {
   clearTimeout(pollTimer);
-  const due = Math.floor(t.n_actions / 5) * 5;
-  if (due > 0 && t.readback_at < due && !t.readback_error) {
+  if (t.readback_pending) {
     pollTimer = setTimeout(async () => {
       const next = await fetch("/thesis").then(r => r.json());
       renderThesis(next); waitForReadback(next);

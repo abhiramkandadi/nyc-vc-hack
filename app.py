@@ -18,10 +18,11 @@ from readback import generate
 
 COMPANIES_FILE = Path("companies.json")
 INDEX_FILE = Path("index.html")
-READBACK_EVERY = 5  # write a new readback after every this many actions
+READBACK_EVERY = 10  # first readback at this many actions, then again every this many
 
 lock = threading.Lock()
-state: dict = {"ranker": None, "readback": None, "readback_error": None, "readback_at": 0}
+state: dict = {"ranker": None, "readback": None, "readback_error": None, "readback_at": 0,
+               "readback_pending": False, "epoch": 0}
 
 
 @asynccontextmanager
@@ -45,6 +46,17 @@ def _names(ranker: Ranker, actions: tuple[str, ...]) -> list[str]:
     return [ranker.companies[ranker.index[u]]["name"] for u, a in ranker.actions if a in actions]
 
 
+def _described(ranker: Ranker, actions: tuple[str, ...]) -> list[str]:
+    """'Name (sector, team size)' for the readback. The sector drops its bracketed detail."""
+    out = []
+    for u, a in ranker.actions:
+        if a in actions:
+            c = ranker.companies[ranker.index[u]]
+            sector = (c.get("sector") or "unknown sector").split(" (")[0]
+            out.append(f"{c['name']} ({sector}, {c.get('headcount_range') or 'unknown'} people)")
+    return out
+
+
 @app.get("/")
 def index() -> FileResponse:
     return FileResponse(INDEX_FILE, headers={"Cache-Control": "no-store"})
@@ -65,15 +77,16 @@ def next_company() -> dict:
         return out
 
 
-def write_readback(n: int, weights: dict, saved: list[str], passed: list[str]) -> None:
+def write_readback(epoch: int, n: int, weights: dict, saved: list[str], passed: list[str]) -> None:
     """Runs in the background so the swipe response never waits on the LLM."""
     try:
         text, error = generate(weights, saved, passed), None
     except Exception as e:  # shown to the partner as it is, never replaced with made-up text
         text, error = None, str(e)
     with lock:
-        if n >= state["readback_at"]:
-            state.update(readback=text, readback_error=error, readback_at=n)
+        if epoch != state["epoch"]:  # the session was reset while this was running
+            return
+        state.update(readback=text, readback_error=error, readback_at=n, readback_pending=False)
 
 
 @app.post("/action")
@@ -89,11 +102,13 @@ def post_action(body: ActionIn, background: BackgroundTasks) -> dict:
         except ValueError as e:
             raise HTTPException(409, str(e))
         n = len(r.actions)
-        if n % READBACK_EVERY == 0:
-            background.add_task(write_readback, n, r.weights(),
-                                _names(r, ("save", "intro")), _names(r, ("pass",)))
+        due = n % READBACK_EVERY == 0
+        if due:
+            state["readback_pending"] = True
+            background.add_task(write_readback, state["epoch"], n, r.weights(),
+                                _described(r, ("save", "intro")), _described(r, ("pass",)))
         return {"n_actions": n, "remaining": len(r.companies) - len(r.seen()),
-                "readback_pending": n % READBACK_EVERY == 0}
+                "readback_pending": due}
 
 
 @app.get("/thesis")
@@ -108,6 +123,7 @@ def thesis() -> dict:
             "readback": state["readback"],
             "readback_error": state["readback_error"],
             "readback_at": state["readback_at"],
+            "readback_pending": state["readback_pending"],
         }
 
 
@@ -115,5 +131,6 @@ def thesis() -> dict:
 def reset() -> dict:
     with lock:
         state["ranker"].reset()
-        state.update(readback=None, readback_error=None, readback_at=0)
+        state.update(readback=None, readback_error=None, readback_at=0, readback_pending=False,
+                     epoch=state["epoch"] + 1)
     return {"ok": True}
