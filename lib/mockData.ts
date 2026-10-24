@@ -113,6 +113,8 @@ export function mediaKindOf(url: string): MediaKind {
   return KIND_BY_PHOTO.get(photoKey(url)) ?? "headshot";
 }
 
+import { FOUNDER_PHOTOS } from "./founderPhotos";
+
 export interface AssignedMedia {
   src: string;
   kind: MediaKind;
@@ -136,6 +138,11 @@ export function assignUniquePortraits(
   const used = new Set<string>();
   const out: Record<string, AssignedMedia> = {};
   for (const s of startups) {
+    const real = FOUNDER_PHOTOS[s.id];
+    if (real) out[s.id] = { src: real, kind: "headshot" };
+  }
+  for (const s of startups) {
+    if (out[s.id]) continue;
     if (isValidUrl(s.founderImage) && !used.has(photoKey(s.founderImage))) {
       used.add(photoKey(s.founderImage));
       out[s.id] = { src: s.founderImage, kind: mediaKindOf(s.founderImage) };

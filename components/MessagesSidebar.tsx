@@ -63,7 +63,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
   const [editing, setEditing] = useState(false);
   const [avatarOk, setAvatarOk] = useState(true);
   const [name, setName] = useState("Somya Gupta");
-  const [title, setTitle] = useState("General Partner @ Deal Flow VC");
+  const [title, setTitle] = useState("Founder @ localhost:nyc");
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 30_000);
     return () => clearInterval(t);
@@ -125,13 +125,14 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
           </button>
         </div>
         <div className="mt-4 flex flex-wrap gap-2" aria-label="Fund metrics">
-          {["💼 $50M Fund I", "🔥 14 Deals Termed", "🎯 Sector: Physical AI & Agents"].map((m) => (
+          {["🏙️ 75+ NYC founder events", "🔍 Venture Scout @ EWOR", "💻 Full Stack @ Wand AI"].map((m) => (
             <span key={m} className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-700">
               {m}
             </span>
           ))}
         </div>
-        <p className="mt-3 text-xs text-gray-500">{thesis}</p>
+        <p className="mt-3 text-xs italic text-gray-500">Making NYC the biggest startup ecosystem in the world.</p>
+        <p className="mt-1 text-xs text-gray-400">{thesis}</p>
       </section>
 
       <section className="-mx-3 flex-1 pb-4" aria-label="Deal pipeline">

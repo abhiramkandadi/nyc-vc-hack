@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+import { PHOTO_CREDITS } from "@/lib/founderPhotos";
 import { fallbackPortrait, type AssignedMedia, type StealthStartup } from "@/lib/mockData";
 
 /** Per-startup portrait overrides so no two founders on screen share a face. */
@@ -22,6 +23,7 @@ export default function FounderPhoto({ startup, className }: Props) {
     <img
       src={sources[Math.min(stage, sources.length - 1)]}
       alt={`Portrait for ${startup.founderName}`}
+      title={PHOTO_CREDITS[startup.id]}
       draggable={false}
       onError={() => setStage((n) => n + 1)}
       className={className}
