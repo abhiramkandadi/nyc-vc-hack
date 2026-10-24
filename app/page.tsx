@@ -148,11 +148,11 @@ export default function Home() {
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-70 transition-colors duration-700 ease-out"
+          className="pointer-events-none absolute inset-0 opacity-90 transition-colors duration-700 ease-out"
           style={{
             backgroundColor: aura,
-            WebkitMaskImage: "radial-gradient(ellipse 90% 75% at 50% 35%, black 0%, rgba(0,0,0,0.55) 45%, transparent 100%)",
-            maskImage: "radial-gradient(ellipse 90% 75% at 50% 35%, black 0%, rgba(0,0,0,0.55) 45%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 110% 95% at 50% 40%, black 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.25) 85%, transparent 100%)",
+            maskImage: "radial-gradient(ellipse 110% 95% at 50% 40%, black 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.25) 85%, transparent 100%)",
           }}
         />
         <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />

@@ -202,7 +202,7 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
               className={`${stampBase} border-double border-emerald-500 bg-emerald-950/40 text-emerald-400 drop-shadow-[0_20px_50px_rgba(16,185,129,0.7)]`}
             >
               <span>Term</span>
-              <span>Sheet 💖</span>
+              <span>Sheet ❤️</span>
             </motion.div>
             <motion.div
               style={{ opacity: nopeOpacity, scale: nopeScale, rotate: -18 }}
@@ -213,7 +213,7 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
             </motion.div>
             <motion.div
               style={{ opacity: superOpacity, scale: superScale, rotate: -8 }}
-              className={`${stampBase} border-sky-400 bg-sky-950/40 text-sky-300 drop-shadow-[0_20px_50px_rgba(56,189,248,0.7)]`}
+              className={`${stampBase} border-sky-300 bg-sky-600/80 text-white drop-shadow-[0_0_40px_rgba(56,189,248,0.95)]`}
             >
               <span>Super</span>
               <span>Invest ⚡</span>

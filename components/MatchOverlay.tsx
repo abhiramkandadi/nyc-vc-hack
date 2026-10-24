@@ -23,6 +23,24 @@ export default function MatchOverlay({ startup, superInvest, mode, emailOpened, 
 
   useEffect(() => {
     if (mode !== "match") return;
+    if (superInvest) {
+      const colors = ["#38BDF8", "#0EA5E9", "#FFD700", "#FFFFFF", "#FF385C", "#10B981"];
+      const star = confetti.shapeFromText({ text: "⚡", scalar: 2 });
+      const fire = (opts: confetti.Options) => confetti({ colors, zIndex: 100, disableForReducedMotion: true, ...opts });
+      fire({ particleCount: 400, spread: 360, startVelocity: 55, origin: { x: 0.5, y: 0.5 }, scalar: 1.3 });
+      fire({ particleCount: 60, spread: 120, origin: { x: 0.5, y: 0.5 }, shapes: [star], scalar: 3 });
+      const end = Date.now() + 2800;
+      const id = setInterval(() => {
+        if (Date.now() > end) return clearInterval(id);
+        fire({ particleCount: 70, angle: 60, spread: 70, startVelocity: 70, origin: { x: 0, y: 0.8 } });
+        fire({ particleCount: 70, angle: 120, spread: 70, startVelocity: 70, origin: { x: 1, y: 0.8 } });
+        fire({ particleCount: 40, spread: 360, startVelocity: 30, gravity: 0.6, origin: { x: Math.random(), y: Math.random() * 0.4 } });
+      }, 220);
+      return () => {
+        clearInterval(id);
+        confetti.reset();
+      };
+    }
     confetti({
       particleCount: 120,
       spread: 80,
@@ -34,7 +52,7 @@ export default function MatchOverlay({ startup, superInvest, mode, emailOpened, 
       confetti({ particleCount: 60, spread: 70, angle, origin: { x, y: 0.7 }, colors: ["#FF385C", "#FFD700", "#10B981"], zIndex: 100 });
     side(0, 60);
     side(1, 120);
-  }, [mode]);
+  }, [mode, superInvest]);
 
   const sendIntro = () => {
     const subject = `Intro: ${startup.name}`;
