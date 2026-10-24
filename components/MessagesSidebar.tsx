@@ -79,19 +79,22 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
       <section className="border-b border-gray-200 pb-5" aria-label="Your profile">
         <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-500">Your profile</h3>
         <div className="flex items-center gap-4">
-          {avatarOk ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src="/profile.jpg"
-              alt={name}
-              onError={() => setAvatarOk(false)}
-              className="h-20 w-20 shrink-0 rounded-full object-cover ring-[3px] ring-[#FF385C] ring-offset-2"
-            />
-          ) : (
-            <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF385C] to-amber-400 text-2xl font-bold text-white ring-[3px] ring-[#FF385C] ring-offset-2">
-              {initials}
-            </span>
-          )}
+          <div className="relative inline-block shrink-0" title="Active in NYC • Sourcing Physical AI">
+            {avatarOk ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src="/profile.jpg"
+                alt={name}
+                onError={() => setAvatarOk(false)}
+                className="h-20 w-20 shrink-0 rounded-full object-cover ring-[3px] ring-[#FF385C] ring-offset-2"
+              />
+            ) : (
+              <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF385C] to-amber-400 text-2xl font-bold text-white ring-[3px] ring-[#FF385C] ring-offset-2">
+                {initials}
+              </span>
+            )}
+            <span className="absolute bottom-0 right-0 z-10 h-4 w-4 animate-pulse rounded-full border-2 border-white bg-emerald-500 shadow-md" aria-label="Active in NYC, sourcing Physical AI" />
+          </div>
           <div className="min-w-0 flex-1">
             {editing ? (
               <div className="flex flex-col gap-1">
@@ -132,10 +135,6 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
             </span>
           ))}
         </div>
-        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-500" />
-          Active in NYC • Sourcing Physical AI
-        </p>
         <p className="mt-3 text-xs italic text-gray-500">Making NYC the biggest startup ecosystem in the world.</p>
         <p className="mt-1 text-xs text-gray-400">{thesis}</p>
       </section>
@@ -168,7 +167,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
                         {m.startup.founderName} • {m.startup.name}
                       </p>
                       {recentActivity(m.startup)?.recent && (
-                        <span className="h-2.5 w-2.5 shrink-0 animate-pulse rounded-full bg-emerald-500" title={`In the news ${recentActivity(m.startup)?.label}`} />
+                        <span className="h-3 w-3 shrink-0 animate-pulse rounded-full border border-white bg-emerald-500" title={`In the news ${recentActivity(m.startup)?.label}`} />
                       )}
                       <span className="shrink-0 text-[11px] text-gray-400">{timeAgo(m.matchedAt, now)}</span>
                     </div>

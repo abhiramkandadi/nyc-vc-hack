@@ -88,8 +88,14 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
         </div>
 
         {activity && (
-          <div className="absolute left-3 top-6 flex items-center gap-1.5 rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
-            <span className={`h-2 w-2 rounded-full ${activity.recent ? "animate-pulse bg-emerald-400" : "bg-gray-300"}`} />
+          <div
+            className={`absolute left-3 top-6 flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold backdrop-blur-md ${
+              activity.recent
+                ? "border-emerald-500/40 bg-emerald-50/90 text-emerald-700"
+                : "border-gray-300/60 bg-white/80 text-gray-600"
+            }`}
+          >
+            <span className={`h-3 w-3 rounded-full border-2 border-white shadow-sm ${activity.recent ? "animate-pulse bg-emerald-500" : "bg-gray-400"}`} />
             In the news · {activity.label}
           </div>
         )}

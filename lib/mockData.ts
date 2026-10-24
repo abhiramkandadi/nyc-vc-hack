@@ -93,7 +93,7 @@ export function recentActivity(s: Pick<StealthStartup, "sourcePublishedAt">): { 
   if (!Number.isFinite(t)) return null;
   const days = Math.max(0, Math.floor((Date.now() - t) / 86_400_000));
   const label = days === 0 ? "today" : days === 1 ? "1d ago" : days < 60 ? `${days}d ago` : `${Math.floor(days / 30)}mo ago`;
-  return { label, recent: days <= 7 };
+  return { label, recent: days <= 60 };
 }
 
 export function hashString(key: string): number {
