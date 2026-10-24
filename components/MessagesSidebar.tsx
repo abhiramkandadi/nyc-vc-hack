@@ -3,6 +3,7 @@
 import { Check, Inbox, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
+import { SAMPLE_THREADS } from "@/lib/sampleThreads";
 import type { StealthStartup } from "@/lib/mockData";
 
 export interface MatchRecord {
@@ -106,12 +107,13 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
           <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">Messages / Deal pipeline</h3>
           {unread > 0 && <span className="rounded-full bg-[#FF385C] px-2 py-0.5 text-[11px] font-bold text-white">{unread}</span>}
         </div>
-        {matches.length === 0 ? (
-          <div className="flex flex-col items-center gap-2 px-8 py-10 text-center text-gray-400">
-            <Inbox className="h-8 w-8" />
+        {matches.length === 0 && (
+          <div className="flex flex-col items-center gap-2 px-8 py-6 text-center text-gray-400">
+            <Inbox className="h-7 w-7" />
             <p className="text-sm">Swipe right on a founder. Matches and drafted intros show up here.</p>
           </div>
-        ) : (
+        )}
+        {matches.length > 0 && (
           <ul>
             {ordered.map((m) => (
               <li key={m.startup.id}>
@@ -142,6 +144,31 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
             ))}
           </ul>
         )}
+
+        <div className="flex items-center justify-between px-3 pb-1 pt-4">
+          <h4 className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Sample conversations</h4>
+        </div>
+        <ul aria-label="Sample conversations">
+          {SAMPLE_THREADS.map((t) => (
+            <li key={t.id} className="flex items-center gap-3 border-l-4 border-transparent px-3 py-3">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-200 text-sm font-bold text-gray-600">
+                {t.name.split(/[\s.]+/).filter(Boolean).map((w) => w[0]).join("").slice(0, 2).toUpperCase()}
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-baseline justify-between gap-2">
+                  <p className="truncate text-base font-bold text-gray-900">
+                    {t.name} • {t.org}
+                  </p>
+                  <span className="shrink-0 text-[11px] text-gray-400">{t.time}</span>
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  <p className={`truncate text-sm ${t.unread ? "font-semibold text-gray-800" : "text-gray-500"}`}>{t.preview}</p>
+                  {t.unread && <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#FF385C]" aria-label="Unread" />}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
     </aside>
   );
