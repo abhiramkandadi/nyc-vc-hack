@@ -27,7 +27,7 @@ class ThesisIntegrationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             pool = Path(folder) / "companies.json"
             pool.write_text(json.dumps(companies))
-            with patch.object(service, "COMPANIES_FILE", pool), patch.object(service, "load_embeddings", return_value=embeddings), patch.object(service, "generate", return_value="Offline test readback."):
+            with patch.object(service, "COMPANIES_FILE", pool), patch.object(service, "load_embeddings", return_value=embeddings), patch.object(service, "load_fund_embeddings", side_effect=lambda funds: {f["id"]: rng.normal(size=8) for f in funds}), patch.object(service, "generate", return_value="Offline test readback."):
                 with TestClient(service.app) as client:
                     ranking = client.get("/ranking").json()
                     self.assertFalse(ranking["fitted"])

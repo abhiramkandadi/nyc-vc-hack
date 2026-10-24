@@ -263,6 +263,9 @@ async function readSeed(path: string): Promise<AktaSeedDocument | null> {
  * pull, licensed akta.pro data) wins over the committed 50-profile seed when it exists.
  */
 async function defaultSeedPath(): Promise<string> {
+  // SEED_FILE lets a deploy or a test name the seed explicitly, for example a mounted data file.
+  const explicit = process.env.SEED_FILE?.trim();
+  if (explicit) return explicit;
   const local = join(process.cwd(), "lib", "seededAktaData.local.json");
   try { await stat(local); return local; } catch { return join(process.cwd(), "lib", "seededAktaData.json"); }
 }

@@ -1,4 +1,4 @@
-const assert=require('node:assert/strict');const {pathToFileURL}=require('node:url');const root=require('node:path').resolve(__dirname,'../..')+'/';
+const assert=require('node:assert/strict');const {pathToFileURL}=require('node:url');const root=require('node:path').resolve(__dirname,'../..')+'/'; process.env.SEED_FILE=root+'lib/seededAktaData.json'; // pin the committed 50-profile seed, so a local seed cannot change the result
 require('node:module').registerHooks({resolve(s,c,n){if(s==='server-only')return{url:'data:text/javascript,export%20%7B%7D',shortCircuit:true};if(s.startsWith('@/'))return{url:pathToFileURL(root+s.slice(2)+'.ts').href,shortCircuit:true};if(s.startsWith('./')&&c.parentURL?.startsWith(pathToFileURL(root+'lib/').href)&&!s.endsWith('.ts'))return{url:new URL(s+'.ts',c.parentURL).href,shortCircuit:true};if(s==='next/server')return{url:pathToFileURL(root+'node_modules/next/server.js').href,shortCircuit:true};return n(s,c);}});
 let scoring={};try{scoring=require(root+'lib/scoring.ts');}catch(e){if(e.code!=='MODULE_NOT_FOUND')throw e;}
 (async()=>{
