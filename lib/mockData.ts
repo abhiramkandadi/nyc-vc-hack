@@ -7,6 +7,8 @@ export interface StealthStartup {
   founderName: string;
   founderAvatar: string;
   founderImage: string;
+  /** Accent hex used for the ambient stage glow; derived from the id when absent. */
+  themeColor?: string;
   exCompany: string;
   founderBackground: string;
   headline: string;
@@ -34,11 +36,54 @@ export const FALLBACK_PORTRAITS: readonly string[] = [
   "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=800",
 ];
 
-/** Deterministic fallback so the same founder always gets the same portrait. */
-export function fallbackPortrait(key: string): string {
+export function hashString(key: string): number {
   let h = 0;
   for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
-  return FALLBACK_PORTRAITS[h % FALLBACK_PORTRAITS.length];
+  return h;
+}
+
+const THEME_PALETTE = ["#E11D48", "#8B5CF6", "#0284C7", "#D97706", "#059669", "#DB2777", "#4F46E5", "#0D9488"] as const;
+
+export function themeColorFor(s: Pick<StealthStartup, "id" | "themeColor">): string {
+  return s.themeColor || THEME_PALETTE[hashString(s.id) % THEME_PALETTE.length];
+}
+
+const photoKey = (url: string): string => url.match(/photo-[\w-]+/)?.[0] ?? url;
+
+/**
+ * Assigns each startup a portrait no other startup in the list uses. The founder's own image is kept
+ * unless an earlier startup already uses it (or it is missing); then the next unused pool portrait,
+ * starting from an id-hash index, is assigned. Beyond the pool size, portraits repeat.
+ */
+export function assignUniquePortraits(startups: readonly Pick<StealthStartup, "id" | "founderImage">[]): Record<string, string> {
+  const used = new Set<string>();
+  const out: Record<string, string> = {};
+  for (const s of startups) {
+    if (s.founderImage && !used.has(photoKey(s.founderImage))) {
+      used.add(photoKey(s.founderImage));
+      out[s.id] = s.founderImage;
+    }
+  }
+  for (const s of startups) {
+    if (out[s.id]) continue;
+    const start = hashString(s.id) % FALLBACK_PORTRAITS.length;
+    let pick = FALLBACK_PORTRAITS[start];
+    for (let i = 0; i < FALLBACK_PORTRAITS.length; i++) {
+      const c = FALLBACK_PORTRAITS[(start + i) % FALLBACK_PORTRAITS.length];
+      if (!used.has(photoKey(c))) {
+        pick = c;
+        break;
+      }
+    }
+    used.add(photoKey(pick));
+    out[s.id] = pick;
+  }
+  return out;
+}
+
+/** Deterministic fallback so the same founder always gets the same portrait. */
+export function fallbackPortrait(key: string): string {
+  return FALLBACK_PORTRAITS[hashString(key) % FALLBACK_PORTRAITS.length];
 }
 
 function avatar(initials: string, background: string): string {

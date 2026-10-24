@@ -9,7 +9,8 @@ import MessagesSidebar, { type MatchRecord } from "@/components/MessagesSidebar"
 import MatchOverlay from "@/components/MatchOverlay";
 import SwipeCard, { type SwipeDirection } from "@/components/SwipeCard";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
-import { MOCK_STEALTH_STARTUPS, fallbackPortrait, type StealthStartup, type TargetSector } from "@/lib/mockData";
+import { PortraitContext } from "@/components/FounderPhoto";
+import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, type StealthStartup, type TargetSector } from "@/lib/mockData";
 
 const PRESET_SECTORS: Record<Preset, TargetSector[]> = {
   "Plug & Play": ["B2B SaaS"],
@@ -37,6 +38,7 @@ export default function Home() {
     [preset, startups],
   );
   const remaining = deck.slice(index);
+  const portraits = useMemo(() => assignUniquePortraits(startups), [startups]);
 
   const log = useCallback((step: TraceEntry["step"], message: string, status: TraceEntry["status"]) => {
     setLogs((l) => [...l, { id: `t${seq++}`, ts: stamp(), step, message, status }]);
@@ -125,10 +127,11 @@ export default function Home() {
   };
 
   const activeStartup = remaining[0] ?? startups[0];
-  const activeImage = activeStartup ? activeStartup.founderImage || fallbackPortrait(activeStartup.id) : "";
+  const aura = activeStartup ? themeColorFor(activeStartup) : "#FF385C";
   const thesis = preset === "Everywhere VC" ? "Thesis: Everywhere VC" : `Thesis: ${preset}`;
 
   return (
+    <PortraitContext.Provider value={portraits}>
     <div className="flex h-screen w-screen justify-between overflow-hidden bg-[#F8F9FA] font-sans text-gray-900">
       <GallerySidebar
         startups={startups}
@@ -141,8 +144,8 @@ export default function Home() {
       <div className="relative flex h-full min-w-0 flex-1 flex-col overflow-hidden">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 scale-125 overflow-hidden opacity-25 blur-3xl transition-all duration-700 ease-out"
-          style={{ backgroundImage: `url(${activeImage})`, backgroundSize: "cover", backgroundPosition: "center" }}
+          className="pointer-events-none absolute inset-0 scale-125 opacity-40 blur-[120px] transition-all duration-700 ease-out"
+          style={{ background: `radial-gradient(circle at center, ${aura} 0%, transparent 70%)` }}
         />
         <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 
@@ -195,5 +198,6 @@ export default function Home() {
 
       <TraceDrawer open={drawerOpen} onToggle={() => setDrawerOpen((o) => !o)} logs={logs} source={source} />
     </div>
+    </PortraitContext.Provider>
   );
 }

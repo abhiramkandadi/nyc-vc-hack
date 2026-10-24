@@ -1,7 +1,7 @@
 "use client";
 
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
-import { BadgeCheck, Heart, Landmark, RotateCcw, Search, Star, X, Zap, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Heart, Landmark, RotateCcw, Star, TrendingUp, Users, X, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
 import type { StealthStartup } from "@/lib/mockData";
@@ -11,11 +11,23 @@ export type SwipeDirection = "left" | "right" | "up";
 const X_THRESHOLD = 120;
 const Y_THRESHOLD = 140;
 
-const SIGNAL_ICONS: { icon: LucideIcon; color: string }[] = [
-  { icon: Zap, color: "text-amber-400" },
-  { icon: Landmark, color: "text-sky-400" },
-  { icon: Search, color: "text-fuchsia-400" },
-];
+type SignalKind = "velocity" | "team" | "legal";
+
+const SIGNAL_STYLE: Record<SignalKind, { icon: LucideIcon; pill: string }> = {
+  velocity: { icon: TrendingUp, pill: "border-emerald-200 bg-emerald-50 text-emerald-700" },
+  team: { icon: Users, pill: "border-indigo-200 bg-indigo-50 text-indigo-700" },
+  legal: { icon: Landmark, pill: "border-amber-200 bg-amber-50 text-amber-700" },
+};
+
+const KIND_ORDER: SignalKind[] = ["velocity", "team", "legal"];
+
+/** Classify a signal by its wording; unmatched signals fall back to their position. */
+function signalKind(text: string, index: number): SignalKind {
+  if (/commit|velocity|github|repo|launch|exited|shipp/i.test(text)) return "velocity";
+  if (/hire|joined|co-?founder|founder:|ex-|team|role|partner/i.test(text)) return "team";
+  if (/c-corp|filing|filed|incorporat|raised|angel|round|seed|funding|entity/i.test(text)) return "legal";
+  return KIND_ORDER[index % 3];
+}
 
 interface TopCardProps {
   startup: StealthStartup;
@@ -105,13 +117,13 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
         <p className="line-clamp-2 px-6 pt-1 text-sm font-medium leading-relaxed text-gray-700">{startup.pitchSummary}</p>
         <div className="mx-6 my-3 flex flex-wrap gap-2" aria-label="akta.pro signals">
           {startup.signals.map((s, i) => {
-            const { icon: Icon, color } = SIGNAL_ICONS[i];
+            const { icon: Icon, pill } = SIGNAL_STYLE[signalKind(s, i)];
             return (
               <span
                 key={s}
-                className="flex max-w-full items-center gap-1.5 rounded-xl border border-gray-200 bg-gray-100 px-3 py-2 text-xs font-semibold text-gray-800"
+                className={`flex max-w-full items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold ${pill}`}
               >
-                <Icon className={`h-3 w-3 shrink-0 ${color}`} />
+                <Icon className="h-3.5 w-3.5 shrink-0" />
                 <span className="truncate">{s}</span>
               </span>
             );

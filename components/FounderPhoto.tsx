@@ -1,18 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { fallbackPortrait, type StealthStartup } from "@/lib/mockData";
+
+/** Per-startup portrait overrides so no two founders on screen share a face. */
+export const PortraitContext = createContext<Record<string, string>>({});
 
 interface Props {
   startup: Pick<StealthStartup, "id" | "founderName" | "founderImage" | "founderAvatar">;
   className?: string;
 }
 
-/** Single source for founder photos: portrait, then a verified fallback portrait, then the initials avatar. */
+/** Single source for founder photos: assigned portrait, then a hashed fallback portrait, then the initials avatar. */
 export default function FounderPhoto({ startup, className }: Props) {
+  const assigned = useContext(PortraitContext)[startup.id];
   const [stage, setStage] = useState(0);
   const fallback = fallbackPortrait(startup.id || startup.founderName);
-  const sources = [startup.founderImage || fallback, fallback, startup.founderAvatar];
+  const sources = [assigned || startup.founderImage || fallback, fallback, startup.founderAvatar];
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
