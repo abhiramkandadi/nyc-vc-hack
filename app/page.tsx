@@ -10,6 +10,7 @@ import MatchOverlay from "@/components/MatchOverlay";
 import SwipeCard, { type SwipeDirection } from "@/components/SwipeCard";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
 import { PortraitContext } from "@/components/FounderPhoto";
+import { useDominantColor } from "@/lib/useDominantColor";
 import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, type StealthStartup, type TargetSector } from "@/lib/mockData";
 
 const PRESET_SECTORS: Record<Preset, TargetSector[]> = {
@@ -127,7 +128,8 @@ export default function Home() {
   };
 
   const activeStartup = remaining[0] ?? startups[0];
-  const aura = activeStartup ? themeColorFor(activeStartup) : "#FF385C";
+  const auraFallback = activeStartup ? themeColorFor(activeStartup) : "#FF385C";
+  const aura = useDominantColor(activeStartup ? portraits[activeStartup.id]?.src : undefined, auraFallback);
   const thesis = preset === "Everywhere VC" ? "Thesis: Everywhere VC" : `Thesis: ${preset}`;
 
   return (
@@ -141,11 +143,17 @@ export default function Home() {
         onSelect={handleSelectFounder}
       />
 
-      <div className="relative flex h-full min-w-0 flex-1 flex-col items-center justify-between overflow-hidden bg-[#F1F3F5]">
+      <div id="stage-root"
+        className="relative flex h-full min-w-0 flex-1 flex-col items-center justify-between overflow-hidden bg-[#F1F3F5] [container-type:inline-size]"
+      >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 scale-125 opacity-40 blur-[120px] transition-all duration-700 ease-out"
-          style={{ background: `radial-gradient(circle at center, ${aura} 0%, transparent 70%)` }}
+          className="pointer-events-none absolute inset-0 opacity-70 transition-colors duration-700 ease-out"
+          style={{
+            backgroundColor: aura,
+            WebkitMaskImage: "radial-gradient(ellipse 90% 75% at 50% 35%, black 0%, rgba(0,0,0,0.55) 45%, transparent 100%)",
+            maskImage: "radial-gradient(ellipse 90% 75% at 50% 35%, black 0%, rgba(0,0,0,0.55) 45%, transparent 100%)",
+          }}
         />
         <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 

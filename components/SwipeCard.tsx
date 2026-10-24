@@ -150,8 +150,8 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
   const shake = useAnimationControls();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [stage, setStage] = useState<HTMLElement | null>(null);
+  useEffect(() => setStage(document.getElementById("stage-root")), []);
   // A new top card starts centered; the previous card's fling offset must not carry over.
   useEffect(() => {
     x.set(0);
@@ -164,7 +164,7 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
   const superOpacity = useTransform(y, [-Y_THRESHOLD, -20], [1, 0]);
   const superScale = useTransform(y, [-Y_THRESHOLD, -20], [1.3, 0.5]);
   const stampBase =
-    "absolute flex select-none flex-col items-center rounded-[3rem] border-[1.1rem] px-[0.35em] py-[0.18em] text-center text-[min(13vw,11rem)] font-black uppercase leading-[0.95] tracking-widest backdrop-blur-md";
+    "absolute flex select-none flex-col items-center rounded-[3rem] border-[1.1rem] px-[0.35em] py-[0.18em] text-center text-[min(9cqw,9rem)] font-black uppercase leading-[0.95] tracking-widest backdrop-blur-md";
   const impact = () => {
     shake.start({ x: [0, -10, 10, -5, 5, 0], transition: { duration: 0.15, ease: "easeOut" } });
   };
@@ -194,9 +194,9 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
         )}
       </motion.div>
 
-      {mounted &&
+      {stage &&
         createPortal(
-          <div className="pointer-events-none fixed inset-0 z-[60] flex items-center justify-center overflow-hidden" aria-hidden="true">
+          <div className="pointer-events-none absolute inset-0 z-[60] flex items-center justify-center overflow-hidden" aria-hidden="true">
             <motion.div
               style={{ opacity: likeOpacity, scale: likeScale, rotate: 18 }}
               className={`${stampBase} border-double border-emerald-500 bg-emerald-950/40 text-emerald-400 drop-shadow-[0_20px_50px_rgba(16,185,129,0.7)]`}
@@ -219,7 +219,7 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
               <span>Invest ⚡</span>
             </motion.div>
           </div>,
-          document.body,
+          stage,
         )}
 
       <div className="flex shrink-0 items-center justify-center gap-5 pb-1" role="group" aria-label="Swipe actions">
