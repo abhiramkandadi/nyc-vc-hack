@@ -52,11 +52,11 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
         else if (info.offset.x > X_THRESHOLD) fling("right");
         else if (info.offset.x < -X_THRESHOLD) fling("left");
       }}
-      className="absolute inset-0 flex cursor-grab select-none flex-col justify-between overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-xl active:cursor-grabbing"
+      className="absolute inset-0 flex cursor-grab select-none flex-col justify-between overflow-hidden rounded-[32px] border border-gray-200 bg-white shadow-2xl active:cursor-grabbing"
     >
       {/* Image area */}
-      <div className="relative h-[380px] w-full shrink-0 bg-gray-200">
-        <FounderPhoto startup={startup} className="h-[380px] w-full object-cover object-top" />
+      <div className="relative h-[460px] w-full shrink-0 bg-gray-200">
+        <FounderPhoto startup={startup} className="h-[460px] w-full object-cover object-top" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
         <div className="absolute inset-x-3 top-2 flex gap-1" aria-hidden="true">
@@ -89,11 +89,11 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
         </motion.span>
 
         <div className="absolute inset-x-4 bottom-3 text-white">
-          <h2 className="flex items-center gap-2 text-[28px] font-bold leading-tight">
+          <h2 className="flex items-center gap-2 text-3xl font-extrabold leading-tight">
             {startup.founderName}, <span className="font-normal">{startup.stage}</span>
             <BadgeCheck className="h-6 w-6 fill-sky-500 text-white" aria-label="Verified" />
           </h2>
-          <p className="text-sm font-medium text-white">
+          <p className="text-base font-medium text-white">
             Ex-{startup.exCompany} • {startup.name}
           </p>
         </div>
@@ -101,14 +101,14 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
 
       {/* Body */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        <p className="line-clamp-2 px-4 pt-3 text-xs font-medium leading-relaxed text-gray-700">{startup.pitchSummary}</p>
-        <div className="mx-4 my-2 flex flex-wrap gap-1.5" aria-label="akta.pro signals">
+        <p className="line-clamp-2 px-5 pt-4 text-sm font-medium leading-relaxed text-gray-700">{startup.pitchSummary}</p>
+        <div className="mx-5 my-3 flex flex-wrap gap-2" aria-label="akta.pro signals">
           {startup.signals.map((s, i) => {
             const { icon: Icon, color } = SIGNAL_ICONS[i];
             return (
               <span
                 key={s}
-                className="flex max-w-full items-center gap-1.5 rounded-lg border border-gray-200 bg-gray-100 px-2.5 py-1.5 text-[11px] font-medium text-gray-800"
+                className="flex max-w-full items-center gap-1.5 rounded-lg border border-gray-200 bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-800"
               >
                 <Icon className={`h-3 w-3 shrink-0 ${color}`} />
                 <span className="truncate">{s}</span>
@@ -116,7 +116,7 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
             );
           })}
           {startup.liveNews && (
-            <span className="flex max-w-full items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1.5 text-[11px] font-medium text-emerald-800">
+            <span className="flex max-w-full items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-800">
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
               <span className="truncate">{startup.liveNews.title}</span>
             </span>
@@ -142,11 +142,11 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
 
   return (
     <div className="flex h-full w-full flex-col justify-between">
-      <div className="relative h-[580px] w-full">
+      <div className="relative h-[720px] w-full">
         {next && (
           <div
             aria-hidden="true"
-            className="absolute inset-0 translate-y-3 scale-[0.94] rounded-3xl border border-gray-200 bg-white opacity-70 shadow-md"
+            className="absolute inset-0 translate-y-3 scale-[0.94] rounded-[32px] border border-gray-200 bg-white opacity-70 shadow-md"
           />
         )}
         {top && (
@@ -168,7 +168,7 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
           disabled={!canRewind || !!forced}
           aria-label="Rewind"
           title="Rewind"
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-amber-500 shadow-md transition hover:scale-110 disabled:opacity-40 disabled:hover:scale-100"
+          className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-200 bg-white text-amber-500 shadow-md transition hover:scale-110 disabled:opacity-40 disabled:hover:scale-100"
         >
           <RotateCcw className="h-5 w-5" strokeWidth={3} />
         </button>
@@ -177,16 +177,16 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
           disabled={locked}
           aria-label="Pass"
           title="Pass"
-          className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-200 bg-white text-xl text-rose-500 shadow-lg transition hover:scale-110 disabled:opacity-40"
+          className="flex h-16 w-16 items-center justify-center rounded-full border border-gray-200 bg-white text-xl text-rose-500 shadow-[0_8px_24px_rgba(244,63,94,0.3)] transition hover:scale-110 disabled:opacity-40"
         >
-          <X className="h-7 w-7" strokeWidth={3.5} />
+          <X className="h-8 w-8" strokeWidth={3.5} />
         </button>
         <button
           onClick={() => setForced("up")}
           disabled={locked}
           aria-label="Super-Invest"
           title="Super-Invest"
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-sky-400 shadow-md transition hover:scale-110 disabled:opacity-40"
+          className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-200 bg-white text-sky-400 shadow-md transition hover:scale-110 disabled:opacity-40"
         >
           <Star className="h-5 w-5 fill-sky-400" />
         </button>
@@ -195,9 +195,9 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
           disabled={locked}
           aria-label="Match"
           title="Match"
-          className="flex h-16 w-16 items-center justify-center rounded-full border border-gray-200 bg-white text-2xl text-emerald-500 shadow-xl transition hover:scale-110 disabled:opacity-40"
+          className="flex h-20 w-20 items-center justify-center rounded-full border border-gray-200 bg-white text-2xl text-emerald-500 shadow-[0_10px_32px_rgba(16,185,129,0.45)] transition hover:scale-110 disabled:opacity-40"
         >
-          <Heart className="h-7 w-7 fill-emerald-500" />
+          <Heart className="h-9 w-9 fill-emerald-500" />
         </button>
       </div>
     </div>

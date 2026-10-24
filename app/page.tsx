@@ -4,7 +4,8 @@ import { AnimatePresence } from "framer-motion";
 import { RotateCcw } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Header, { type Preset } from "@/components/Header";
-import Sidebar, { type MatchRecord } from "@/components/Sidebar";
+import GallerySidebar from "@/components/GallerySidebar";
+import MessagesSidebar, { type MatchRecord } from "@/components/MessagesSidebar";
 import MatchOverlay from "@/components/MatchOverlay";
 import SwipeCard, { type SwipeDirection } from "@/components/SwipeCard";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
@@ -106,6 +107,15 @@ export default function Home() {
     setOverlay({ startup: m.startup, superInvest: m.superInvest, mode: "chat" });
   };
 
+  const handleSelectFounder = (s: StealthStartup) => {
+    const i = startups.findIndex((x) => x.id === s.id);
+    if (i < 0) return;
+    setPreset("Everywhere VC");
+    setIndex(i);
+    setHistory([]);
+    log("swipe", `Jumped to ${s.name}`, "info");
+  };
+
   const changePreset = (p: Preset) => {
     setPreset(p);
     setIndex(0);
@@ -117,22 +127,23 @@ export default function Home() {
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-[#F8F9FA] font-sans text-gray-900">
-      <Sidebar
-        matches={matches}
-        thesis={thesis}
-        selectedId={overlay?.mode === "chat" ? overlay.startup.id : null}
-        onSelectMatch={handleOpenChat}
+      <GallerySidebar
+        startups={startups}
+        currentId={remaining[0]?.id ?? null}
+        matchedIds={new Set(matches.map((m) => m.startup.id))}
+        live={source === "live"}
+        onSelect={handleSelectFounder}
       />
 
-      <div className="relative flex h-full flex-1 flex-col overflow-y-auto">
+      <div className="relative flex h-full min-w-0 flex-1 flex-col overflow-y-auto">
         <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 
-        <main className="flex w-full flex-1 items-center justify-center px-4 py-6">
-          <div className="relative my-auto flex h-[680px] w-full max-w-[400px] flex-col justify-between">
+        <main className="flex w-full flex-1 items-center justify-center p-6">
+          <div className="relative my-auto flex h-[840px] w-full max-w-[480px] flex-col justify-between">
             {remaining.length > 0 ? (
               <SwipeCard startups={remaining} onSwipe={handleSwipe} onRewind={handleRewind} canRewind={history.length > 0} />
             ) : (
-              <div className="flex h-[580px] w-full flex-col items-center justify-center gap-4 rounded-3xl border border-gray-200/80 bg-white p-10 text-center shadow-xl">
+              <div className="flex h-[720px] w-full flex-col items-center justify-center gap-4 rounded-[32px] border border-gray-200/80 bg-white p-10 text-center shadow-xl">
                 <h2 className="font-display text-2xl font-bold text-gray-900">You&apos;re all caught up</h2>
                 <p className="text-sm text-gray-500">No more stealth startups for this preset.</p>
                 <button
@@ -149,6 +160,13 @@ export default function Home() {
           </div>
         </main>
       </div>
+
+      <MessagesSidebar
+        matches={matches}
+        thesis={thesis}
+        selectedId={overlay?.mode === "chat" ? overlay.startup.id : null}
+        onSelectMatch={handleOpenChat}
+      />
 
       <AnimatePresence>
         {overlay && (

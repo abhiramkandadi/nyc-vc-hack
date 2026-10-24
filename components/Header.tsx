@@ -24,7 +24,7 @@ function Tie({ className }: { className?: string }) {
 export default function Header({ preset, onPreset, matchCount }: Props) {
   return (
     <header className="sticky top-0 z-20 flex w-full flex-wrap items-center justify-between gap-3 border-b border-gray-200 bg-white px-6 py-3 shadow-sm">
-      <div className="flex items-center gap-2 font-display text-xl font-extrabold text-[#FF385C] md:hidden">
+      <div className="flex items-center gap-2 font-display text-xl font-extrabold text-[#FF385C]">
         <span className="relative flex items-center">
           <Flame className="h-7 w-7 fill-[#FF385C] text-[#FF385C]" aria-hidden="true" />
           <Tie className="absolute -right-2 top-2.5 h-5 w-5" />
