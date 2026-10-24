@@ -333,7 +333,7 @@ export function parseSeededAktaData(value: unknown): AktaSeedDocument | null {
   const raw = object(value);
   const fetchedAt = string(raw.fetchedAt);
   if (raw.schemaVersion !== 1 || raw.provider !== "akta.pro" || !fetchedAt || !Number.isFinite(Date.parse(fetchedAt)) || Date.parse(fetchedAt) > Date.now() + 300_000 || !safeUrl(raw.sourceApiUrl)) return null;
-  if (!Array.isArray(raw.data) || raw.data.length < 1 || raw.data.length > 50) return null;
+  if (!Array.isArray(raw.data) || raw.data.length < 1 || raw.data.length > 500) return null;
   const ids = new Set<string>();
   for (const item of raw.data) {
     const p = object(item);
@@ -395,9 +395,18 @@ let refreshFailure: { key: string; reason: string; retryAt: number } | undefined
  * should await fetchStartupProfiles()/flushAktaTelemetry() before exiting.
  * Filesystem/JSON/HTTP overhead still exists; literal 0ms cannot be guaranteed.
  */
+/**
+ * A local, gitignored seed (the 180-company pull, licensed akta.pro data) wins over the
+ * committed 50-profile seed when it exists, so the public repo never carries the larger set.
+ */
+async function defaultSeedPath(): Promise<string> {
+  const local = join(process.cwd(), "lib", "seededAktaData.local.json");
+  try { await stat(local); return local; } catch { return join(process.cwd(), "lib", "seededAktaData.json"); }
+}
+
 export async function getStartupProfiles(options: { seedPath?: string } = {}): Promise<StartupProfilesResult> {
   const started = performance.now();
-  const seed = await readSeed(options.seedPath ?? join(process.cwd(), "lib", "seededAktaData.json"));
+  const seed = await readSeed(options.seedPath ?? await defaultSeedPath());
   if (seed) {
     reportAktaTelemetry("seed_cache_hit", { source: "seed", count: seed.data.length, latencyMs: Math.round(performance.now() - started) });
     return { data: structuredClone(seed.data), fetchedAt: seed.fetchedAt, cached: true, source: "seed" };
