@@ -22,6 +22,7 @@ EMBED_MODEL = "openai/text-embedding-3-small"
 EMBED_CACHE = Path("data/embeddings.json")
 FUND_CACHE = Path("data/fund_embeddings.json")
 EMBED_BATCH = 64
+NO_FIT_ACTION_WEIGHT = 1 / 3  # how much saves and passes count against the fund thesis before a fit
 EMBED_SCALE = 3.0  # puts the unit-length embedding on a scale comparable to the 0/1 features
 
 ACTIONS = ("pass", "save", "track", "intro")
@@ -172,12 +173,13 @@ class Ranker:
         pos = [self.index[u] for u, a in self.actions if a in POSITIVE]
         neg = [self.index[u] for u, a in self.actions if a == "pass"]
         # No fit yet: start from the fund's thesis, then lean toward saves and away from passes.
+        # Actions count for a third, so a few of them cannot pull the ranking off the fund.
         score = self.fund_sim[idx].copy()
         for rows, sign in ((pos, 1.0), (neg, -1.0)):
             if rows:
                 ref = self.X[rows].mean(axis=0)
                 sim = X @ ref / (np.linalg.norm(X, axis=1) * np.linalg.norm(ref) + 1e-9)
-                score += sign * sim
+                score += sign * NO_FIT_ACTION_WEIGHT * sim
         return score
 
     def ranked_unseen(self) -> list[dict]:
