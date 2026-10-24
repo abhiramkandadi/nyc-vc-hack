@@ -25,6 +25,7 @@ export default function Home() {
   const [overlay, setOverlay] = useState<{ startup: StealthStartup; superInvest: boolean } | null>(null);
   const [logs, setLogs] = useState<TraceEntry[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [history, setHistory] = useState<{ startup: StealthStartup; wasMatch: boolean }[]>([]);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   const deck = useMemo(
@@ -57,8 +58,19 @@ export default function Home() {
     [log],
   );
 
+  const handleRewind = () => {
+    const last = history[history.length - 1];
+    if (!last) return;
+    setHistory((h) => h.slice(0, -1));
+    setIndex((i) => Math.max(0, i - 1));
+    if (last.wasMatch) setMatches((m) => m.filter((x) => x.id !== last.startup.id));
+    setOverlay(null);
+    log("swipe", `Rewind: ${last.startup.name}`, "info");
+  };
+
   const handleSwipe = (d: SwipeDirection, s: StealthStartup) => {
     setIndex((i) => i + 1);
+    setHistory((h) => [...h, { startup: s, wasMatch: d !== "left" && !matches.some((x) => x.id === s.id) }]);
     log("swipe", `${d === "left" ? "Pass" : d === "up" ? "Super-Invest" : "Match"}: ${s.name}`, "info");
     if (d === "left") return;
     setMatches((m) => (m.some((x) => x.id === s.id) ? m : [...m, s]));
@@ -69,6 +81,7 @@ export default function Home() {
   const changePreset = (p: Preset) => {
     setPreset(p);
     setIndex(0);
+    setHistory([]);
     log("swipe", `Preset → ${p}`, "info");
   };
 
@@ -78,13 +91,16 @@ export default function Home() {
 
       <main className="flex flex-col items-center px-4 py-6">
         {remaining.length > 0 ? (
-          <SwipeCard startups={remaining} onSwipe={handleSwipe} />
+          <SwipeCard startups={remaining} onSwipe={handleSwipe} onRewind={handleRewind} canRewind={history.length > 0} />
         ) : (
           <div className="mt-16 flex w-full max-w-[420px] flex-col items-center gap-4 rounded-[32px] border border-white/15 bg-zinc-950/90 p-10 text-center backdrop-blur-2xl">
             <h2 className="font-display text-2xl font-bold">You&apos;re all caught up</h2>
             <p className="text-sm text-foreground/60">No more stealth startups for this preset.</p>
             <button
-              onClick={() => setIndex(0)}
+              onClick={() => {
+                setIndex(0);
+                setHistory([]);
+              }}
               className="flex items-center gap-2 rounded-full bg-[#FF385C] px-5 py-2 text-sm font-semibold text-white shadow-[0_0_20px_rgba(255,56,92,0.4)]"
             >
               <RotateCcw className="h-4 w-4" /> Reset deck

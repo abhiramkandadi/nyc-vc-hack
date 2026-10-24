@@ -6,6 +6,7 @@ export interface StealthStartup {
   name: string;
   founderName: string;
   founderAvatar: string;
+  founderImage: string;
   exCompany: string;
   headline: string;
   signalScore: number;
@@ -21,6 +22,7 @@ function avatar(initials: string, background: string): string {
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
 
+// founderImage values are Unsplash stock portraits used as placeholders; they are not the fictional founders.
 // All identities, affiliations, scores, and akta.pro-style signals are synthetic.
 // These fixtures are not provider observations or investment recommendations.
 export const MOCK_STEALTH_STARTUPS: StealthStartup[] = [
@@ -29,6 +31,7 @@ export const MOCK_STEALTH_STARTUPS: StealthStartup[] = [
     name: "Canal Compute",
     founderName: "Maya Sethi",
     founderAvatar: avatar("MS", "#312e81"),
+    founderImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=800",
     exCompany: "Anthropic",
     headline: "GPU-aware inference routing for enterprise AI workloads.",
     signalScore: 98,
@@ -43,6 +46,7 @@ export const MOCK_STEALTH_STARTUPS: StealthStartup[] = [
     name: "Ledgerline",
     founderName: "Julian Mercer",
     founderAvatar: avatar("JM", "#164e63"),
+    founderImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800",
     exCompany: "Stripe",
     headline: "An exception-resolution workspace for finance operations.",
     signalScore: 94,
@@ -57,6 +61,7 @@ export const MOCK_STEALTH_STARTUPS: StealthStartup[] = [
     name: "Turnstile Robotics",
     founderName: "Elena Park",
     founderAvatar: avatar("EP", "#064e3b"),
+    founderImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
     exCompany: "Boston Dynamics",
     headline: "Robot inspection systems for constrained urban facilities.",
     signalScore: 91,
@@ -71,6 +76,7 @@ export const MOCK_STEALTH_STARTUPS: StealthStartup[] = [
     name: "Tracewell",
     founderName: "Arjun Vora",
     founderAvatar: avatar("AV", "#713f12"),
+    founderImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800",
     exCompany: "OpenAI",
     headline: "Reproducible evaluation and debugging for AI agents.",
     signalScore: 96,
@@ -85,6 +91,7 @@ export const MOCK_STEALTH_STARTUPS: StealthStartup[] = [
     name: "Permit House",
     founderName: "Nadia Alvarez",
     founderAvatar: avatar("NA", "#831843"),
+    founderImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=800",
     exCompany: "Ramp",
     headline: "Permitting coordination for commercial buildouts.",
     signalScore: 88,
@@ -99,6 +106,7 @@ export const MOCK_STEALTH_STARTUPS: StealthStartup[] = [
     name: "Dockhand Systems",
     founderName: "Theo Bennett",
     founderAvatar: avatar("TB", "#3f3f46"),
+    founderImage: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
     exCompany: "Amazon Robotics",
     headline: "Vision-assisted handling for small urban warehouses.",
     signalScore: 85,
