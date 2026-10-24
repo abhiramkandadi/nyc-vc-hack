@@ -71,21 +71,21 @@ function TopCard({ startup, forced, onSwipe }: TopCardProps) {
 
         <motion.span
           style={{ opacity: likeOpacity }}
-          className="absolute left-5 top-14 -rotate-12 rounded-lg border-4 border-emerald-400 px-2.5 py-0.5 font-display text-3xl font-extrabold text-emerald-400"
+          className="pointer-events-none absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 rotate-[18deg] whitespace-nowrap rounded-2xl border-8 border-emerald-500 bg-black/40 px-6 py-2 text-5xl font-extrabold uppercase tracking-wider text-emerald-400 shadow-2xl backdrop-blur-sm"
         >
-          INVEST
+          Term sheet 💖
         </motion.span>
         <motion.span
           style={{ opacity: nopeOpacity }}
-          className="absolute right-5 top-14 rotate-12 rounded-lg border-4 border-rose-500 px-2.5 py-0.5 font-display text-3xl font-extrabold text-rose-500"
+          className="pointer-events-none absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 rotate-[-18deg] whitespace-nowrap rounded-2xl border-8 border-red-500 bg-black/40 px-6 py-2 text-5xl font-extrabold uppercase tracking-wider text-red-500 shadow-2xl backdrop-blur-sm"
         >
-          PASS
+          No deal ❌
         </motion.span>
         <motion.span
           style={{ opacity: superOpacity }}
-          className="absolute left-1/2 top-14 -translate-x-1/2 rounded-lg border-4 border-sky-400 px-2.5 py-0.5 font-display text-3xl font-extrabold text-sky-400"
+          className="pointer-events-none absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2 rotate-[-5deg] whitespace-nowrap rounded-2xl border-8 border-sky-400 bg-black/40 px-6 py-2 text-5xl font-extrabold uppercase tracking-wider text-sky-400 shadow-2xl backdrop-blur-sm"
         >
-          SUPER
+          Lead invest ⚡
         </motion.span>
 
         <div className="absolute inset-x-4 bottom-3 text-white">

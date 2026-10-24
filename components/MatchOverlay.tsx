@@ -28,7 +28,12 @@ export default function MatchOverlay({ startup, superInvest, mode, emailOpened, 
       spread: 80,
       origin: { y: 0.6 },
       colors: ["#FF385C", "#FF1744", "#FFD700", "#10B981"],
+      zIndex: 100,
     });
+    const side = (x: number, angle: number) =>
+      confetti({ particleCount: 60, spread: 70, angle, origin: { x, y: 0.7 }, colors: ["#FF385C", "#FFD700", "#10B981"], zIndex: 100 });
+    side(0, 60);
+    side(1, 120);
   }, [mode]);
 
   const sendIntro = () => {
@@ -91,6 +96,8 @@ export default function MatchOverlay({ startup, superInvest, mode, emailOpened, 
           {startup.founderBackground} · {startup.name}
         </p>
 
+        <p className="mt-3 rounded-xl bg-gray-50 p-3 text-xs leading-relaxed text-gray-600">{startup.pitchSummary}</p>
+
         <div className="mt-4">
           <label htmlFor="intro-draft" className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
             Intro email (editable)
@@ -99,7 +106,7 @@ export default function MatchOverlay({ startup, superInvest, mode, emailOpened, 
             id="intro-draft"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
-            rows={8}
+            rows={6}
             className="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 p-3 text-sm leading-relaxed text-gray-700 outline-none focus:border-[#FF385C]"
           />
         </div>

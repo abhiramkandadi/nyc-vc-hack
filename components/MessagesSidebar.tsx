@@ -91,6 +91,13 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
             {editing ? <Check className="h-4 w-4" /> : <Pencil className="h-4 w-4" />}
           </button>
         </div>
+        <div className="mt-4 flex flex-wrap gap-2" aria-label="Fund metrics">
+          {["💼 $50M Fund I", "🔥 14 Deals Termed", "🎯 Sector: Physical AI & Agents"].map((m) => (
+            <span key={m} className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-700">
+              {m}
+            </span>
+          ))}
+        </div>
         <p className="mt-3 text-xs text-gray-500">{thesis}</p>
       </section>
 

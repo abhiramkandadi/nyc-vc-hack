@@ -9,7 +9,7 @@ import MessagesSidebar, { type MatchRecord } from "@/components/MessagesSidebar"
 import MatchOverlay from "@/components/MatchOverlay";
 import SwipeCard, { type SwipeDirection } from "@/components/SwipeCard";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
-import { MOCK_STEALTH_STARTUPS, type StealthStartup, type TargetSector } from "@/lib/mockData";
+import { MOCK_STEALTH_STARTUPS, fallbackPortrait, type StealthStartup, type TargetSector } from "@/lib/mockData";
 
 const PRESET_SECTORS: Record<Preset, TargetSector[]> = {
   "Plug & Play": ["B2B SaaS"],
@@ -98,7 +98,8 @@ export default function Home() {
         ? m
         : [...m, { startup: s, matchedAt: Date.now(), superInvest: d === "up", emailOpened: false, unread: true }],
     );
-    setOverlay({ startup: s, superInvest: d === "up", mode: "match" });
+    // Beat of suspense before the match reveal.
+    timers.current.push(setTimeout(() => setOverlay({ startup: s, superInvest: d === "up", mode: "match" }), 400));
     runPipeline(s);
   };
 
@@ -123,6 +124,8 @@ export default function Home() {
     log("swipe", `Preset → ${p}`, "info");
   };
 
+  const activeStartup = remaining[0] ?? startups[0];
+  const activeImage = activeStartup ? activeStartup.founderImage || fallbackPortrait(activeStartup.id) : "";
   const thesis = preset === "Everywhere VC" ? "Thesis: Everywhere VC" : `Thesis: ${preset}`;
 
   return (
@@ -136,9 +139,14 @@ export default function Home() {
       />
 
       <div className="relative flex h-full min-w-0 flex-1 flex-col overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 scale-125 overflow-hidden opacity-25 blur-3xl transition-all duration-700 ease-out"
+          style={{ backgroundImage: `url(${activeImage})`, backgroundSize: "cover", backgroundPosition: "center" }}
+        />
         <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 
-        <main className="flex min-h-0 w-full flex-1 flex-col items-center justify-center p-4">
+        <main className="relative z-10 flex min-h-0 w-full flex-1 flex-col items-center justify-center p-4">
           <div className="relative flex h-full w-full max-w-[520px] flex-col">
             {remaining.length > 0 ? (
               <SwipeCard startups={remaining} onSwipe={handleSwipe} onRewind={handleRewind} canRewind={history.length > 0} />
