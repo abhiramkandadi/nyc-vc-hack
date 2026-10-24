@@ -1,35 +1,49 @@
 import { NextResponse } from "next/server";
-import { fetchStealthNews } from "@/lib/sponsorStack";
-import { MOCK_STEALTH_STARTUPS, type StealthStartup } from "@/lib/mockData";
+import { randomUUID } from "node:crypto";
+import { exportPrismTrace } from "@/lib/sponsorStack";
+import { AktaHydrationError, getStartupProfiles, getMockStartupProfiles } from "@/lib/akta";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+export const maxDuration = 30;
 
 /**
- * Hybrid hydration: when AKTA_API_KEY is set, attach each startup's latest akta.pro
- * news signal. Any failure (missing key, timeout, empty result) falls back to the seed deck.
+ * Live discovery and hydration, with explicit demo fallback. `startups`/`source`
+ * remain compatible with the existing UI; new clients consume `success`/`data`.
  */
 export async function GET() {
-  if (!process.env.AKTA_API_KEY) {
-    return NextResponse.json({ source: "sample", startups: MOCK_STEALTH_STARTUPS });
-  }
-
-  const results = await Promise.all(
-    MOCK_STEALTH_STARTUPS.map(async (s): Promise<StealthStartup | null> => {
+  const startedAt = performance.now();
+  const headers = { "Cache-Control": "no-store" };
+  try {
+    const result = await getStartupProfiles();
+    const demo = result.source === "mock";
+    return NextResponse.json({
+      success: true, data: result.data, source: demo ? "sample" : "live", startups: result.data,
+      meta: { dataSource: demo ? "mock" : "akta.pro", retrieval: result.source, demo, reason: result.reason,
+        refreshing: result.refreshing ?? false, fetchedAt: result.fetchedAt, cached: result.cached },
+    }, { headers: { ...headers, "X-Data-Source": demo ? "mock" : "akta.pro", "X-Data-Retrieval": result.source } });
+  } catch (error: unknown) {
+    const reason = error instanceof AktaHydrationError ? error.code : "HYDRATION_FAILED";
+    // Do not log raw errors, provider bodies, keys, or private company payloads.
+    console.warn("[signals] Returning demo profiles", { reason });
+    if (process.env.PRISMTRACE_API_KEY?.trim()) {
       try {
-        const page = await fetchStealthNews({ query: `${s.name} ${s.founderName}`, limit: 1 }, { timeoutMs: 6_000 });
-        const hit = page.data[0];
-        return hit ? { ...s, liveNews: { title: hit.title, url: hit.url } } : null;
+        await exportPrismTrace({
+          project_id: process.env.PRISM_PROJECT_ID?.trim() || "company-tinder",
+          model: "not-applicable",
+          input_messages: [{ role: "user", content: "Hydrate startup profiles from akta.pro." }],
+          output_message: JSON.stringify({ event: "akta_hydration_fallback", reason, dataSource: "mock" }),
+          latency_ms: Math.round(performance.now() - startedAt),
+          session_id: randomUUID(), agent_id: "AktaHydrationService",
+        }, { timeoutMs: 1_000 });
       } catch {
-        return null;
+        console.warn("[signals] Fallback telemetry unavailable");
       }
-    }),
-  );
-
-  if (results.every((r) => r === null)) {
-    return NextResponse.json({ source: "sample", startups: MOCK_STEALTH_STARTUPS });
+    }
+    const data = getMockStartupProfiles();
+    return NextResponse.json({
+      success: true, data, source: "sample", startups: data,
+      meta: { dataSource: "mock", demo: true, reason, fetchedAt: new Date().toISOString(), cached: false },
+    }, { headers: { ...headers, "X-Data-Source": "mock" } });
   }
-  return NextResponse.json({
-    source: "live",
-    startups: MOCK_STEALTH_STARTUPS.map((s, i) => results[i] ?? s),
-  });
 }

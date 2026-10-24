@@ -1,0 +1,473 @@
+{
+  "schemaVersion": 1,
+  "provider": "akta.pro",
+  "fetchedAt": "2026-10-24T17:02:12.552Z",
+  "sourceApiUrl": "https://mcp.akta.pro/mcp",
+  "data": [
+    {
+      "id": "02mokfp",
+      "name": "Dynamic Creatures",
+      "founderName": "Marc Theermann",
+      "founderImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Boston Dynamics",
+      "founderBackground": "Co-founder & CEO",
+      "headline": "Dynamic Creatures builds interactive character robots for hospitality and entertainment, combining robotics with adaptive AI behavior.  It launched Sn",
+      "signalScore": 97,
+      "stage": "Pre-Seed",
+      "signals": [
+        "Exited stealth in September 2026",
+        "Official Boston Dynamics entertainment partner",
+        "SnowJay AI character platform launched"
+      ],
+      "pitchSummary": "Dynamic Creatures builds interactive character robots for hospitality and entertainment, combining robotics with adaptive AI behavior.  It launched SnowJay and reports an official entertainment partnership with Boston Dynamics.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Marc,\n\nWe came across Dynamic Creatures while researching early-stage companies. Dynamic Creatures builds interactive character robots for hospitality and entertainment, combining robotics with adaptive AI behavior.  It launched SnowJay and reports an official entertainment partnership with Boston Dynamics.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Dynamic Creatures Emerges from Stealth",
+        "url": "https://www.dynamiccreatures.com/news"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "Exited stealth in September 2026",
+          "sourceUrl": "https://www.dynamiccreatures.com/news",
+          "observedAt": "2026-09-08T00:00:00"
+        },
+        {
+          "text": "Official Boston Dynamics entertainment partner",
+          "sourceUrl": "https://www.dynamiccreatures.com/news",
+          "observedAt": "2026-09-08T00:00:00"
+        },
+        {
+          "text": "SnowJay AI character platform launched",
+          "sourceUrl": "https://www.dynamiccreatures.com/news",
+          "observedAt": "2026-09-08T00:00:00"
+        },
+        {
+          "text": "Founder previously at Boston Dynamics",
+          "sourceUrl": "https://www.dynamiccreatures.com/news",
+          "observedAt": null
+        },
+        {
+          "text": "News: Dynamic Creatures Emerges from Stealth",
+          "sourceUrl": "https://www.dynamiccreatures.com/news",
+          "observedAt": "2026-09-08T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
+        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
+        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
+        "Profile normalized from akta.pro news; full company enrichment was not available.",
+        "Stock portrait placeholder; not an image of the named founder.",
+        "Stage unavailable; Pre-Seed is a display default.",
+        "Sector inferred for frontend filtering; verify classification."
+      ]
+    },
+    {
+      "id": "003oan6",
+      "name": "Midcentury",
+      "founderName": "Chetan Kulhari",
+      "founderImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Magic",
+      "founderBackground": "Co-founder & CEO",
+      "headline": "Midcentury develops multimodal training datasets for frontier AI and embodied systems.  Its reported launch includes an egocentric human-behavior data",
+      "signalScore": 98,
+      "stage": "Seed",
+      "signals": [
+        "$15M seed round reported at stealth exit",
+        "2M+ hours of egocentric human-behavior data",
+        "Matrix physical-AI simulation platform launched"
+      ],
+      "pitchSummary": "Midcentury develops multimodal training datasets for frontier AI and embodied systems.  Its reported launch includes an egocentric human-behavior dataset and Matrix, a simulation platform for physical AI.",
+      "targetSector": "Physical AI",
+      "draftEmail": "Hi Chetan,\n\nWe came across Midcentury while researching early-stage companies. Midcentury develops multimodal training datasets for frontier AI and embodied systems.  Its reported launch includes an egocentric human-behavior dataset and Matrix, a simulation platform for physical AI.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Midcentury Emerges From Stealth With $15M Seed for Physical AI Training Data",
+        "url": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$15M seed round reported at stealth exit",
+          "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
+          "observedAt": "2026-09-26T10:13:48"
+        },
+        {
+          "text": "2M+ hours of egocentric human-behavior data",
+          "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
+          "observedAt": "2026-09-26T10:13:48"
+        },
+        {
+          "text": "Matrix physical-AI simulation platform launched",
+          "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
+          "observedAt": "2026-09-26T10:13:48"
+        },
+        {
+          "text": "Founder previously at Magic",
+          "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
+          "observedAt": null
+        },
+        {
+          "text": "News: Midcentury Emerges From Stealth With $15M Seed for Physical AI Training Data",
+          "sourceUrl": "https://ventureburn.com/midcentury-raises-15m-seed-physical-ai/",
+          "observedAt": "2026-09-26T10:13:48"
+        }
+      ],
+      "warnings": [
+        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
+        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
+        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
+        "News reports a $15M seed announcement; the company snapshot lists $30.1M total funding, a different scope.",
+        "Stock portrait placeholder; not an image of the named founder.",
+        "Sector inferred for frontend filtering; verify classification."
+      ]
+    },
+    {
+      "id": "akta-news-39683006",
+      "name": "TeRAM",
+      "founderName": "Charlie Cheng",
+      "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Founder & CEO",
+      "headline": "TeRAM develops custom 3D SRAM to address memory-bandwidth constraints in AI computing.  Its stated roadmap targets initial customer production in 2029",
+      "signalScore": 96,
+      "stage": "Seed",
+      "signals": [
+        "$37M equity financing reported at stealth exit",
+        "Custom 3D SRAM for AI memory bandwidth",
+        "Initial customer production targeted for 2029"
+      ],
+      "pitchSummary": "TeRAM develops custom 3D SRAM to address memory-bandwidth constraints in AI computing.  Its stated roadmap targets initial customer production in 2029.",
+      "targetSector": "AI Infra",
+      "draftEmail": "Hi Charlie,\n\nWe came across TeRAM while researching early-stage companies. TeRAM develops custom 3D SRAM to address memory-bandwidth constraints in AI computing.  Its stated roadmap targets initial customer production in 2029.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "TeRAM Emerges from Stealth to Tackle the AI Memory Wall",
+        "url": "https://teram.com/teram-press-release/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$37M equity financing reported at stealth exit",
+          "sourceUrl": "https://teram.com/teram-press-release/",
+          "observedAt": "2026-09-14T00:00:00"
+        },
+        {
+          "text": "Custom 3D SRAM for AI memory bandwidth",
+          "sourceUrl": "https://teram.com/teram-press-release/",
+          "observedAt": "2026-09-14T00:00:00"
+        },
+        {
+          "text": "Initial customer production targeted for 2029",
+          "sourceUrl": "https://teram.com/teram-press-release/",
+          "observedAt": "2026-09-14T00:00:00"
+        },
+        {
+          "text": "News: TeRAM Emerges from Stealth to Tackle the AI Memory Wall",
+          "sourceUrl": "https://teram.com/teram-press-release/",
+          "observedAt": "2026-09-14T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
+        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
+        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
+        "Profile normalized from akta.pro news; full company enrichment was not available.",
+        "Stock portrait placeholder; not an image of the named founder.",
+        "Sector inferred for frontend filtering; verify classification."
+      ]
+    },
+    {
+      "id": "0000uxu",
+      "name": "Beltic",
+      "founderName": "Isha Bhatnagar",
+      "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Coinbase",
+      "founderBackground": "Co-founder & CEO",
+      "headline": "Beltic provides verification infrastructure for AI agents, checking identity, authority, and transaction legitimacy.  Modular APIs help businesses acc",
+      "signalScore": 98,
+      "stage": "Seed",
+      "signals": [
+        "$7.3M seed round led by Norwest",
+        "Earlier $1.5M pre-seed round reported",
+        "Agent identity and transaction authorization APIs"
+      ],
+      "pitchSummary": "Beltic provides verification infrastructure for AI agents, checking identity, authority, and transaction legitimacy.  Modular APIs help businesses accept agent-driven activity with explicit safeguards.",
+      "targetSector": "AI Infra",
+      "draftEmail": "Hi Isha,\n\nWe came across Beltic while researching early-stage companies. Beltic provides verification infrastructure for AI agents, checking identity, authority, and transaction legitimacy.  Modular APIs help businesses accept agent-driven activity with explicit safeguards.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Beltic Emerges from Stealth to Secure Autonomous Agent Transactions at Scale",
+        "url": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$7.3M seed round led by Norwest",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
+          "observedAt": "2026-09-30T00:00:00"
+        },
+        {
+          "text": "Earlier $1.5M pre-seed round reported",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
+          "observedAt": "2026-09-30T00:00:00"
+        },
+        {
+          "text": "Agent identity and transaction authorization APIs",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
+          "observedAt": "2026-09-30T00:00:00"
+        },
+        {
+          "text": "Founder previously at Coinbase",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
+          "observedAt": null
+        },
+        {
+          "text": "News: Beltic Emerges from Stealth to Secure Autonomous Agent Transactions at Scale",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/beltic-emerges-from-stealth-to-secure-autonomous-agent-transactions-at-scale-302893772.html",
+          "observedAt": "2026-09-30T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
+        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
+        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
+        "Recent launch news identifies Isha Bhatnagar as CEO/co-founder; the concise company snapshot lists a different role.",
+        "Stock portrait placeholder; not an image of the named founder.",
+        "Sector inferred for frontend filtering; verify classification."
+      ]
+    },
+    {
+      "id": "02mqjeu",
+      "name": "Keewano",
+      "founderName": "Mark Kardashov",
+      "founderImage": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "TestProject",
+      "founderBackground": "Co-founder",
+      "headline": "Keewano develops a data layer that preserves ordered entity-event histories for AI agents.  It is designed to let agents investigate large event strea",
+      "signalScore": 97,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$12M financing reported on stealth exit",
+        "Entity-event histories for AI agent context",
+        "Founding team previously built TestProject and Devalore"
+      ],
+      "pitchSummary": "Keewano develops a data layer that preserves ordered entity-event histories for AI agents.  It is designed to let agents investigate large event streams without rebuilding context for each query.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Mark,\n\nWe came across Keewano while researching early-stage companies. Keewano develops a data layer that preserves ordered entity-event histories for AI agents.  It is designed to let agents investigate large event streams without rebuilding context for each query.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Keewano Exits Stealth with $12M in Funding",
+        "url": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$12M financing reported on stealth exit",
+          "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
+          "observedAt": "2026-09-16T00:00:00"
+        },
+        {
+          "text": "Entity-event histories for AI agent context",
+          "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
+          "observedAt": "2026-09-16T00:00:00"
+        },
+        {
+          "text": "Founding team previously built TestProject and Devalore",
+          "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
+          "observedAt": "2026-09-16T00:00:00"
+        },
+        {
+          "text": "Founder previously at TestProject",
+          "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
+          "observedAt": null
+        },
+        {
+          "text": "News: Keewano Exits Stealth with $12M in Funding",
+          "sourceUrl": "https://www.linkedin.com/posts/hetz-ventures_this-team-built-and-exited-big-companies-activity-7505638473572356096-jY6w?utm_source=share&utm_medium=member_desktop&rcm=ACoAAGnshbMBlMCr9ac62B58sJF2I6MSQ2naHEg",
+          "observedAt": "2026-09-16T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
+        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
+        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
+        "Profile normalized from akta.pro news; full company enrichment was not available.",
+        "Stock portrait placeholder; not an image of the named founder.",
+        "Stage unavailable; Pre-Seed is a display default.",
+        "Sector inferred for frontend filtering; verify classification."
+      ]
+    },
+    {
+      "id": "akta-news-33865927",
+      "name": "Empirik.ai",
+      "founderName": "Avon Puri",
+      "founderImage": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "VMware",
+      "founderBackground": "Co-founder",
+      "headline": "ai builds agents and a decision layer for infrastructure operations.  Its platform models the impact of proposed changes before execution to help team",
+      "signalScore": 97,
+      "stage": "Pre-Seed",
+      "signals": [
+        "$21M financing reported at stealth exit",
+        "Infrastructure-change impact analysis agents",
+        "Production use reported at Guardant Health and Avahi"
+      ],
+      "pitchSummary": "ai builds agents and a decision layer for infrastructure operations.  Its platform models the impact of proposed changes before execution to help teams understand risk.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Avon,\n\nWe came across Empirik.ai while researching early-stage companies. ai builds agents and a decision layer for infrastructure operations.  Its platform models the impact of proposed changes before execution to help teams understand risk.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Empirik.AI Emerges From Stealth With $21M to Build AI Agents for Infrastructure",
+        "url": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": true,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$21M financing reported at stealth exit",
+          "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
+          "observedAt": "2026-09-04T10:11:07"
+        },
+        {
+          "text": "Infrastructure-change impact analysis agents",
+          "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
+          "observedAt": "2026-09-04T10:11:07"
+        },
+        {
+          "text": "Production use reported at Guardant Health and Avahi",
+          "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
+          "observedAt": "2026-09-04T10:11:07"
+        },
+        {
+          "text": "Founder previously at VMware",
+          "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
+          "observedAt": null
+        },
+        {
+          "text": "News: Empirik.AI Emerges From Stealth With $21M to Build AI Agents for Infrastructure",
+          "sourceUrl": "https://www.citybiz.co/article/899019/empirik-ai-emerges-from-stealth-with-21m-to-build-ai-agents-for-infrastructure/",
+          "observedAt": "2026-09-04T10:11:07"
+        }
+      ],
+      "warnings": [
+        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
+        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
+        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
+        "Profile normalized from akta.pro news; full company enrichment was not available.",
+        "Stock portrait placeholder; not an image of the named founder.",
+        "Stage unavailable; Pre-Seed is a display default.",
+        "Sector inferred for frontend filtering; verify classification."
+      ]
+    },
+    {
+      "id": "akta-news-35071927",
+      "name": "Twin1 AI",
+      "founderName": "Lewis Z. Liu",
+      "founderImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "founderAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&crop=faces&q=90&w=1200",
+      "exCompany": "Not disclosed",
+      "founderBackground": "Co-founder",
+      "headline": "Twin1 builds AI extensions of individual professionals to capture knowledge, judgment, and context.  Its governed network connects that expertise acro",
+      "signalScore": 96,
+      "stage": "Seed",
+      "signals": [
+        "$20M seed round reported at stealth exit",
+        "AI extensions capture professional knowledge",
+        "Governed network for enterprise agent context"
+      ],
+      "pitchSummary": "Twin1 builds AI extensions of individual professionals to capture knowledge, judgment, and context.  Its governed network connects that expertise across an organization.",
+      "targetSector": "AI Agents",
+      "draftEmail": "Hi Lewis,\n\nWe came across Twin1 AI while researching early-stage companies. Twin1 builds AI extensions of individual professionals to capture knowledge, judgment, and context.  Its governed network connects that expertise across an organization.\n\nWould you be open to a brief conversation about your product, customer discovery, and current priorities?\n\nBest,\nThe investment team",
+      "liveNews": {
+        "title": "Twin1 Emerges from Stealth with $20M Seed Round",
+        "url": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/"
+      },
+      "dataSource": "akta.pro",
+      "imageIsPlaceholder": true,
+      "imageSource": "unsplash-placeholder",
+      "stageIsInferred": false,
+      "sectorIsInferred": true,
+      "signalScoreMethod": "evidence-coverage-v1",
+      "signalEvidence": [
+        {
+          "text": "$20M seed round reported at stealth exit",
+          "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/",
+          "observedAt": "2026-08-20T00:00:00"
+        },
+        {
+          "text": "AI extensions capture professional knowledge",
+          "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/",
+          "observedAt": "2026-08-20T00:00:00"
+        },
+        {
+          "text": "Governed network for enterprise agent context",
+          "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/",
+          "observedAt": "2026-08-20T00:00:00"
+        },
+        {
+          "text": "News: Twin1 Emerges from Stealth with $20M Seed Round",
+          "sourceUrl": "https://www.linkedin.com/feed/update/urn:li:share:7496226023991140352/",
+          "observedAt": "2026-08-20T00:00:00"
+        }
+      ],
+      "warnings": [
+        "Signal score uses a demo-scale evidence coverage rubric, not investment probability.",
+        "Publicly emerged from stealth according to the cited akta.pro news; not verified to remain in stealth.",
+        "Signals are reported source claims; GitHub commit counts and C-Corp filings were not supplied for this company.",
+        "Profile normalized from akta.pro news; full company enrichment was not available.",
+        "Stock portrait placeholder; not an image of the named founder.",
+        "Sector inferred for frontend filtering; verify classification."
+      ]
+    }
+  ],
+  "provenance": {
+    "transport": "mcp",
+    "newsIds": [
+      35076551,
+      38966347,
+      39683006,
+      39310343,
+      39670705,
+      33865927,
+      35071927
+    ],
+    "notes": [
+      "Retrieved through authenticated akta.pro MCP tools: news_signals, news_detail, company_search, and company_data_concise.",
+      "These are real companies with published stealth-exit reports, not invented stealth identities.",
+      "Sector labels, email drafts, and evidence-coverage scores are application-derived. Missing employment history and stock portraits remain disclosed."
+    ]
+  }
+}
