@@ -18,6 +18,8 @@ export interface StealthStartup {
   pitchSummary: string;
   targetSector: TargetSector;
   draftEmail: string;
+  /** Founder pitch video (YouTube/Vimeo embed or .mp4). Optional. */
+  videoUrl?: string;
   /** When the source news item was published (ISO), from akta.pro data. */
   sourcePublishedAt?: string;
   /** Latest akta.pro news item, present only when live hydration succeeds. */
@@ -96,6 +98,11 @@ export function recentActivity(s: Pick<StealthStartup, "sourcePublishedAt">): { 
   return { label, recent: days <= 60 };
 }
 
+/** The founder's pitch video URL: from the data, else the manual map in founderVideos.ts. */
+export function videoFor(s: Pick<StealthStartup, "id" | "videoUrl">): string | undefined {
+  return s.videoUrl || FOUNDER_VIDEOS[s.id] || undefined;
+}
+
 export function hashString(key: string): number {
   let h = 0;
   for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
@@ -126,6 +133,7 @@ export function mediaKindOf(url: string): MediaKind {
 }
 
 import { FOUNDER_PHOTOS } from "./founderPhotos";
+import { FOUNDER_VIDEOS } from "./founderVideos";
 
 export interface AssignedMedia {
   src: string;

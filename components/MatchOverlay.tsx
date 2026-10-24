@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import { Flame, X, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
-import type { StealthStartup } from "@/lib/mockData";
+import VideoPlayer from "./VideoPlayer";
+import { parseVideoUrl } from "@/lib/founderVideos";
+import { videoFor, type StealthStartup } from "@/lib/mockData";
 
 interface Props {
   startup: StealthStartup;
@@ -44,6 +46,8 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
   const [draft, setDraft] = useState(startup.draftEmail);
   const [sent, setSent] = useState(emailOpened);
   const [videoRequested, setVideoRequested] = useState(false);
+  const videoUrl = videoFor(startup);
+  const hasVideo = !!parseVideoUrl(videoUrl);
 
   useEffect(() => {
     if (mode !== "match") return;
@@ -180,6 +184,13 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
             </section>
           )}
 
+          {hasVideo && (
+            <section>
+              <h3 className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">🎬 Founder 90-Second Pitch Reel</h3>
+              <VideoPlayer url={videoUrl ?? ""} title={`${startup.name} pitch reel`} />
+            </section>
+          )}
+
           <section>
             <label htmlFor="intro-draft" className="mb-1.5 block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
               Intro email (editable)
@@ -201,13 +212,15 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
           >
             ✉️ {sent ? "Open Intro Email Again" : "Send Intro Email"}
           </button>
+          {!hasVideo && (
           <button
             onClick={requestVideo}
             className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-[#FF385C]/40 bg-white py-2.5 text-sm font-semibold text-[#FF385C] transition hover:bg-rose-50"
           >
             🎥 {videoRequested ? "Open 90s Pitch Request Again" : "Request 90s Video Pitch / Call"}
           </button>
-          {videoRequested && (
+          )}
+          {!hasVideo && videoRequested && (
             <p role="status" className="rounded-xl bg-emerald-50 px-3 py-2 text-center text-xs font-medium text-emerald-700">
               🎥 90s pitch request opened in your mail app. Add the founder&apos;s email and send it.
             </p>

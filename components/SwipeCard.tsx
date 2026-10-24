@@ -6,7 +6,9 @@ import { BadgeCheck, Heart, Landmark, RotateCcw, Star, TrendingUp, Users, X, typ
 import { useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import FounderPhoto, { PortraitContext } from "./FounderPhoto";
-import { recentActivity, type MediaKind, type StealthStartup } from "@/lib/mockData";
+import VideoPlayer from "./VideoPlayer";
+import { parseVideoUrl } from "@/lib/founderVideos";
+import { recentActivity, videoFor, type MediaKind, type StealthStartup } from "@/lib/mockData";
 
 export type SwipeDirection = "left" | "right" | "up";
 
@@ -51,6 +53,9 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
   const mediaKind = useContext(PortraitContext)[startup.id]?.kind;
   const mediaLabel = mediaKind ? MEDIA_LABEL[mediaKind] : undefined;
   const activity = recentActivity(startup);
+  const videoUrl = videoFor(startup);
+  const hasVideo = !!parseVideoUrl(videoUrl);
+  const [playing, setPlaying] = useState(false);
 
   const fling = (d: SwipeDirection) => {
     onImpact(d);
@@ -69,6 +74,10 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
       dragSnapToOrigin
       dragElastic={0.9}
       style={{ x, y, rotate }}
+      onTap={(e) => {
+        // A tap on the photo (not a drag) opens the pitch video when the founder has one.
+        if (hasVideo && (e.target as HTMLElement).closest("[data-photo]")) setPlaying(true);
+      }}
       onDragEnd={(_, info) => {
         if (info.offset.y < -Y_THRESHOLD) fling("up");
         else if (info.offset.x > X_THRESHOLD) fling("right");
@@ -77,7 +86,7 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
       className="absolute inset-0 flex cursor-grab select-none flex-col justify-between overflow-hidden rounded-[36px] border border-gray-200/80 bg-white shadow-2xl active:cursor-grabbing"
     >
       {/* Image area */}
-      <div className="relative h-[62%] w-full shrink-0 bg-gray-200">
+      <div data-photo className="relative h-[62%] w-full shrink-0 bg-gray-200">
         <FounderPhoto startup={startup} className="h-full w-full object-cover object-top" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
@@ -102,6 +111,15 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
         <div className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md">
           {startup.signalScore}% match
         </div>
+        {hasVideo && (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            className="absolute left-1/2 top-[45%] z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/40 bg-black/40 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition hover:bg-black/55"
+          >
+            🎥 90s Pitch Available — Tap to Play
+          </button>
+        )}
         {mediaLabel && (
           <div className="absolute right-3 top-[3.25rem] rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
             {mediaLabel}
@@ -145,6 +163,28 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
         </div>
       </div>
 
+      {playing &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${startup.name} pitch video`}
+            onClick={() => setPlaying(false)}
+          >
+            <div className="w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
+              <div className="mb-2 flex items-center justify-between text-white">
+                <p className="text-sm font-semibold">🎬 {startup.founderName} · {startup.name}</p>
+                <button onClick={() => setPlaying(false)} aria-label="Close video" className="rounded-full p-1.5 hover:bg-white/10">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              <VideoPlayer url={videoUrl ?? ""} title={`${startup.name} pitch video`} />
+            </div>
+          </div>,
+          document.body,
+        )}
     </motion.div>
   );
 }
