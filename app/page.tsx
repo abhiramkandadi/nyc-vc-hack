@@ -76,16 +76,16 @@ export default function Home() {
     <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,rgba(255,56,92,0.12),transparent_55%)]">
       <Header preset={preset} onPreset={changePreset} matchCount={matches.length} />
 
-      <main className="flex flex-col items-center px-4 py-8">
+      <main className="flex flex-col items-center px-4 py-6">
         {remaining.length > 0 ? (
           <SwipeCard startups={remaining} onSwipe={handleSwipe} />
         ) : (
-          <div className="glass mt-16 flex w-[min(92vw,380px)] flex-col items-center gap-4 rounded-3xl p-10 text-center">
+          <div className="mt-16 flex w-full max-w-[420px] flex-col items-center gap-4 rounded-[32px] border border-white/15 bg-zinc-950/90 p-10 text-center backdrop-blur-2xl">
             <h2 className="font-display text-2xl font-bold">You&apos;re all caught up</h2>
             <p className="text-sm text-foreground/60">No more stealth startups for this preset.</p>
             <button
               onClick={() => setIndex(0)}
-              className="flex items-center gap-2 rounded-full bg-coral px-5 py-2 text-sm font-semibold text-white shadow-coral"
+              className="flex items-center gap-2 rounded-full bg-[#FF385C] px-5 py-2 text-sm font-semibold text-white shadow-[0_0_20px_rgba(255,56,92,0.4)]"
             >
               <RotateCcw className="h-4 w-4" /> Reset deck
             </button>
