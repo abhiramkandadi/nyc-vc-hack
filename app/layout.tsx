@@ -22,6 +22,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "NYC VC Hack",
   description: "Swipe-style matching for founders and investors.",
+  icons: { icon: "/logo.webp", apple: "/logo.webp" },
 };
 
 export const viewport: Viewport = {
