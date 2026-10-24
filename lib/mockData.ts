@@ -22,9 +22,22 @@ export interface StealthStartup {
   videoUrl?: string;
   /** When the source news item was published (ISO), from akta.pro data. */
   sourcePublishedAt?: string;
+  /**
+   * The thesis service's learned match for this company. Present only on a learned ranking.
+   * `probability` is null until the model has fitted, and then the badge must stay hidden.
+   */
+  learnedMatch?: { probability: number | null; reasons: string[]; fitted: boolean };
+  /** The source's own sector label, finer than the four-way targetSector. */
+  sectorLabel?: string;
   /** Latest akta.pro news item, present only when live hydration succeeds. */
   liveNews?: { title: string; url: string };
 }
+
+/** Seeded profiles use this label where the source has no founder or former employer. */
+export const NOT_DISCLOSED = "Not disclosed";
+export const isDisclosed = (value?: string): boolean => !!value && value !== NOT_DISCLOSED;
+/** The founder's name, or the company name when the source lists no founder. */
+export const founderLabel = (s: Pick<StealthStartup, "founderName" | "name">): string => (isDisclosed(s.founderName) ? s.founderName : s.name);
 
 export type MediaKind = "headshot" | "hq" | "hardware" | "infra";
 

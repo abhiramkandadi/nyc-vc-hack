@@ -8,9 +8,11 @@ import GallerySidebar from "@/components/GallerySidebar";
 import MessagesSidebar, { type MatchRecord } from "@/components/MessagesSidebar";
 import MatchOverlay from "@/components/MatchOverlay";
 import SwipeCard, { type SwipeDirection } from "@/components/SwipeCard";
+import ThesisPanel from "@/components/ThesisPanel";
 import TraceDrawer, { type TraceEntry } from "@/components/TraceDrawer";
 import { PortraitContext } from "@/components/FounderPhoto";
 import { useDominantColor } from "@/lib/useDominantColor";
+import type { ThesisData } from "@/lib/thesisTypes";
 import { MOCK_STEALTH_STARTUPS, assignUniquePortraits, themeColorFor, videoFor, type StealthStartup } from "@/lib/mockData";
 
 /** Demo order: the first card has no video, the second has one, and the rest keep their ranked order. */
@@ -21,6 +23,10 @@ function arrangeDeck(list: StealthStartup[]): StealthStartup[] {
   const rest = list.filter((_, i) => i !== firstPlain && i !== firstVideo);
   return [list[firstPlain], list[firstVideo], ...rest];
 }
+
+/** left = pass, right = save, up = track, and the Intro button sends "down". */
+const ACTION = { left: "pass", right: "save", up: "track", down: "intro" } as const;
+const ACTION_LABEL = { pass: "Pass", save: "Save", track: "Track", intro: "Intro" } as const;
 
 let seq = 0;
 const stamp = () => new Date().toLocaleTimeString("en-US", { hour12: false });
@@ -35,6 +41,7 @@ export default function Home() {
   const [history, setHistory] = useState<{ startup: StealthStartup; wasMatch: boolean }[]>([]);
   const [startups, setStartups] = useState<StealthStartup[]>(MOCK_STEALTH_STARTUPS);
   const [source, setSource] = useState<"live" | "sample">("sample");
+  const [thesisData, setThesisData] = useState<ThesisData | null>(null);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   // The API already filters and ranks the deck for the active thesis.
@@ -43,6 +50,50 @@ export default function Home() {
 
   const log = useCallback((step: TraceEntry["step"], message: string, status: TraceEntry["status"]) => {
     setLogs((l) => [...l, { id: `t${seq++}`, ts: stamp(), step, message, status }]);
+  }, []);
+
+  /** Learned weights and the readback, from the thesis service through /api/thesis. */
+  const refreshThesis = useCallback(
+    () =>
+      fetch("/api/thesis", { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d: { success?: boolean; data?: ThesisData } | null) => {
+          if (d?.success && d.data) setThesisData(d.data);
+        })
+        .catch(() => undefined),
+    [],
+  );
+  useEffect(() => {
+    void refreshThesis();
+  }, [refreshThesis]);
+  // A readback takes several seconds. Poll while the service says it is writing one.
+  useEffect(() => {
+    if (!thesisData?.readback_pending) return;
+    const t = setTimeout(() => void refreshThesis(), 1200);
+    return () => clearTimeout(t);
+  }, [thesisData, refreshThesis]);
+
+  const indexRef = useRef(0);
+  indexRef.current = index;
+  const syncId = useRef(0);
+
+  /**
+   * After an action the service has refit, so ask it for the new order. Cards already acted on
+   * stay at the front, in order, and the rest follow the model's ranking.
+   */
+  const reorderDeck = useCallback((thesisName: Preset) => {
+    const id = ++syncId.current;
+    fetch(`/api/signals?thesis=${encodeURIComponent(thesisName)}&ranking=learned`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { startups: StealthStartup[]; meta?: { ranking?: { source?: string } } } | null) => {
+        if (id !== syncId.current || !d?.startups?.length || d.meta?.ranking?.source !== "model") return;
+        setStartups((prev) => {
+          const acted = prev.slice(0, indexRef.current);
+          const actedIds = new Set(acted.map((x) => x.id));
+          return [...acted, ...d.startups.filter((x) => !actedIds.has(x.id))];
+        });
+      })
+      .catch(() => undefined);
   }, []);
 
   const requestId = useRef(0);
@@ -74,7 +125,9 @@ export default function Home() {
     (s: StealthStartup) => {
       const steps: [TraceEntry["step"], string][] = [
         ["akta.pro signal fetch", `${s.signals.length} signals for ${s.name}${s.liveNews ? " + latest news" : ""}`],
-        ["Thor/Nicrron LLM evaluation", `Thesis fit scored ${s.signalScore}/100 for ${s.targetSector}`],
+        ["Thor/Nicrron LLM evaluation", s.learnedMatch?.fitted && s.learnedMatch.probability != null
+          ? `Learned match ${Math.round(s.learnedMatch.probability * 100)}% for ${s.name}`
+          : `Evidence coverage ${s.signalScore}/100 for ${s.targetSector}; no learned match yet`],
         ["Roundtable bus handoff", "SourcingAgent → ICDiligenceAgent deal_brief queued"],
         ["PRISM export", `Trace exported for ${s.name}`],
       ];
@@ -93,28 +146,47 @@ export default function Home() {
     if (last.wasMatch) setMatches((m) => m.filter((x) => x.startup.id !== last.startup.id));
     setOverlay(null);
     log("swipe", `Rewind: ${last.startup.name}`, "info");
+    // Take the action back in the model too, so the screen and the learned weights agree.
+    fetch("/api/feedback", { method: "DELETE" })
+      .then(() => {
+        reorderDeck(preset);
+        void refreshThesis();
+      })
+      .catch(() => undefined);
   };
 
   const handleSwipe = (d: SwipeDirection, s: StealthStartup) => {
+    const action = ACTION[d];
+    const isMatch = d === "right" || d === "down"; // save and intro open the match flow
     setIndex((i) => i + 1);
-    setHistory((h) => [...h, { startup: s, wasMatch: d !== "left" && !matches.some((x) => x.startup.id === s.id) }]);
-    log("swipe", `${d === "left" ? "Pass" : d === "up" ? "Super-Invest" : "Match"}: ${s.name}`, "info");
-    // Fire-and-forget so the swipe animation is never blocked by the network.
+    setHistory((h) => [...h, { startup: s, wasMatch: isMatch && !matches.some((x) => x.startup.id === s.id) }]);
+    log("swipe", `${ACTION_LABEL[action]}: ${s.name}`, "info");
+    // Record the action with the thesis service, then ask for the new order.
+    // The swipe animation never waits on the network.
     fetch("/api/feedback", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      // The feedback route accepts pass | save | track | intro: Match saves, Super-Invest asks for an intro.
-      body: JSON.stringify({ id: s.id, startupId: s.id, action: d === "left" ? "pass" : d === "up" ? "intro" : "save", gesture: d === "left" ? "pass" : d === "up" ? "super_invest" : "match", thesis: preset }),
+      body: JSON.stringify({ id: s.id, action }),
       keepalive: true,
-    }).catch(() => undefined);
+    })
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+        reorderDeck(preset);
+        void refreshThesis();
+      })
+      .catch(() => log("swipe", `Thesis service did not record ${ACTION_LABEL[action]} for ${s.name}`, "info"));
     if (d === "left") return;
+    if (d === "up") {
+      log("swipe", `Tracking ${s.name}: right company, wrong time`, "ok");
+      return;
+    }
     setMatches((m) =>
       m.some((x) => x.startup.id === s.id)
         ? m
-        : [...m, { startup: s, matchedAt: Date.now(), superInvest: d === "up", emailOpened: false, unread: true }],
+        : [...m, { startup: s, matchedAt: Date.now(), superInvest: d === "down", emailOpened: false, unread: true }],
     );
     // Beat of suspense before the match reveal.
-    timers.current.push(setTimeout(() => setOverlay({ startup: s, superInvest: d === "up", mode: "match" }), 400));
+    timers.current.push(setTimeout(() => setOverlay({ startup: s, superInvest: d === "down", mode: "match" }), 400));
     runPipeline(s);
   };
 
@@ -124,10 +196,14 @@ export default function Home() {
   };
 
   const handleSelectFounder = (s: StealthStartup) => {
-    const i = startups.findIndex((x) => x.id === s.id);
-    if (i < 0) return;
-    setIndex(i);
-    setHistory([]);
+    const at = startups.findIndex((x) => x.id === s.id);
+    if (at < 0) return;
+    if (at < index) {
+      log("swipe", `${s.name} already has an action. Use Rewind to change it.`, "info");
+      return;
+    }
+    // Move this founder to the front of the cards still to come. Cards already acted on stay put.
+    setStartups((prev) => [...prev.slice(0, index), s, ...prev.slice(index).filter((x) => x.id !== s.id)]);
     log("swipe", `Jumped to ${s.name}`, "info");
   };
 
@@ -197,6 +273,7 @@ export default function Home() {
         thesis={thesis}
         selectedId={overlay?.mode === "chat" ? overlay.startup.id : null}
         onSelectMatch={handleOpenChat}
+        panel={<ThesisPanel data={thesisData} />}
       />
 
       <AnimatePresence>

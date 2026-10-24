@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getStartupProfiles, reportAktaTelemetry } from "@/lib/akta";
-import { FEEDBACK_ACTIONS, FeedbackConflictError, submitFeedback, type FeedbackAction } from "@/lib/thesisRanker";
+import { FEEDBACK_ACTIONS, FeedbackConflictError, submitFeedback, undoLastLocalFeedback, type FeedbackAction } from "@/lib/thesisRanker";
+import { thesisServiceUrl } from "@/lib/thesisService";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -51,4 +52,24 @@ export async function POST(request: Request): Promise<NextResponse> {
     reportAktaTelemetry("feedback_failed", { code, latencyMs: Math.round(performance.now() - started) });
     return NextResponse.json({ success: false, error: { code } }, { status, headers });
   }
+}
+
+/** DELETE /api/feedback: take back the latest action (Rewind), in the Python service when it is reachable and locally. */
+export async function DELETE(): Promise<NextResponse> {
+  const undone = undoLastLocalFeedback();
+  const url = thesisServiceUrl("/undo");
+  let service: "undone" | "nothing" | "unavailable" = "unavailable";
+  if (url) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 1_500);
+    try {
+      const response = await fetch(url, { method: "POST", cache: "no-store", redirect: "error", signal: controller.signal });
+      service = response.ok ? "undone" : response.status === 409 ? "nothing" : "unavailable";
+    } catch {
+      service = "unavailable";
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  return NextResponse.json({ success: true, data: { undone, service } }, { headers });
 }

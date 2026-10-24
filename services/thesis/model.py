@@ -20,7 +20,9 @@ load_dotenv()
 NICRRON_BASE = "https://api.nicrron.ai/v1"
 EMBED_MODEL = "openai/text-embedding-3-small"
 EMBED_CACHE = Path("data/embeddings.json")
+FUND_CACHE = Path("data/fund_embeddings.json")
 EMBED_BATCH = 64
+NO_FIT_ACTION_WEIGHT = 1 / 3  # how much saves and passes count against the fund thesis before a fit
 EMBED_SCALE = 3.0  # puts the unit-length embedding on a scale comparable to the 0/1 features
 
 ACTIONS = ("pass", "save", "track", "intro")
@@ -43,8 +45,17 @@ def company_text(c: dict) -> str:
 
 def load_embeddings(companies: list[dict]) -> dict[str, np.ndarray]:
     """Return {uuid: vector}. Only companies missing from the disk cache are sent to Nicrron."""
-    cache = json.loads(EMBED_CACHE.read_text(encoding="utf-8")) if EMBED_CACHE.exists() else {}
-    texts = {c["uuid"]: company_text(c) for c in companies}
+    return _embed_cached({c["uuid"]: company_text(c) for c in companies}, EMBED_CACHE)
+
+
+def load_fund_embeddings(funds: list[dict]) -> dict[str, np.ndarray]:
+    """Return {fund id: vector} for each fund's thesis text, embedded once and cached."""
+    return _embed_cached({f["id"]: f["thesis"] for f in funds}, FUND_CACHE)
+
+
+def _embed_cached(texts: dict[str, str], cache_file: Path) -> dict[str, np.ndarray]:
+    """Embed {key: text}. A key is sent to Nicrron only if its text changed since it was cached."""
+    cache = json.loads(cache_file.read_text(encoding="utf-8")) if cache_file.exists() else {}
     hashes = {u: hashlib.sha1(t.encode("utf-8")).hexdigest() for u, t in texts.items()}
     todo = [u for u in texts if cache.get(u, {}).get("h") != hashes[u]]
     if todo:
@@ -60,8 +71,8 @@ def load_embeddings(companies: list[dict]) -> dict[str, np.ndarray]:
                     raise RuntimeError(f"embeddings HTTP {r.status_code}: {r.text}")
                 for u, item in zip(batch, sorted(r.json()["data"], key=lambda d: d["index"])):
                     cache[u] = {"h": hashes[u], "v": item["embedding"]}
-        EMBED_CACHE.parent.mkdir(exist_ok=True)
-        EMBED_CACHE.write_text(json.dumps(cache), encoding="utf-8")
+        cache_file.parent.mkdir(exist_ok=True)
+        cache_file.write_text(json.dumps(cache), encoding="utf-8")
     return {u: np.array(cache[u]["v"], dtype=np.float32) for u in texts}
 
 
@@ -113,15 +124,11 @@ class Ranker:
         self.index = {c["uuid"]: i for i, c in enumerate(companies)}
         self.features = Features(companies)
         self.F = np.array([self.features.vector(c) for c in companies])
-        # Cold start, before any action: show companies with the most to read first.
-        self.richness = np.array([
-            bool(c.get("founders")) + (len(c.get("founders", [])) >= 2)
-            + any(f.get("previous_companies") for f in c.get("founders", []))
-            + any(m.get("date") for m in c.get("recent_moves", []))
-            for c in companies
-        ], dtype=float)
-        E = np.array([embeddings[c["uuid"]] for c in companies])
-        self.X = np.hstack([E * EMBED_SCALE, self.F])
+        self.E = np.array([embeddings[c["uuid"]] for c in companies])
+        self.X = np.hstack([self.E * EMBED_SCALE, self.F])
+        # The selected fund's thesis is the starting reference, before the partner has acted.
+        self.fund_id: str | None = None
+        self.fund_sim = np.zeros(len(companies))
         self.actions: list[tuple[str, str]] = []
         self.clf: LogisticRegression | None = None
 
@@ -139,8 +146,23 @@ class Ranker:
         self.actions.append((uuid, action))
         self._fit()
 
+    def undo(self) -> str | None:
+        """Drop the latest action and refit. Returns that company's uuid, or None if there was none."""
+        if not self.actions:
+            return None
+        uuid, _ = self.actions.pop()
+        self._fit()
+        return uuid
+
     def reset(self) -> None:
         self.actions, self.clf = [], None
+
+    def set_fund(self, fund_id: str, vector: np.ndarray) -> None:
+        """Start from this fund's thesis vector. Clears the actions, since they belonged to another run."""
+        self.reset()
+        self.fund_id = fund_id
+        unit = vector / (np.linalg.norm(vector) + 1e-9)
+        self.fund_sim = self.E @ unit / (np.linalg.norm(self.E, axis=1) + 1e-9)
 
     def _fit(self) -> None:
         rows = [(self.index[u], a in POSITIVE) for u, a in self.actions if a != "track"]
@@ -158,11 +180,15 @@ class Ranker:
             return self.clf.predict_proba(X)[:, 1]
         pos = [self.index[u] for u, a in self.actions if a in POSITIVE]
         neg = [self.index[u] for u, a in self.actions if a == "pass"]
-        if pos or neg:  # only one kind of action so far: similarity to the centroid
-            ref = self.X[pos if pos else neg].mean(axis=0)
-            sim = X @ ref / (np.linalg.norm(X, axis=1) * np.linalg.norm(ref) + 1e-9)
-            return sim if pos else -sim
-        return self.richness[idx]  # cold start
+        # No fit yet: start from the fund's thesis, then lean toward saves and away from passes.
+        # Actions count for a third, so a few of them cannot pull the ranking off the fund.
+        score = self.fund_sim[idx].copy()
+        for rows, sign in ((pos, 1.0), (neg, -1.0)):
+            if rows:
+                ref = self.X[rows].mean(axis=0)
+                sim = X @ ref / (np.linalg.norm(X, axis=1) * np.linalg.norm(ref) + 1e-9)
+                score += sign * NO_FIT_ACTION_WEIGHT * sim
+        return score
 
     def ranked_unseen(self) -> list[dict]:
         seen = self.seen()

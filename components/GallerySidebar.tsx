@@ -2,7 +2,7 @@
 
 import { Heart } from "lucide-react";
 import FounderPhoto from "./FounderPhoto";
-import { recentActivity, type StealthStartup } from "@/lib/mockData";
+import { founderLabel, recentActivity, type StealthStartup } from "@/lib/mockData";
 
 interface Props {
   startups: StealthStartup[];
@@ -32,7 +32,7 @@ export default function GallerySidebar({ startups, currentId, matchedIds, live, 
           <button
             key={s.id}
             onClick={() => onSelect(s)}
-            aria-label={`View ${s.founderName}, ${s.name}`}
+            aria-label={`View ${founderLabel(s)}, ${s.name}`}
             className={`group relative block h-full min-h-48 w-full overflow-hidden rounded-2xl border bg-gray-100 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg ${
               currentId === s.id ? "border-[#FF385C] ring-2 ring-[#FF385C]" : "border-gray-200"
             }`}
@@ -51,7 +51,7 @@ export default function GallerySidebar({ startups, currentId, matchedIds, live, 
               </span>
             )}
             <div className="absolute inset-x-2.5 bottom-2 text-white">
-              <p className="truncate text-base font-bold leading-tight">{s.founderName}</p>
+              <p className="truncate text-base font-bold leading-tight">{founderLabel(s)}</p>
               <p className="truncate text-xs text-white/80">{s.name}</p>
             </div>
           </button>

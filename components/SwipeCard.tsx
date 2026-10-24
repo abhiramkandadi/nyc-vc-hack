@@ -2,15 +2,16 @@
 
 import confetti from "canvas-confetti";
 import { AnimatePresence, animate, motion, useAnimationControls, useMotionValue, useTransform, type MotionValue } from "framer-motion";
-import { BadgeCheck, Heart, Landmark, RotateCcw, Star, TrendingUp, Users, X, type LucideIcon } from "lucide-react";
+import { BadgeCheck, Clock, Heart, Landmark, RotateCcw, Star, TrendingUp, Users, X, type LucideIcon } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import FounderPhoto, { PortraitContext } from "./FounderPhoto";
 import VideoPlayer from "./VideoPlayer";
 import { parseVideoUrl } from "@/lib/founderVideos";
-import { recentActivity, videoFor, type MediaKind, type StealthStartup } from "@/lib/mockData";
+import { isDisclosed, recentActivity, videoFor, type MediaKind, type StealthStartup } from "@/lib/mockData";
 
-export type SwipeDirection = "left" | "right" | "up";
+/** left = pass, right = save, up = track. "down" is intro, and only the Intro button sends it. */
+export type SwipeDirection = "left" | "right" | "up" | "down";
 
 const X_THRESHOLD = 120;
 const Y_THRESHOLD = 140;
@@ -59,8 +60,8 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
 
   const fling = (d: SwipeDirection) => {
     onImpact(d);
-    const mv = d === "up" ? y : x;
-    animate(mv, d === "left" ? -700 : d === "up" ? -800 : 700, { duration: 0.3 }).then(() => onSwipe(d));
+    const mv = d === "up" || d === "down" ? y : x;
+    animate(mv, d === "left" ? -700 : d === "up" ? -800 : d === "down" ? 800 : 700, { duration: 0.3 }).then(() => onSwipe(d));
   };
 
   useEffect(() => {
@@ -108,9 +109,15 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
             In the news · {activity.label}
           </div>
         )}
-        <div className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md">
-          {startup.signalScore}% match
-        </div>
+        {/* The learned probability, shown only once the model has fitted. Never the evidence-coverage score. */}
+        {startup.learnedMatch?.fitted && startup.learnedMatch.probability != null && (
+          <div
+            className="absolute right-3 top-6 rounded-full bg-[#FF385C] px-3 py-1 text-xs font-bold text-white shadow-md"
+            title={startup.learnedMatch.reasons.length ? `Because: ${startup.learnedMatch.reasons.join(", ")}` : "Learned from your actions"}
+          >
+            {Math.round(startup.learnedMatch.probability * 100)}% match
+          </div>
+        )}
         {hasVideo && (
           <button
             type="button"
@@ -128,11 +135,15 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
 
         <div className="absolute inset-x-4 bottom-3 text-white">
           <h2 className="flex items-center gap-2 text-3xl font-black leading-tight">
-            {startup.founderName}, <span className="font-normal">{startup.stage}</span>
-            <BadgeCheck className="h-8 w-8 fill-sky-500 text-white" aria-label="Verified" />
+            {isDisclosed(startup.founderName) ? startup.founderName : startup.name}, <span className="font-normal">{startup.stage}</span>
+            {isDisclosed(startup.founderName) && <BadgeCheck className="h-8 w-8 fill-sky-500 text-white" aria-label="Verified" />}
           </h2>
           <p className="text-base font-medium text-white">
-            Ex-{startup.exCompany} • {startup.name}
+            {!isDisclosed(startup.founderName)
+              ? `${startup.sectorLabel ?? startup.targetSector} • founders not listed in source`
+              : isDisclosed(startup.exCompany)
+                ? `Ex-${startup.exCompany} • ${startup.name}`
+                : `${startup.name} • ${startup.sectorLabel ?? startup.targetSector}`}
           </p>
         </div>
       </div>
@@ -276,13 +287,15 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
   const likeScale = useTransform(x, [20, X_THRESHOLD], [0.5, 1.3]);
   const nopeOpacity = useTransform(x, [-X_THRESHOLD, -20], [1, 0]);
   const nopeScale = useTransform(x, [-X_THRESHOLD, -20], [1.3, 0.5]);
-  const superOpacity = useTransform(y, [-Y_THRESHOLD, -20], [1, 0]);
-  const superScale = useTransform(y, [-Y_THRESHOLD, -20], [1.3, 0.5]);
+  const trackOpacity = useTransform(y, [-Y_THRESHOLD, -20], [1, 0]);
+  const trackScale = useTransform(y, [-Y_THRESHOLD, -20], [1.3, 0.5]);
+  const introOpacity = useTransform(y, [20, 400], [0, 1]);
+  const introScale = useTransform(y, [20, 400], [0.5, 1.3]);
   const stampBase =
     "absolute flex select-none flex-col items-center rounded-[3rem] border-[1.1rem] px-[0.35em] py-[0.18em] text-center text-[min(9cqw,9rem)] font-black uppercase leading-[0.95] tracking-widest backdrop-blur-md";
   const [burstKey, setBurstKey] = useState(0);
   const impact = (d: SwipeDirection) => {
-    if (d === "up") {
+    if (d === "down") {
       setBurstKey((k) => k + 1);
       try {
         const horn = new Audio("/sfx/airhorn.mp3");
@@ -339,11 +352,18 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
               <span>Deal ❌</span>
             </motion.div>
             <motion.div
-              style={{ opacity: superOpacity, scale: superScale, rotate: -8 }}
+              style={{ opacity: trackOpacity, scale: trackScale, rotate: -8 }}
+              className={`${stampBase} border-amber-300 bg-amber-600/80 text-white drop-shadow-[0_0_40px_rgba(251,191,36,0.9)]`}
+            >
+              <span>Track</span>
+              <span>Later ⏳</span>
+            </motion.div>
+            <motion.div
+              style={{ opacity: introOpacity, scale: introScale, rotate: -8 }}
               className={`${stampBase} border-sky-300 bg-sky-600/80 text-white drop-shadow-[0_0_40px_rgba(56,189,248,0.95)]`}
             >
-              <span>Super</span>
-              <span>Invest ⚡</span>
+              <span>Intro</span>
+              <span>Now ⚡</span>
             </motion.div>
           </div>,
           stage,
@@ -368,6 +388,15 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
         >
           <X className="h-8 w-8" strokeWidth={3.5} />
         </button>
+        <button
+          onClick={() => setForced("up")}
+          disabled={locked}
+          aria-label="Track"
+          title="Track: right company, wrong time"
+          className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-200 bg-white text-amber-500 shadow-md transition hover:scale-110 disabled:opacity-40"
+        >
+          <Clock className="h-6 w-6" strokeWidth={3} />
+        </button>
         <span className="relative flex h-14 w-14 items-center justify-center">
           <motion.span
             aria-hidden="true"
@@ -382,10 +411,10 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
           />
           <button
-            onClick={() => setForced("up")}
+            onClick={() => setForced("down")}
             disabled={locked}
-            aria-label="Super-Invest"
-            title="Super-Invest"
+            aria-label="Intro"
+            title="Intro: get me to them now"
             className="relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-sky-300 bg-white text-sky-500 shadow-[0_0_26px_rgba(56,189,248,0.95)] transition hover:scale-110 disabled:opacity-40"
           >
             <Star className="h-6 w-6 fill-sky-400" />
@@ -394,8 +423,8 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
         <button
           onClick={() => setForced("right")}
           disabled={locked}
-          aria-label="Match"
-          title="Match"
+          aria-label="Save"
+          title="Save"
           className="flex h-20 w-20 items-center justify-center rounded-full border border-gray-200 bg-white text-2xl text-emerald-500 shadow-[0_10px_32px_rgba(16,185,129,0.45)] transition hover:scale-110 disabled:opacity-40"
         >
           <Heart className="h-9 w-9 fill-emerald-500" />

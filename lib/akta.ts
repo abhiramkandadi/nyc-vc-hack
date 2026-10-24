@@ -7,10 +7,6 @@ import { exportPrismTrace } from "./sponsorStack";
 
 // Next.js loads .env.local into process.env. Never read/return the file itself,
 // use NEXT_PUBLIC_ credentials, or import this module into a client component.
-const DEFAULT_API_URL = "https://api.akta.pro/api/v1";
-const CACHE_TTL_MS = 60_000;
-const REQUEST_BUDGET_MS = 10_000;
-const DISCOVERY_QUERY = "New York City stealth or recently launched Pre-Seed and Seed startups in AI infrastructure, AI agents, B2B SaaS, or robotics";
 const HEADSHOTS = [
   "photo-1573496359142-b8d87734a5a2",
   "photo-1494790108377-be9c29b29330",
@@ -46,14 +42,6 @@ export interface StartupProfilesResult extends HydrationResult {
   source: "seed" | "live" | "mock";
   reason?: string;
   refreshing?: boolean;
-}
-export interface LiveFetchOptions {
-  timeoutMs?: number;
-  attempts?: number;
-  /** Offline seeding allows this deadline per request rather than per pipeline. */
-  perRequestTimeout?: boolean;
-  bypassCache?: boolean;
-  onProgress?: (event: { operation: string; attempt: number; attempts: number; code?: string }) => void;
 }
 export class AktaHydrationError extends Error {
   readonly code: string;
@@ -212,128 +200,12 @@ export function getMockStartupProfiles(): StartupProfile[] {
     imageSource: "unsplash-placeholder", stageIsInferred: false, sectorIsInferred: false, signalScoreMethod: "demo", signalEvidence: [],
     warnings: ["Demo profile, affiliations, metrics, and signals are synthetic.", "Stock portrait placeholder; not a verified founder image."] }));
 }
-function apiBase(): string {
-  let url: URL;
-  try { url = new URL(process.env.AKTA_API_URL || DEFAULT_API_URL); }
-  catch { throw new AktaHydrationError("INVALID_API_URL"); }
-  if (!["https:", "http:"].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw new AktaHydrationError("INVALID_API_URL");
-  return url.toString().replace(/\/$/, "");
-}
-async function fetchAktaOnce(base: string, path: string, apiKey: string, parentSignal: AbortSignal, timeoutMs: number, body?: Raw): Promise<unknown> {
-  const url = `${base}/${path}`;
-  parentSignal.throwIfAborted();
-  const controller = new AbortController();
-  const abort = (): void => controller.abort();
-  parentSignal.addEventListener("abort", abort, { once: true });
-  const timer = setTimeout(abort, timeoutMs);
-  const signal = controller.signal;
-  try {
-    const response = await fetch(url, { method: body ? "POST" : "GET", headers: { "x-api-key": apiKey, Accept: "application/json", ...(body ? { "Content-Type": "application/json" } : {}) },
-      ...(body ? { body: JSON.stringify(body) } : {}), signal, cache: "no-store", redirect: "error" });
-    if (!response.ok) {
-      await response.body?.cancel().catch(() => undefined);
-      throw new AktaHydrationError(response.status === 429 ? "RATE_LIMITED" : "UPSTREAM_HTTP_ERROR", response.status);
-    }
-    const reader = response.body?.getReader();
-    if (!reader) throw new AktaHydrationError("EMPTY_RESPONSE");
-    let size = 0, content = "";
-    const decoder = new TextDecoder();
-    try {
-      while (true) {
-        const part = await reader.read();
-        if (part.done) break;
-        size += part.value.byteLength;
-        if (size > 2_097_152) { await reader.cancel(); throw new AktaHydrationError("RESPONSE_TOO_LARGE"); }
-        content += decoder.decode(part.value, { stream: true });
-      }
-      content += decoder.decode();
-    } finally { reader.releaseLock(); }
-    try { return JSON.parse(content) as unknown; } catch { throw new AktaHydrationError("INVALID_RESPONSE"); }
-  } catch (error: unknown) {
-    if (signal.aborted) throw new AktaHydrationError("TIMEOUT");
-    if (error instanceof AktaHydrationError) throw error;
-    throw new AktaHydrationError("NETWORK_ERROR");
-  } finally {
-    clearTimeout(timer);
-    parentSignal.removeEventListener("abort", abort);
-  }
-}
-async function fetchAkta(base: string, path: string, apiKey: string, signal: AbortSignal, options: LiveFetchOptions, body?: Raw): Promise<unknown> {
-  const attempts = options.attempts ?? 1;
-  for (let attempt = 1; attempt <= attempts; attempt++) {
-    options.onProgress?.({ operation: path.split("?")[0], attempt, attempts });
-    try { return await fetchAktaOnce(base, path, apiKey, signal, options.timeoutMs ?? REQUEST_BUDGET_MS, body); }
-    catch (error: unknown) {
-      const failure = error instanceof AktaHydrationError ? error : new AktaHydrationError("TIMEOUT");
-      options.onProgress?.({ operation: path.split("?")[0], attempt, attempts, code: failure.code });
-      const retryable = ["TIMEOUT", "NETWORK_ERROR", "RATE_LIMITED"].includes(failure.code) || (failure.status !== undefined && failure.status >= 500);
-      if (signal.aborted || !retryable || attempt === attempts) throw failure;
-      await new Promise<void>((resolve, reject) => {
-        const abort = (): void => { clearTimeout(timer); reject(new AktaHydrationError("TIMEOUT")); };
-        const timer = setTimeout(() => { signal.removeEventListener("abort", abort); resolve(); }, 500 * 2 ** (attempt - 1));
-        signal.addEventListener("abort", abort, { once: true });
-      });
-    }
-  }
-  throw new AktaHydrationError("RETRIES_EXHAUSTED");
-}
-let cached: { key: string; expiresAt: number; result: HydrationResult } | undefined;
-let inFlight: { key: string; promise: Promise<HydrationResult> } | undefined;
-
-/** Bounded discovery + firmographic/founder/news enrichment; successful results cache for 60s. */
-export async function fetchStartupProfiles(options: LiveFetchOptions = {}): Promise<HydrationResult> {
-  if (!Number.isInteger(options.timeoutMs ?? REQUEST_BUDGET_MS) || (options.timeoutMs ?? REQUEST_BUDGET_MS) < 100 || (options.timeoutMs ?? REQUEST_BUDGET_MS) > 60_000) throw new AktaHydrationError("INVALID_TIMEOUT");
-  if (!Number.isInteger(options.attempts ?? 1) || (options.attempts ?? 1) < 1 || (options.attempts ?? 1) > 3) throw new AktaHydrationError("INVALID_ATTEMPTS");
-  const apiKey = process.env.AKTA_API_KEY?.trim();
-  if (!apiKey) throw new AktaHydrationError("MISSING_API_KEY");
-  const base = apiBase();
-  const query = process.env.AKTA_DISCOVERY_QUERY?.trim() || DISCOVERY_QUERY;
-  if (query.length > 2_000) throw new AktaHydrationError("INVALID_DISCOVERY_QUERY");
-  const cacheKey = createHash("sha256").update(JSON.stringify([base, query, apiKey])).digest("hex");
-  if (!options.bypassCache && cached?.key === cacheKey && cached.expiresAt > Date.now()) return { ...structuredClone(cached.result), cached: true };
-  if (!options.bypassCache && inFlight?.key === cacheKey) return structuredClone(await inFlight.promise);
-  const pending = (async (): Promise<HydrationResult> => {
-    const controller = new AbortController();
-    const timer = options.perRequestTimeout ? undefined : setTimeout(() => controller.abort(), options.timeoutMs ?? REQUEST_BUDGET_MS);
-    try {
-      const discovery = object(await fetchAkta(base, "list/generate/companies/", apiKey, controller.signal, options, { query, limit: 6 }));
-      const candidates = array(discovery.data).map(object).filter((company) => string(company.uuid, company.website)).slice(0, 6);
-      if (!candidates.length) throw new AktaHydrationError("NO_PROFILES");
-      const bundles: { company: Raw; news: unknown[] }[] = [];
-      // Two companies concurrently, each with two reads: at most four enrichments in flight.
-      for (let index = 0; index < candidates.length; index += 2) {
-        const batch = await Promise.all(candidates.slice(index, index + 2).map(async (company) => {
-          const identifier = string(company.uuid, company.website)!;
-          const enrichmentQuery = new URLSearchParams({ company: identifier, sections: "firmographic,management_profile" });
-          const newsQuery = new URLSearchParams({ company: identifier, limit: "3" });
-          const [enrichment, news] = await Promise.all([
-            fetchAkta(base, `company/enrichment/?${enrichmentQuery}`, apiKey, controller.signal, options),
-            fetchAkta(base, `news/?${newsQuery}`, apiKey, controller.signal, options),
-          ]);
-          const enriched = object(object(enrichment).data);
-          if (!Object.keys(enriched).length) throw new AktaHydrationError("INVALID_RESPONSE");
-          return { company: { ...company, ...enriched }, news: array(object(news).data) };
-        }));
-        bundles.push(...batch);
-      }
-      const data = hydrateStartupProfiles(bundles);
-      if (!data.length) throw new AktaHydrationError("NO_PROFILES");
-      const result: HydrationResult = { data, fetchedAt: new Date().toISOString(), cached: false };
-      cached = { key: cacheKey, expiresAt: Date.now() + CACHE_TTL_MS, result: structuredClone(result) };
-      return result;
-    } finally { if (timer !== undefined) clearTimeout(timer); controller.abort(); }
-  })();
-  inFlight = { key: cacheKey, promise: pending };
-  try { return structuredClone(await pending); }
-  finally { if (inFlight?.promise === pending) inFlight = undefined; }
-}
-
 /** Reject malformed or mock artifacts rather than relabeling them as provider data. */
 export function parseSeededAktaData(value: unknown): AktaSeedDocument | null {
   const raw = object(value);
   const fetchedAt = string(raw.fetchedAt);
   if (raw.schemaVersion !== 1 || raw.provider !== "akta.pro" || !fetchedAt || !Number.isFinite(Date.parse(fetchedAt)) || Date.parse(fetchedAt) > Date.now() + 300_000 || !safeUrl(raw.sourceApiUrl)) return null;
-  if (!Array.isArray(raw.data) || raw.data.length < 1 || raw.data.length > 50) return null;
+  if (!Array.isArray(raw.data) || raw.data.length < 1 || raw.data.length > 500) return null;
   const ids = new Set<string>();
   for (const item of raw.data) {
     const p = object(item);
@@ -385,45 +257,24 @@ async function readSeed(path: string): Promise<AktaSeedDocument | null> {
     return null;
   }
 }
-let backgroundRefresh: Promise<void> | undefined;
-let refreshFailure: { key: string; reason: string; retryAt: number } | undefined;
-
 /**
- * Seed-first, with no akta/PRISM network await on the response path. On a miss,
- * a best-effort Node background refresh is limited to 2.5s; this request receives
- * the mock deck and the next request can use warmed live data. Dedicated jobs
- * should await fetchStartupProfiles()/flushAktaTelemetry() before exiting.
- * Filesystem/JSON/HTTP overhead still exists; literal 0ms cannot be guaranteed.
+ * Seed-only. Nothing in this module calls akta.pro: a refreshed seed comes from the offline
+ * script in scripts/seedAktaData.ts, run by a person. A local, gitignored seed (the 180-company
+ * pull, licensed akta.pro data) wins over the committed 50-profile seed when it exists.
  */
+async function defaultSeedPath(): Promise<string> {
+  const local = join(process.cwd(), "lib", "seededAktaData.local.json");
+  try { await stat(local); return local; } catch { return join(process.cwd(), "lib", "seededAktaData.json"); }
+}
+
 export async function getStartupProfiles(options: { seedPath?: string } = {}): Promise<StartupProfilesResult> {
   const started = performance.now();
-  const seed = await readSeed(options.seedPath ?? join(process.cwd(), "lib", "seededAktaData.json"));
+  const seed = await readSeed(options.seedPath ?? await defaultSeedPath());
   if (seed) {
     reportAktaTelemetry("seed_cache_hit", { source: "seed", count: seed.data.length, latencyMs: Math.round(performance.now() - started) });
     return { data: structuredClone(seed.data), fetchedAt: seed.fetchedAt, cached: true, source: "seed" };
   }
-  let reason = "MISSING_API_KEY";
-  if (process.env.AKTA_API_KEY?.trim()) {
-    try {
-      const cacheKey = createHash("sha256").update(JSON.stringify([apiBase(), process.env.AKTA_DISCOVERY_QUERY?.trim() || DISCOVERY_QUERY, process.env.AKTA_API_KEY.trim()])).digest("hex");
-      if (cached?.key === cacheKey && cached.expiresAt > Date.now()) {
-        reportAktaTelemetry("live_cache_hit", { source: "live", count: cached.result.data.length });
-        return { ...structuredClone(cached.result), cached: true, source: "live" };
-      }
-      reason = refreshFailure?.key === cacheKey && refreshFailure.retryAt > Date.now() ? refreshFailure.reason : "LIVE_REFRESH_PENDING";
-      if (!backgroundRefresh && reason === "LIVE_REFRESH_PENDING") {
-        reportAktaTelemetry("live_refresh_started", { source: "live" });
-        backgroundRefresh = fetchStartupProfiles({ timeoutMs: 2_500, attempts: 1, bypassCache: true })
-          .then((result) => { refreshFailure = undefined; reportAktaTelemetry("live_refresh_succeeded", { source: "live", count: result.data.length }); })
-          .catch((error: unknown) => {
-            const code = error instanceof AktaHydrationError ? error.code : "HYDRATION_FAILED";
-            refreshFailure = { key: cacheKey, reason: code, retryAt: Date.now() + 30_000 };
-            reportAktaTelemetry("live_refresh_failed", { source: "live", code });
-          }).finally(() => { backgroundRefresh = undefined; });
-      }
-    } catch { reason = "INVALID_API_CONFIGURATION"; }
-  }
   const data = getMockStartupProfiles();
-  reportAktaTelemetry("mock_fallback", { source: "mock", count: data.length, code: reason });
-  return { data, source: "mock", reason, refreshing: Boolean(backgroundRefresh), fetchedAt: new Date().toISOString(), cached: false };
+  reportAktaTelemetry("mock_fallback", { source: "mock", count: data.length, code: "NO_SEED" });
+  return { data, source: "mock", reason: "NO_SEED", fetchedAt: new Date().toISOString(), cached: false };
 }

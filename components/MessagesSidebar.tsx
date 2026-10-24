@@ -1,11 +1,11 @@
 "use client";
 
 import { Check, Inbox, Pencil } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import FounderPhoto from "./FounderPhoto";
 import { recentActivity } from "@/lib/mockData";
 import { SAMPLE_THREADS, type SampleThread } from "@/lib/sampleThreads";
-import type { StealthStartup } from "@/lib/mockData";
+import { founderLabel, type StealthStartup } from "@/lib/mockData";
 
 export interface MatchRecord {
   startup: StealthStartup;
@@ -22,6 +22,8 @@ interface Props {
   thesis: string;
   selectedId: string | null;
   onSelectMatch: (m: MatchRecord) => void;
+  /** Shown between the profile and the pipeline, for example the thesis panel. */
+  panel?: ReactNode;
 }
 
 function timeAgo(ts: number, now: number): string {
@@ -59,7 +61,7 @@ function SampleAvatar({ thread }: { thread: SampleThread }) {
   );
 }
 
-export default function MessagesSidebar({ matches, thesis, selectedId, onSelectMatch }: Props) {
+export default function MessagesSidebar({ matches, thesis, selectedId, onSelectMatch, panel }: Props) {
   const [now, setNow] = useState(() => Date.now());
   const [editing, setEditing] = useState(false);
   const [avatarOk, setAvatarOk] = useState(true);
@@ -139,6 +141,8 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
         <p className="mt-1 text-xs text-gray-400">{thesis}</p>
       </section>
 
+      {panel}
+
       <section className="-mx-3 flex-1 pb-4" aria-label="Deal pipeline">
         <div className="flex items-center justify-between pb-2 pt-5">
           <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">Messages / Deal pipeline</h3>
@@ -164,7 +168,7 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-2">
                       <p className="truncate text-base font-bold text-gray-900">
-                        {m.startup.founderName} • {m.startup.name}
+                        {founderLabel(m.startup)} • {m.startup.name}
                       </p>
                       {recentActivity(m.startup)?.recent && (
                         <span className="h-3 w-3 shrink-0 animate-pulse rounded-full border border-white bg-emerald-500" title={`In the news ${recentActivity(m.startup)?.label}`} />

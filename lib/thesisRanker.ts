@@ -93,6 +93,14 @@ export async function submitFeedback(profile: StartupProfile, action: FeedbackAc
   } catch (error) { return { ...local, backend: "typescript", reason: failureReason(error) }; }
 }
 
+/** Take back the latest locally recorded action (Rewind). Returns its id, or null when there is none. */
+export function undoLastLocalFeedback(): string | null {
+  const last = Array.from(feedback.keys()).pop();
+  if (last === undefined) return null;
+  feedback.delete(last);
+  return last;
+}
+
 /** Python order when available; local preference scoring otherwise. No entries are dropped. */
 export async function applyLearnedRanking<T extends Pick<StartupProfile, "id" | "signalScore">>(profiles: T[]): Promise<LearnedRanking<T>> {
   const fallback = (reason: string): LearnedRanking<T> => localRanking(profiles, reason);

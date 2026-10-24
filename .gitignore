@@ -1,3 +1,11 @@
+node_modules/
+.env
+.venv/
+__pycache__/
+.DS_Store
+data/
+companies.json
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -17,7 +25,6 @@
 /build
 
 # misc
-.DS_Store
 *.pem
 
 # debug
@@ -35,3 +42,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .next-build
+
+# licensed akta.pro data, local only
+lib/seededAktaData.local.json

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import FounderPhoto from "./FounderPhoto";
 import VideoPlayer from "./VideoPlayer";
 import { parseVideoUrl } from "@/lib/founderVideos";
-import { videoFor, type StealthStartup } from "@/lib/mockData";
+import { founderLabel, isDisclosed, videoFor, type StealthStartup } from "@/lib/mockData";
 
 interface Props {
   startup: StealthStartup;
@@ -122,7 +122,7 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
 
         <header className="shrink-0 px-6 pb-3 pt-6">
           <h2 className="bg-gradient-to-r from-[#FF385C] via-rose-500 to-amber-400 bg-clip-text text-center font-display text-4xl font-extrabold italic tracking-tight text-transparent">
-            {mode === "chat" ? startup.name : superInvest ? "SUPER-INVEST!" : "IT'S A MATCH!"}
+            {mode === "chat" ? startup.name : superInvest ? "INTRO REQUESTED!" : "IT'S A MATCH!"}
           </h2>
           {mode === "match" && (
             <p className="mt-1 text-center text-xs text-gray-500">
@@ -131,7 +131,7 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
                   <Zap className="h-3.5 w-3.5" /> Priority outreach flagged
                 </span>
               ) : (
-                <>You and {startup.founderName} both want this conversation.</>
+                <>You and {founderLabel(startup)} both want this conversation.</>
               )}
             </p>
           )}
@@ -145,9 +145,11 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
               className="h-16 w-16 rounded-full border-4 border-white object-cover object-top shadow-lg"
             />
           </div>
-          <p className="mt-2 text-center text-sm font-semibold text-gray-900">{startup.founderName}</p>
+          <p className="mt-2 text-center text-sm font-semibold text-gray-900">{founderLabel(startup)}</p>
           <p className="text-center text-xs text-gray-500">
-            {startup.founderBackground} · {startup.name}
+            {isDisclosed(startup.founderName)
+              ? `${startup.founderBackground} · ${startup.name}`
+              : `Founders not listed in source · ${startup.sectorLabel ?? startup.targetSector}`}
           </p>
         </header>
 

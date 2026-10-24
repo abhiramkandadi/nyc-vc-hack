@@ -34,7 +34,7 @@ async function seed(): Promise<void> {
   const lock = await open(lockPath, "wx", 0o600);
   const temporary = `${target}.${process.pid}.${randomUUID()}.tmp`;
   try {
-    console.log("[seed] Fetching real akta.pro data: 15-second request deadlines, at most 3 attempts.");
+    console.log("[seed] Reading a captured akta.pro snapshot. This script makes no network calls.");
     akta.reportAktaTelemetry("seed_started", { source: "live" });
     let result: HydrationResult;
     let sourceApiUrl = process.env.AKTA_API_URL || "https://api.akta.pro/api/v1";
@@ -56,10 +56,8 @@ async function seed(): Promise<void> {
       };
       console.log("[seed] Hydrated captured akta.pro MCP records with source-linked evidence.");
     } else {
-      result = await akta.fetchStartupProfiles({
-        timeoutMs: 15_000, attempts: 3, perRequestTimeout: true, bypassCache: true,
-        onProgress: (event) => console.log("[seed]", JSON.stringify(event)),
-      });
+      // Live fetching was removed: this repo must never call akta.pro and spend credits.
+      throw new akta.AktaHydrationError("LIVE_FETCH_REMOVED_USE_MCP_SNAPSHOT");
     }
     if (result.data.length < 6) throw new akta.AktaHydrationError("INSUFFICIENT_REAL_PROFILES");
     const document: AktaSeedDocument = {
