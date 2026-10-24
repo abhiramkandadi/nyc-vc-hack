@@ -1,6 +1,7 @@
 "use client";
 
-import { animate, motion, useAnimationControls, useMotionValue, useTransform, type MotionValue } from "framer-motion";
+import confetti from "canvas-confetti";
+import { AnimatePresence, animate, motion, useAnimationControls, useMotionValue, useTransform, type MotionValue } from "framer-motion";
 import { BadgeCheck, Heart, Landmark, RotateCcw, Star, TrendingUp, Users, X, type LucideIcon } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
@@ -40,7 +41,7 @@ interface TopCardProps {
   startup: StealthStartup;
   forced: SwipeDirection | null;
   onSwipe: (d: SwipeDirection) => void;
-  onImpact: () => void;
+  onImpact: (d: SwipeDirection) => void;
   x: MotionValue<number>;
   y: MotionValue<number>;
 }
@@ -51,7 +52,7 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
   const mediaLabel = mediaKind ? MEDIA_LABEL[mediaKind] : undefined;
 
   const fling = (d: SwipeDirection) => {
-    onImpact();
+    onImpact(d);
     const mv = d === "up" ? y : x;
     animate(mv, d === "left" ? -700 : d === "up" ? -800 : 700, { duration: 0.3 }).then(() => onSwipe(d));
   };
@@ -135,6 +136,67 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
   );
 }
 
+/** Full-screen "grand" moment for a Super-Invest: blue flash, sweeping spotlight beams, and a first confetti blast. */
+function SuperBurst({ burstKey }: { burstKey: number }) {
+  useEffect(() => {
+    if (!burstKey) return;
+    const colors = ["#38BDF8", "#0EA5E9", "#7DD3FC", "#FFFFFF", "#FFD700"];
+    confetti({ particleCount: 250, spread: 100, startVelocity: 60, origin: { x: 0.5, y: 0.9 }, colors, zIndex: 120, disableForReducedMotion: true });
+    confetti({ particleCount: 120, spread: 70, angle: 60, startVelocity: 65, origin: { x: 0, y: 0.9 }, colors, zIndex: 120, disableForReducedMotion: true });
+    confetti({ particleCount: 120, spread: 70, angle: 120, startVelocity: 65, origin: { x: 1, y: 0.9 }, colors, zIndex: 120, disableForReducedMotion: true });
+  }, [burstKey]);
+
+  return (
+    <AnimatePresence>
+      {burstKey > 0 && (
+        <motion.div
+          key={burstKey}
+          className="pointer-events-none fixed inset-0 z-[110] overflow-hidden"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: [1, 1, 0] }}
+          transition={{ duration: 1.9, times: [0, 0.7, 1] }}
+          aria-hidden="true"
+        >
+          <motion.div
+            className="absolute inset-0 bg-sky-950"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.75, 0.55] }}
+            transition={{ duration: 0.5 }}
+          />
+          <motion.div
+            className="absolute inset-0 bg-sky-400"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 0.95, 0] }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          />
+          {[-24, 0, 24].map((deg, i) => (
+            <motion.div
+              key={deg}
+              className="absolute left-1/2 top-[-10%] h-[130%] w-[60vmax] origin-top -translate-x-1/2"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(224,242,254,0.95) 0%, rgba(125,211,252,0.55) 45%, rgba(56,189,248,0) 100%)",
+                clipPath: "polygon(46% 0, 54% 0, 100% 100%, 0 100%)",
+                filter: "blur(6px)",
+              }}
+              initial={{ rotate: deg * 2.2, opacity: 0 }}
+              animate={{ rotate: [deg * 2.2, deg * 0.4, deg * 0.9], opacity: [0, 0.9, 0.7] }}
+              transition={{ duration: 1.4, delay: 0.08 * i, ease: "easeOut" }}
+            />
+          ))}
+          <motion.div
+            className="absolute left-1/2 top-0 h-[80%] w-[70%] -translate-x-1/2"
+            style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.95), rgba(56,189,248,0.45) 45%, transparent 72%)" }}
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: [0, 1, 0.8], scale: [0.6, 1.15, 1] }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 interface Props {
   startups: StealthStartup[];
   onSwipe: (d: SwipeDirection, s: StealthStartup) => void;
@@ -165,7 +227,9 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
   const superScale = useTransform(y, [-Y_THRESHOLD, -20], [1.3, 0.5]);
   const stampBase =
     "absolute flex select-none flex-col items-center rounded-[3rem] border-[1.1rem] px-[0.35em] py-[0.18em] text-center text-[min(9cqw,9rem)] font-black uppercase leading-[0.95] tracking-widest backdrop-blur-md";
-  const impact = () => {
+  const [burstKey, setBurstKey] = useState(0);
+  const impact = (d: SwipeDirection) => {
+    if (d === "up") setBurstKey((k) => k + 1);
     shake.start({ x: [0, -10, 10, -5, 5, 0], transition: { duration: 0.15, ease: "easeOut" } });
   };
 
@@ -194,6 +258,7 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
         )}
       </motion.div>
 
+      {typeof document !== "undefined" && createPortal(<SuperBurst burstKey={burstKey} />, document.body)}
       {stage &&
         createPortal(
           <div className="pointer-events-none absolute inset-0 z-[60] flex items-center justify-center overflow-hidden" aria-hidden="true">
@@ -241,15 +306,29 @@ export default function SwipeCard({ startups, onSwipe, onRewind, canRewind }: Pr
         >
           <X className="h-8 w-8" strokeWidth={3.5} />
         </button>
-        <button
-          onClick={() => setForced("up")}
-          disabled={locked}
-          aria-label="Super-Invest"
-          title="Super-Invest"
-          className="flex h-14 w-14 items-center justify-center rounded-full border border-gray-200 bg-white text-sky-400 shadow-md transition hover:scale-110 disabled:opacity-40"
-        >
-          <Star className="h-5 w-5 fill-sky-400" />
-        </button>
+        <span className="relative flex h-14 w-14 items-center justify-center">
+          <motion.span
+            aria-hidden="true"
+            className="absolute inset-[-6px] rounded-full bg-sky-400/60 blur-md"
+            animate={{ scale: [1, 1.45, 1], opacity: [0.8, 0.2, 0.8] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.span
+            aria-hidden="true"
+            className="absolute inset-0 rounded-full border-2 border-sky-300"
+            animate={{ scale: [1, 1.7], opacity: [0.7, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+          />
+          <button
+            onClick={() => setForced("up")}
+            disabled={locked}
+            aria-label="Super-Invest"
+            title="Super-Invest"
+            className="relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-sky-300 bg-white text-sky-500 shadow-[0_0_26px_rgba(56,189,248,0.95)] transition hover:scale-110 disabled:opacity-40"
+          >
+            <Star className="h-6 w-6 fill-sky-400" />
+          </button>
+        </span>
         <button
           onClick={() => setForced("right")}
           disabled={locked}
