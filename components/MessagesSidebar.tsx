@@ -84,10 +84,10 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
               src="/profile.jpg"
               alt={name}
               onError={() => setAvatarOk(false)}
-              className="h-16 w-16 shrink-0 rounded-full object-cover ring-2 ring-[#FF385C] ring-offset-2"
+              className="h-20 w-20 shrink-0 rounded-full object-cover ring-[3px] ring-[#FF385C] ring-offset-2"
             />
           ) : (
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF385C] to-amber-400 text-xl font-bold text-white ring-2 ring-[#FF385C] ring-offset-2">
+            <span className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF385C] to-amber-400 text-2xl font-bold text-white ring-[3px] ring-[#FF385C] ring-offset-2">
               {initials}
             </span>
           )}
@@ -109,8 +109,8 @@ export default function MessagesSidebar({ matches, thesis, selectedId, onSelectM
               </div>
             ) : (
               <>
-                <p className="truncate font-display text-xl font-bold text-gray-900">{name}</p>
-                <span className="mt-1 inline-block max-w-full rounded-full border border-rose-200 bg-rose-50 px-2.5 py-0.5 text-[11px] font-semibold text-[#FF385C]">
+                <p className="font-display text-2xl font-extrabold leading-tight text-gray-900">{name}</p>
+                <span className="mt-1.5 inline-block max-w-full rounded-full border border-rose-200 bg-rose-50 px-3 py-1 text-xs font-semibold text-[#FF385C]">
                   {title}
                 </span>
               </>
