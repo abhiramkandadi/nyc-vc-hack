@@ -117,7 +117,7 @@ function TopCard({ startup, forced, onSwipe, onImpact, x, y }: TopCardProps) {
             onClick={() => setPlaying(true)}
             className="absolute left-1/2 top-[45%] z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/40 bg-black/40 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-md transition hover:bg-black/55"
           >
-            🎥 90s Pitch Available — Tap to Play
+            🎥 Company Video — Tap to Play
           </button>
         )}
         {mediaLabel && (

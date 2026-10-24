@@ -1,9 +1,16 @@
 /**
- * Real founder pitch videos, keyed by startup id. Founders listed here get the video badge on their card
+ * Real company/founder videos, keyed by startup id. Founders listed here get the video badge on their card
  * and the embedded player in the match modal; everyone else gets the "Request 90s Video Pitch" button.
  * Accepted: YouTube or Vimeo embed URLs, or direct .mp4 files. Only add videos that are the founder's own.
  */
-export const FOUNDER_VIDEOS: Record<string, string> = {};
+export const FOUNDER_VIDEOS: Record<string, string> = {
+  // Dynamic Creatures: "Living Character Robot Hugo", from the company's YouTube channel
+  "02mokfp": "https://www.youtube.com/embed/NT7PEX4IlY8",
+  // Guickly: "AI Measurement Layer for Enterprises", from the company's YouTube channel
+  "akta-news-35074386": "https://www.youtube.com/embed/OFghRNcjMrM",
+  // Cygrid: "Identity enforcement platform for AI-driven enterprises", from the company's YouTube channel
+  "akta-news-42258514": "https://www.youtube.com/embed/DP3Pri-H2E8",
+};
 
 export type VideoSource = { kind: "iframe" | "file"; src: string };
 

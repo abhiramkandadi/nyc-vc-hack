@@ -186,7 +186,7 @@ export default function MatchOverlay({ startup, superInvest, mode, thesis, email
 
           {hasVideo && (
             <section>
-              <h3 className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">🎬 Founder 90-Second Pitch Reel</h3>
+              <h3 className="mb-1.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">🎬 Company Video</h3>
               <VideoPlayer url={videoUrl ?? ""} title={`${startup.name} pitch reel`} />
             </section>
           )}
